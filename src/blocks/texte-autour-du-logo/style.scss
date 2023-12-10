@@ -1,0 +1,76 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+
+/*
+ * Code assez compliqué pour avoir un effet de style avec le logo des potos entouré de 2 colonnes de texte
+ * Quelques essais faits par moi ici : https://codepen.io/Fuunnx/pen/poyqqXw
+ */
+.potos-image-circulaire-milieu {
+  display: flex;
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  gap: var(--gap);
+  position: relative;
+
+  --gap: 20px;
+  --circle-size: 400px;
+  --circle-top: calc(var(--circle-size) / 4);
+}
+
+/* 2e colonne = logo */
+.potos-image-circulaire-milieu > *:nth-child(2) {
+  position: absolute;
+  z-index: 0;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  background: lightgrey;
+  border-radius: 100%;
+  top: var(--circle-top);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 1ere et 3e colonnes = textes */
+.potos-image-circulaire-milieu > *:nth-child(1), .potos-image-circulaire-milieu > *:nth-child(3) {
+  position: relative;
+  z-index: 1;
+}
+
+/* c'est ici que la magie se passe */
+.potos-image-circulaire-milieu > *:nth-child(1)::before, .potos-image-circulaire-milieu > *:nth-child(3)::before {
+  content: "";
+  display: block;
+  --top: calc(var(--circle-top) * 2);
+  height: calc(var(--circle-size) + var(--top));
+  background: lightblue;
+  width: calc(var(--circle-size) / 2 + var(--gap));
+  position: relative;
+  opacity: 0;
+  clip-path: var(--shape);
+  shape-outside: var(--shape);
+}
+
+.potos-image-circulaire-milieu > *:nth-child(1) {
+  text-align: right;
+}
+
+.potos-image-circulaire-milieu > *:nth-child(1)::before {
+  --shape: circle(50% at calc(100% + var(--gap) / 2) center);
+  float: right;
+}
+
+
+.potos-image-circulaire-milieu > *:nth-child(3) {
+  text-align: left;
+}
+
+.potos-image-circulaire-milieu > *:nth-child(3)::before {
+    float: left;
+    --shape: circle(50% at calc(0% - var(--gap) / 2) center);
+}
