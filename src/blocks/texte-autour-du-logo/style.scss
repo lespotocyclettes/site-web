@@ -12,7 +12,7 @@
  * Code assez compliqué pour avoir un effet de style avec le logo des potos entouré de 2 colonnes de texte
  * Quelques essais faits par moi ici : https://codepen.io/Fuunnx/pen/poyqqXw
  */
-.potos_texte-autour-du-logo {
+.potos-texte-autour-du-logo {
 	.wp-block-columns {
 		display: flex;
 		width: 100%;
@@ -39,7 +39,7 @@
 
 
 	/* 2e colonne = logo */
-	.wp-block-columns>.potos_image {
+	.wp-block-columns>.potos-image {
 		order: -1;
 		position: absolute;
 		z-index: 0;
@@ -66,15 +66,15 @@
 
 
 	/* 1ere et 3e colonnes = textes */
-	.wp-block-columns>.potos_column1,
-	.wp-block-columns>.potos_column2 {
+	.wp-block-columns>.potos-column1,
+	.wp-block-columns>.potos-column2 {
 		position: relative;
 		z-index: 1;
 	}
 
 	/* c'est ici que la magie se passe */
-	.wp-block-columns>.potos_column1::before,
-	.wp-block-columns>.potos_column2::before {
+	.wp-block-columns>.potos-column1::before,
+	.wp-block-columns>.potos-column2::before {
 		content: "";
 		display: block;
 		--top: calc(var(--circle-top) * 2);
@@ -91,7 +91,7 @@
 		}
 	}
 
-	.wp-block-columns>.potos_column1 {
+	.wp-block-columns>.potos-column1 {
 		text-align: right;
 
 		@media screen and (max-width: 781px) {
@@ -99,23 +99,23 @@
 		}
 	}
 
-	.wp-block-columns>.potos_column1::before {
+	.wp-block-columns>.potos-column1::before {
 		--shape: circle(50% at calc(100% + var(--gap) / 2) center);
 		float: right;
 	}
 
-	.wp-block-columns>.potos_column2 {
+	.wp-block-columns>.potos-column2 {
 		text-align: left;
 	}
 
-	.wp-block-columns>.potos_column2::before {
+	.wp-block-columns>.potos-column2::before {
 		float: left;
 		--shape: circle(50% at calc(0% - var(--gap) / 2) center);
 	}
 
 	/* Mettre ici les styles uniquement dédiés à l'interface d'administration */
 	.block-editor-iframe__body & {
-		.wp-block-columns>.potos_image {
+		.wp-block-columns>.potos-image {
 			z-index: 2 !important;
 			background: lightgrey;
 

@@ -44,7 +44,7 @@ registerBlockType(metadata.name, {
 function Edit(props) {
 	return (
 		<div
-			{...useBlockProps({ className: "potos_texte-autour-du-logo alignwide" })}
+			{...useBlockProps({ className: "potos-texte-autour-du-logo alignwide" })}
 		>
 			<InnerBlocks
 				template={[
@@ -55,7 +55,7 @@ function Edit(props) {
 							[
 								"core/column",
 								{
-									className: "potos_column1",
+									className: "potos-column1",
 								},
 								[
 									[
@@ -69,7 +69,7 @@ function Edit(props) {
 							[
 								"core/column",
 								{
-									className: "potos_image",
+									className: "potos-image",
 									lock: {
 										remove: false,
 										move: false,
@@ -80,7 +80,7 @@ function Edit(props) {
 							[
 								"core/column",
 								{
-									className: "potos_column2",
+									className: "potos-column2",
 								},
 								[
 									[
@@ -112,7 +112,7 @@ function save() {
 	return (
 		<div
 			{...useBlockProps.save({
-				className: "potos_texte-autour-du-logo alignwide",
+				className: "potos-texte-autour-du-logo alignwide",
 			})}
 		>
 			<InnerBlocks.Content />
