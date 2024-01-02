@@ -13,8 +13,6 @@
  * Quelques essais faits par moi ici : https://codepen.io/Fuunnx/pen/poyqqXw
  */
 .potos_texte-autour-du-logo {
-
-
 	.wp-block-columns {
 		display: flex;
 		width: 100%;
@@ -26,20 +24,46 @@
 		--gap: 20px;
 		--circle-size: 400px;
 		--circle-top: calc(var(--circle-size) / 4);
+
+		@media screen and (max-width: 960px) {
+			--gap: 10px;
+			--circle-size: 300px;
+		}
+
+		@media screen and (max-width: 768px) {
+			--gap: 10px;
+			--circle-size: 300px;
+		}
 	}
+
+
 
 	/* 2e colonne = logo */
 	.wp-block-columns>.potos_image {
+		order: -1;
 		position: absolute;
 		z-index: 0;
 		width: var(--circle-size);
 		height: var(--circle-size);
-		background: lightgrey;
 		border-radius: 100%;
 		top: var(--circle-top);
 		left: 50%;
 		transform: translateX(-50%);
+
+		@media screen and (max-width: 781px) {
+			position: static;
+			transform: none;
+			width: auto;
+			height: auto;
+			display: flex;
+			justify-content: center;
+
+			&>figure {
+				max-width: var(--circle-size);
+			}
+		}
 	}
+
 
 	/* 1ere et 3e colonnes = textes */
 	.wp-block-columns>.potos_column1,
@@ -61,10 +85,18 @@
 		opacity: 0;
 		clip-path: var(--shape);
 		shape-outside: var(--shape);
+
+		@media screen and (max-width: 781px) {
+			display: none;
+		}
 	}
 
 	.wp-block-columns>.potos_column1 {
 		text-align: right;
+
+		@media screen and (max-width: 781px) {
+			text-align: left;
+		}
 	}
 
 	.wp-block-columns>.potos_column1::before {
@@ -82,12 +114,21 @@
 	}
 
 	/* Mettre ici les styles uniquement dédiés à l'interface d'administration */
-	.wp-site-blocks & {
+	.block-editor-iframe__body & {
 		.wp-block-columns>.potos_image {
 			z-index: 2 !important;
+			background: lightgrey;
 
 			&>* {
 				height: 100%;
+			}
+
+			&>.wp-block-image {
+				border-radius: 50%;
+
+				/* permet de centrer le contenu verticalement */
+				display: grid;
+				align-items: center;
 			}
 		}
 	}

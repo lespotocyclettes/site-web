@@ -11,7 +11,7 @@
 	"supports": {
 		"html": false
 	},
-	"textdomain": "texte-autour-du-logo",
+	"textdomain": "potos-texte-autour-du-logo",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"
