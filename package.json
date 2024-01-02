@@ -12,7 +12,7 @@
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start --hot",
+		"start": "wp-scripts start",
 		"rsync": "rsync-watch"
 	},
 	"devDependencies": {
