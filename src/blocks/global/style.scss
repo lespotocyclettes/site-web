@@ -1,9 +1,47 @@
 /*
+ * Pour éviter un clash entre les classes définies pour le site et d'autres classes, toutes les classes sont préfixées par potos-*
+ */
+
+
+/*
+ * Il s'agit du texte "Les poto'Cyclettes" sur la page d'accueil
+ * Permet de décaler l'image pour qu'elle rentre bien dans la composition générale
+ */
+.potos-logo-homepage {
+	position: relative;
+	top: 0px;
+	left: -80px;
+	margin-bottom: -60px;
+	max-width: 600px;
+
+	@media screen and (max-width: 1312px) {
+		left: -40px;
+		margin-bottom: -70px;
+	}
+
+	@media screen and (max-width: 1226px) {
+		left: -30px;
+		margin-bottom: -70px;
+	}
+
+	@media screen and (max-width: 781px) {
+		max-width: 500px;
+		margin-bottom: -50px;
+	}
+
+	@media screen and (max-width: 400px) {
+		margin-bottom: 0;
+		left: 0;
+	}
+}
+
+
+/*
  * Permet de corriger l'apparence des légendes des images sur fond foncé
  */
 .wp-block-image figcaption {
-	color: inherit;
 	/* permet de récupérer la couleur actuellement utilisée pour les textes environnant */
-	opacity: 0.75;
+	color: inherit;
 	/* permet de rendre ce texte moins proéminent en réduisant son opacité */
+	opacity: 0.75;
 }
