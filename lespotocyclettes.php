@@ -31,12 +31,11 @@ add_action(
     }
 );
 
-add_action(
-    'wp_enqueue_scripts',
-    function() {
+$add_styles = function() {
         $relative_path = 'build/blocks/global/style-index.css';
         $url = plugins_url($relative_path, __FILE__);
-        $absolute_path = dirname(__FILE__) . '/' . $relative_path;
+
+        $absolute_path = __DIR__ . '/' . $relative_path;
 
         wp_enqueue_style(
             'lespotocyclettes',
@@ -44,5 +43,7 @@ add_action(
             array(),
             filemtime($absolute_path)
         );
-    }
-);
+    };
+
+add_action('wp_enqueue_scripts', $add_styles);
+add_action('admin_enqueue_scripts', $add_styles);
