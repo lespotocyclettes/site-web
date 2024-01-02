@@ -30,3 +30,19 @@ add_action(
         register_block_type(__DIR__ . '/build/blocks/texte-autour-du-logo');
     }
 );
+
+add_action(
+    'wp_enqueue_scripts',
+    function() {
+        $relative_path = 'build/blocks/global/style-index.css';
+        $url = plugins_url($relative_path, __FILE__);
+        $absolute_path = dirname(__FILE__) . '/' . $relative_path;
+
+        wp_enqueue_style(
+            'lespotocyclettes',
+            $url,
+            array(),
+            filemtime($absolute_path)
+        );
+    }
+);

@@ -1,0 +1,9 @@
+/*
+ * Permet de corriger l'apparence des légendes des images sur fond foncé
+ */
+.wp-block-image figcaption {
+	color: inherit;
+	/* permet de récupérer la couleur actuellement utilisée pour les textes environnant */
+	opacity: 0.75;
+	/* permet de rendre ce texte moins proéminent en réduisant son opacité */
+}

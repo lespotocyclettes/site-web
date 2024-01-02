@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lespotocyclettes/styles-globaux",
+	"version": "0.1.0",
+	"title": "potos-styles-globaux",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Example block scaffolded with Create Block tool.",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"ancestor": ["nom-inexistant-pour-masquer-ce-block"],
+	"textdomain": "potos-styles-globaux",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
