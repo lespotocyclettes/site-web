@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-import { registerBlockType } from "@wordpress/blocks";
+import { registerBlockVariation } from "@wordpress/blocks";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -25,97 +25,61 @@ import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType(metadata.name, {
-	attributes: {},
-	category: metadata.category,
-	title: metadata.title,
-	edit: Edit,
-	save,
-});
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {JSX.Element} Element to render.
- */
-function Edit(props) {
-	return (
-		<div
-			{...useBlockProps({ className: "potos-texte-autour-du-logo alignwide" })}
-		>
-			<InnerBlocks
-				template={[
+registerBlockVariation("core/columns", {
+	name: "potos-texte-autour-du-logo",
+	title: "Texte autour du logo",
+	attributes: {
+		isStackedOnMobile: true,
+		align: "wide",
+	},
+	innerBlocks: [
+		[
+			"core/columns",
+			{
+				className: "potos-texte-autour-du-logo",
+			},
+			[
+				[
+					"core/column",
+					{
+						className: "potos-column1",
+					},
 					[
-						"core/columns",
-						{},
 						[
-							[
-								"core/column",
-								{
-									className: "potos-column1",
-								},
-								[
-									[
-										"core/paragraph",
-										{
-											placeholder: "Lorem ipsum...",
-										},
-									],
-								],
-							],
-							[
-								"core/column",
-								{
-									className: "potos-image",
-									lock: {
-										remove: false,
-										move: false,
-									},
-								},
-								[["core/image"]],
-							],
-							[
-								"core/column",
-								{
-									className: "potos-column2",
-								},
-								[
-									[
-										"core/paragraph",
-										{
-											placeholder: "Lorem ipsum...",
-										},
-									],
-								],
-							],
+							"core/paragraph",
+							{
+								placeholder: "Lorem ipsum...",
+							},
 						],
 					],
-				]}
-			/>
-		</div>
-	);
-}
-
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {JSX.Element} Element to render.
- */
-function save() {
-	return (
-		<div
-			{...useBlockProps.save({
-				className: "potos-texte-autour-du-logo alignwide",
-			})}
-		>
-			<InnerBlocks.Content />
-		</div>
-	);
-}
+				],
+				[
+					"core/column",
+					{
+						className: "potos-image",
+						lock: {
+							remove: false,
+							move: false,
+						},
+					},
+					[["core/image"]],
+				],
+				[
+					"core/column",
+					{
+						className: "potos-column2",
+					},
+					[
+						[
+							"core/paragraph",
+							{
+								placeholder: "Lorem ipsum...",
+							},
+						],
+					],
+				],
+			],
+		],
+	],
+});
