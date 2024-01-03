@@ -1,12 +1,61 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
+/*
+ * Crée l'effet "photo de vélo floue sur fond vert"
  */
+.wp-block-group.is-style-potos-section-velo {
+	& {
+		background-color: var(--wp--preset--color--secondary);
+		position: relative;
+	}
 
-.wp-block-create-block-lespotocyclettes {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+	&>* {
+		position: relative;
+		z-index: 2;
+	}
+
+	&::before {
+		content: ' ';
+		display: block;
+		background-image: url('./fond-velo-optimise.jpg');
+		background-size: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 0.40;
+		filter: blur(10px);
+		mix-blend-mode: multiply;
+		z-index: 1;
+	}
+}
+
+
+/*
+ * Crée l'effet "photo de rouille sur fond orange"
+ */
+.wp-block-group.is-style-potos-section-rouille {
+	& {
+		background-color: var(--wp--preset--color--tertiary);
+		position: relative;
+
+	}
+
+	&>* {
+		position: relative;
+		z-index: 3;
+	}
+
+	&::before {
+		content: ' ';
+		display: block;
+		background-image: url('./fond-rouille-basse-qualite-tengyart-3YUpwqvPrfM-unsplash.png');
+		background-size: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 0.30;
+		z-index: 1;
+	}
 }

@@ -47,3 +47,19 @@ $add_styles = function() {
 
 add_action('wp_enqueue_scripts', $add_styles);
 add_action('admin_enqueue_scripts', $add_styles);
+
+add_action(
+    'enqueue_block_editor_assets',
+    function() {
+        $relative_path = 'build/blocks/global/index.js';
+        $url = plugins_url($relative_path, __FILE__);
+        $absolute_path = __DIR__ . '/' . $relative_path;
+
+        wp_enqueue_script(
+            'example-enqueue-block-variations',
+            $url,
+            array('wp-blocks', 'wp-dom-ready'),
+            filemtime($absolute_path),
+        );
+    }
+);
