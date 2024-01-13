@@ -1,0 +1,164 @@
+/*
+ * Pour éviter un clash entre les classes définies pour le site et d'autres classes, toutes les classes sont préfixées par potos-*
+ */
+
+
+/*
+ * Il s'agit du texte "Les poto'Cyclettes" sur la page d'accueil
+ * Permet de décaler l'image pour qu'elle rentre bien dans la composition générale
+ */
+ .potos-logo-homepage {
+	position: relative;
+	top: 0px;
+	left: -80px;
+	margin-bottom: -60px;
+	max-width: 600px;
+}
+
+/*
+ * Permet de corriger l'apparence des légendes des images sur fond foncé
+ */
+.wp-block-image figcaption {
+	color: inherit; /* permet de récupérer la couleur actuellement utilisée pour les textes environnant */
+	opacity: 0.75; /* permet de rendre ce texte moins proéminent en réduisant son opacité */
+}
+
+/*
+ * Code assez compliqué pour avoir un effet de style avec le logo des potos entouré de 2 colonnes de texte
+ * Quelques essais faits par moi ici : https://codepen.io/Fuunnx/pen/poyqqXw
+ */
+.potos-image-circulaire-milieu {
+  display: flex;
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  gap: var(--gap);
+  position: relative;
+
+  --gap: 20px;
+  --circle-size: 400px;
+  --circle-top: calc(var(--circle-size) / 4);
+}
+
+/* 2e colonne = logo */
+.potos-image-circulaire-milieu > *:nth-child(2) {
+  position: absolute;
+  z-index: 0;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  background: lightgrey;
+  border-radius: 100%;
+  top: var(--circle-top);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 1ere et 3e colonnes = textes */
+.potos-image-circulaire-milieu > *:nth-child(1), .potos-image-circulaire-milieu > *:nth-child(3) {
+  position: relative;
+  z-index: 1;
+}
+
+/* c'est ici que la magie se passe */
+.potos-image-circulaire-milieu > *:nth-child(1)::before, .potos-image-circulaire-milieu > *:nth-child(3)::before {
+  content: "";
+  display: block;
+  --top: calc(var(--circle-top) * 2);
+  height: calc(var(--circle-size) + var(--top));
+  background: lightblue;
+  width: calc(var(--circle-size) / 2 + var(--gap));
+  position: relative;
+  opacity: 0;
+  clip-path: var(--shape);
+  shape-outside: var(--shape);
+}
+
+.potos-image-circulaire-milieu > *:nth-child(1) {
+  text-align: right;
+}
+
+.potos-image-circulaire-milieu > *:nth-child(1)::before {
+  --shape: circle(50% at calc(100% + var(--gap) / 2) center);
+  float: right;
+}
+
+
+.potos-image-circulaire-milieu > *:nth-child(3) {
+  text-align: left;
+}
+
+.potos-image-circulaire-milieu > *:nth-child(3)::before {
+    float: left;
+    --shape: circle(50% at calc(0% - var(--gap) / 2) center);
+}
+
+
+/*
+ * Crée l'effet "photo de vélo floue sur fond vert"
+ */
+.potos-section-verte  {
+	background-color: var(--wp--preset--color--secondary);
+	position: relative;
+}
+
+.potos-section-verte > * {
+	position: relative;
+	z-index: 2;
+}
+
+.potos-section-verte::before {
+	content: ' ';
+	display: block;
+	background-image: url('/wp-content/uploads/2023/11/fond-velo-optimise.jpg');
+  	background-size: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0.40;
+	filter: blur(10px);
+	mix-blend-mode: multiply;
+	z-index: 1;
+}
+
+
+/*
+ * Crée l'effet "photo de rouille sur fond orange"
+ */
+.potos-section-rouille  {
+	background-color: var(--wp--preset--color--tertiary);
+	position: relative;
+}
+
+.potos-section-rouille > * {
+	position: relative;
+	z-index: 3;
+}
+
+.potos-section-rouille::before {
+	content: ' ';
+	display: block;
+	background-image: url('/wp-content/uploads/2023/11/fond-rouille-basse-qualite-tengyart-3YUpwqvPrfM-unsplash-e1700517310307.png');
+  background-size: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0.30;
+	z-index: 1;
+}
+
+
+.potos-separateur-coup-de-pinceau {
+	background-image: url('/wp-content/uploads/2023/11/long-coup-de-brosse.svg');
+	width: 100%;
+  	height: 100px !important;
+  	background-size: 120% 100%;
+  	margin-top: -50px;
+  	margin-bottom: -50px;
+  	z-index: 2;
+  	background-color: transparent !important;
+  	background-position: 50%;
+}
