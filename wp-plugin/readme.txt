@@ -6,50 +6,38 @@ Stable tag:        0.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block scaffolded with Create Block tool.
+Plugin maison pour personnaliser l'apparence et étendre les fonctionnalités du site. NE PAS DESACTIVER
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Liste des changements apportés (non exhaustive):
+- sections fond vélo / fond rouille
+- séparateurs coup de brosse / peinture
+- ajustement graphiques
+- css personnalisé pour l'affichage de la typographie "Les potocyclettes" en page d'accueil
+- mise en page personnalisée pour obtenir l'effet "texte encadrant le logo"
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload the plugin files to the `/wp-content/plugins/lespotocyclettes` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-
+Manuellement via FTP - ne pas oublier de jouer la commande `npm run build` pour générer les fichiers statiques avant de déployer.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= C'est quoi `npm run build` ? =
 
-An answer to that question.
+Une commande dans le terminal qui permet de préparer le plugin afin qu'il soit p^rêt à fonctionner.
+ça demande un peu de configuration et de se familiariser avec un termiunal, mais ça vaut le coup pour permettre des personnalisations acancées
 
-= What about foo bar? =
+= Je ne veux pas exécuter du code dans un terminal =
 
-Answer to foo bar dilemma.
+Dans ce cas il est toujours possible d'ajouter du code (css ou js) à l'aide du plugin [custom-css-js](https://fr.wordpress.org/plugins/custom-css-js/).
+
+= Je veux modifier ce plugin =
+
+Le code de ce plugin [est dispo sur github](https://github.com/lespotocyclettes/site-web/tree/main/wp-plugin). La documentation pour le développement est dispo sur README.md et sur internet
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Aperçu du site
 
-== Changelog ==
-
-= 0.1.0 =
-* Release
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
