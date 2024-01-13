@@ -12,7 +12,7 @@
 		z-index: 2;
 	}
 
-	&::before {
+	&::after {
 		content: ' ';
 		display: block;
 		background-image: url('./fond-velo-optimise.jpg');
@@ -23,7 +23,7 @@
 		right: 0;
 		bottom: 0;
 		opacity: 0.40;
-		filter: blur(10px);
+		filter: blur(5px);
 		mix-blend-mode: multiply;
 		z-index: 1;
 	}
@@ -37,7 +37,6 @@
 	& {
 		background-color: var(--wp--preset--color--tertiary);
 		position: relative;
-
 	}
 
 	&>* {
@@ -45,7 +44,7 @@
 		z-index: 3;
 	}
 
-	&::before {
+	&::after {
 		content: ' ';
 		display: block;
 		background-image: url('./fond-rouille-basse-qualite-tengyart-3YUpwqvPrfM-unsplash.png');
@@ -57,5 +56,31 @@
 		bottom: 0;
 		opacity: 0.30;
 		z-index: 1;
+	}
+}
+
+
+.wp-block-group.is-style-potos-section-rouille,
+.wp-block-group.is-style-potos-section-velo {
+
+	&::before,
+	&+.wp-block-group::before,
+	&+footer::before {
+		content: ' ';
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		display: block;
+		background-image: url('./long-coup-de-brosse.svg');
+		width: 100%;
+		height: 100px !important;
+		background-size: 120% 100%;
+		margin-top: -50px;
+		margin-bottom: -50px;
+		z-index: 3;
+		background-color: transparent !important;
+		background-position: 50%;
+		color: transparent !important;
 	}
 }

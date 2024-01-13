@@ -1,65 +1,100 @@
 <?php
 /**
- * Plugin Name:       Lespotocyclettes
- * Description:       Example block scaffolded with Create Block tool.
+ * Plugin Name:	   Lespotocyclettes
+ * Description:	   Example block scaffolded with Create Block tool.
  * Requires at least: 6.1
- * Requires PHP:      7.0
- * Version:           0.1.0
- * Author:            The WordPress Contributors
- * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       lespotocyclettes
+ * Requires PHP:	  7.0
+ * Version:		   0.1.0
+ * Author:			The WordPress Contributors
+ * License:		   GPL-2.0-or-later
+ * License URI:	   https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:	   lespotocyclettes
  *
- * @package           create-block
+ * @package		   create-block
  */
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
- */
-add_action(
-    'init',
-    function() {
-        register_block_type(__DIR__ . '/build/blocks/section-de-couleur');
-        register_block_type(__DIR__ . '/build/blocks/texte-autour-du-logo');
-    }
-);
+$add_script = function(string $name, $deps = []) {
+        $relative_path = "build/{$name}";
+        $url = plugins_url($relative_path, __FILE__);
 
-$add_styles = function() {
-        $relative_path = 'build/blocks/global/style-index.css';
+        $absolute_path = __DIR__ . '/' . $relative_path;
+
+        wp_enqueue_script(
+            "potos-{$name}",
+            $url,
+            $deps,
+            filemtime($absolute_path)
+        );
+    };
+
+$add_stylesheet = function(string $name, $deps = []) {
+        $relative_path = "build/{$name}";
         $url = plugins_url($relative_path, __FILE__);
 
         $absolute_path = __DIR__ . '/' . $relative_path;
 
         wp_enqueue_style(
-            'lespotocyclettes',
+            "potos-{$name}",
             $url,
-            array(),
+            $deps,
             filemtime($absolute_path)
         );
     };
 
-add_action('wp_enqueue_scripts', $add_styles);
-add_action('admin_enqueue_scripts', $add_styles);
+$add_styles = function() use ($add_stylesheet) {
+        $add_stylesheet('blocks/global/style-index.css');
+        $add_stylesheet('blocks/section-de-couleur/style-index.css');
+        $add_stylesheet('blocks/texte-autour-du-logo/style-index.css');
+    };
 
+// frontend code
+add_action('wp_enqueue_scripts', function() use ($add_script, $add_styles) {
+        $add_script('blocks/section-de-couleur/index.js', ['wp-dom-ready']);
+        $add_styles();
+    });
+
+// editor code
 add_action(
     'enqueue_block_editor_assets',
-    function() {
-        $relative_path = 'build/blocks/global/index.js';
-        $url = plugins_url($relative_path, __FILE__);
-        $absolute_path = __DIR__ . '/' . $relative_path;
-
-        wp_enqueue_script(
-            'example-enqueue-block-variations',
-            $url,
-            array('wp-blocks', 'wp-dom-ready'),
-            filemtime($absolute_path),
-        );
+    function() use ($add_script, $add_styles) {
+        $add_script('blocks/global/index.js', ['wp-blocks', 'wp-dom-ready']);
+        $add_script('blocks/section-de-couleur/editorScript.js', ['wp-blocks', 'wp-dom-ready']);
+        $add_script('blocks/texte-autour-du-logo/index.js', ['wp-blocks', 'wp-dom-ready']);
+        $add_styles();
     }
 );
+
+// https://github.com/WordPress/gutenberg/issues/14604#issuecomment-702496282
+//filter Media & Text block output to add image caption
+$add_media_block_caption = function($block_content, $block) {
+        if ($block['blockName'] === 'core/media-text') {
+            $media_id = $block['attrs']['mediaId'];
+            if ($media_id) {
+                $image = get_post($media_id);
+                $image_caption = $image->post_excerpt;
+                if ($image_caption) {
+                    $block_content = str_replace(
+                        'wp-block-media-text__media',
+                        'wp-block-media-text__media wp-block-image size-full',
+                        $block_content
+                    );
+                    $block_content = str_replace(
+                        '</figure>',
+
+                        "<figcaption class=\"wp-element-caption\">
+                        {$image_caption}
+                        </figcaption>
+                        </figure>",
+                        $block_content
+                    );
+                    return $block_content;
+                }
+            }
+        }
+        return $block_content;
+    };
+
+add_filter('render_block', $add_media_block_caption, 10, 2);

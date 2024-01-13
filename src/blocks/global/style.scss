@@ -45,3 +45,8 @@
 	/* permet de rendre ce texte moins proéminent en réduisant son opacité */
 	opacity: 0.75;
 }
+
+.wp-block-media-text__media>img {
+	aspect-ratio: 4/3;
+	object-fit: cover;
+}

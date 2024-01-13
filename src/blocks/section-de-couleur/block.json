@@ -13,6 +13,5 @@
 	},
 	"textdomain": "section-de-couleur",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"
 }
