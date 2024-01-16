@@ -1,0 +1,10 @@
+{
+  "name": "lespotocyclettes",
+  "version": "0.1.0",
+  "workspaces": [
+    "./wp-plugin"
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "1.4.1"
+  }
+}

@@ -1,5 +1,5 @@
 {
-	"name": "lespotocyclettes",
+	"name": "@lespotocyclettes/wp-plugin",
 	"version": "0.1.0",
 	"description": "Example block scaffolded with Create Block tool.",
 	"author": "The WordPress Contributors",
@@ -16,7 +16,6 @@
 		"rsync": "rsync-watch"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.4.1",
 		"@wordpress/scripts": "^26.18.0",
 		"dotenv": "^16.3.1",
 		"rsync-watch": "^0.0.1"
