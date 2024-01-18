@@ -62,7 +62,10 @@
 
 .wp-block-group.is-style-potos-section-rouille,
 .wp-block-group.is-style-potos-section-velo {
-	&+.wp-block-group {
+
+	&,
+	&+.wp-block-group,
+	&+footer {
 		position: relative;
 	}
 
