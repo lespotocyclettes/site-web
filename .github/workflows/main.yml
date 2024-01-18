@@ -11,6 +11,8 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+      - name: Installation des dépendances
+        run: cd ./wp-plugin && npm install
       - name: Construction des fichiers statiques de WP-Plugin
         run: cd ./wp-plugin && npm run build
       - run: wp-plugin/node_modules
