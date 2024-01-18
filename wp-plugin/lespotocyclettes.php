@@ -51,8 +51,7 @@ $add_styles = function() use ($add_stylesheet) {
     };
 
 // frontend code
-add_action('wp_enqueue_scripts', function() use ($add_script, $add_styles) {
-        $add_script('blocks/section-de-couleur/index.js', ['wp-dom-ready']);
+add_action('wp_enqueue_scripts', function() use ($add_styles) {
         $add_styles();
     });
 
