@@ -1,0 +1,20 @@
+name: CI -> Déploiement du website
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build WP-Plugin assets
+        run: cd ./wp-plugin && npm install && npm run build
+      # Here is the deployment action
+      - name: Envoi de wp-plugin via FTP
+        uses: airvzxf/ftp-deployment-action@latest
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_dir: "./wp-plugin"
+          remote_dir: "/test"
