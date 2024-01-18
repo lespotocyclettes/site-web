@@ -7,12 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: cd ./wp-plugin
       - name: Construction des fichiers statiques de WP-Plugin
-        run: |
-          cd ./wp-plugin
-          npm install
-          npm run build
-          rm -rf node_modules
+        run: npm run build
+      - run: rm -rf node_modules
+
       # Here is the deployment action
       - name: Envoi de wp-plugin via FTP
         uses: airvzxf/ftp-deployment-action@latest
