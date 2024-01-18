@@ -11,10 +11,9 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      - run: cd ./wp-plugin
       - name: Construction des fichiers statiques de WP-Plugin
-        run: npm run build
-      - run: rm -rf node_modules
+        run: cd ./wp-plugin && npm run build
+      - run: wp-plugin/node_modules
 
       # Here is the deployment action
       - name: Envoi de wp-plugin via FTP
