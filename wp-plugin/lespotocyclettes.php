@@ -45,24 +45,33 @@ $add_stylesheet = function(string $name, $deps = []) {
     };
 
 $add_styles = function() use ($add_stylesheet) {
-        $add_stylesheet('blocks/global/style-index.css');
-        $add_stylesheet('blocks/section-de-couleur/style-index.css');
-        $add_stylesheet('blocks/texte-autour-du-logo/style-index.css');
+        $add_stylesheet('blocks/global/style-editor.css');
+        $add_stylesheet('blocks/section-de-couleur/style-editor.css');
+        $add_stylesheet('blocks/texte-autour-du-logo/style-editor.css');
+    };
+
+$add_scripts = function() use ($add_script) {
+        $add_script('blocks/global/index.js', ['wp-dom-ready']);
     };
 
 // frontend code
-add_action('wp_enqueue_scripts', function() use ($add_styles) {
+add_action(
+    'wp_enqueue_scripts',
+    function() use ($add_scripts, $add_styles) {
         $add_styles();
-    });
+        $add_scripts();
+    }
+);
 
 // editor code
 add_action(
     'enqueue_block_editor_assets',
-    function() use ($add_script, $add_styles) {
-        $add_script('blocks/global/index.js', ['wp-blocks', 'wp-dom-ready']);
-        $add_script('blocks/section-de-couleur/editorScript.js', ['wp-blocks', 'wp-dom-ready']);
-        $add_script('blocks/texte-autour-du-logo/index.js', ['wp-blocks', 'wp-dom-ready']);
+    function() use ($add_script, $add_scripts, $add_styles) {
+        $add_script('blocks/global/editor.js', ['wp-blocks', 'wp-dom-ready']);
+        $add_script('blocks/section-de-couleur/editor.js', ['wp-blocks', 'wp-dom-ready']);
+        $add_script('blocks/texte-autour-du-logo/editor.js', ['wp-blocks', 'wp-dom-ready']);
         $add_styles();
+        $add_scripts();
     }
 );
 

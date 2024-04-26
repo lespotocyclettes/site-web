@@ -13,7 +13,7 @@
 	},
 	"ancestor": ["nom-inexistant-pour-masquer-ce-block"],
 	"textdomain": "potos-styles-globaux",
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"editorScript": "file:./editor.js",
+	"script": "file:./index.js",
+	"style": "file:./style.css"
 }
