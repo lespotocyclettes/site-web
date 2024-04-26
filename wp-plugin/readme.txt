@@ -1,5 +1,5 @@
 === Lespotocyclettes ===
-Contributors:      The WordPress Contributors
+Contributors:      Géraud Henrion
 Tags:              block
 Tested up to:      6.1
 Stable tag:        0.1.0
@@ -7,6 +7,8 @@ License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
 Plugin maison pour personnaliser l'apparence et étendre les fonctionnalités du site. NE PAS DESACTIVER
+
+Sources <a href="https://github.com/lespotocyclettes/site-web/tree/main/wp-plugin">disponibles sur github</a>
 
 == Description ==
 
