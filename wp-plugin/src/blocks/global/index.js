@@ -1,33 +1,24 @@
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-import { registerBlockType } from "@wordpress/blocks";
+document.addEventListener(
+	"DOMContentLoaded",
+	() => {
+		addPinnedClass("header.wp-block-template-part");
+	},
+	{ once: true },
+);
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import "./style.scss";
+// inspiration from https://davidwalsh.name/detect-sticky
+function addPinnedClass(selectors) {
+	const elements = document.querySelectorAll(selectors);
+	const observer = new IntersectionObserver(
+		([element]) =>
+			element.target.classList.toggle(
+				"is-pinned",
+				element.intersectionRatio < 1,
+			),
+		{ threshold: [1] },
+	);
 
-/**
- * Internal dependencies
- */
-import metadata from "./block.json";
-
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-registerBlockType(metadata.name, {
-	attributes: {},
-	category: metadata.category,
-	title: metadata.title,
-	edit: () => <></>,
-	save: () => <></>,
-});
+	for (const element of elements) {
+		observer.observe(element);
+	}
+}

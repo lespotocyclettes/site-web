@@ -86,3 +86,61 @@
 		}
 	}
 }
+
+/**
+ * Rend la navighation flottante
+ *
+ * Une classe .is-pinned est ajoutée dynamiquement via https://davidwalsh.name/detect-sticky
+ */
+header.wp-block-template-part:has(.wp-block-navigation.is-responsive) {
+	& {
+		position: sticky;
+		top: -1px;
+		z-index: 10;
+	}
+
+	&.is-pinned {
+		pointer-events: none;
+	}
+
+	.site-logo-img {
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	&.is-pinned .site-logo-img {
+		opacity: 0;
+	}
+
+	.wp-block-navigation.is-responsive {
+		background-color: var(--wp--preset--color--background);
+		pointer-events: auto;
+
+		padding-block: var(--wp--preset--spacing--xx-small);
+		margin-block: calc(-1 * var(--wp--preset--spacing--xx-small));
+
+		padding-inline: var(--wp--preset--spacing--x-small);
+		margin-inline: calc(-1 * var(--wp--preset--spacing--x-small));
+
+		border-radius: var(--wp--custom--border-radius--medium);
+	}
+
+	@media screen and (max-width: 782px) {
+		.wp-block-navigation.is-responsive {
+			padding-block: var(--wp--preset--spacing--x-small);
+			margin-block: calc(-1 * var(--wp--preset--spacing--x-small));
+			transition: transform 0.3s ease-in-out;
+		}
+
+		&>* {
+			transition: transform 0.3s ease-in-out;
+		}
+
+		&.is-pinned>* {
+			transform: translateY(-50%);
+		}
+
+		&.is-pinned .wp-block-navigation.is-responsive {
+			transform: translateY(calc(50% + var(--wp--preset--spacing--xx-small)));
+		}
+	}
+}
