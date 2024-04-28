@@ -52,6 +52,16 @@
 }
 
 /**
+ * Permet de corriger l'apparence des legendes des images dans la galerie d'images
+ * Améliore le contraste
+ */
+.wp-block-gallery.has-nested-images figure.wp-block-image figcaption {
+	background: rgba(0, 0, 0, 0.9);
+	padding: var(--wp--preset--spacing--xx-small);
+	border-radius: var(--wp--custom--border-radius--medium);
+}
+
+/**
  * Ajout d'un effet grain texturé
  */
 .wp-site-blocks {
