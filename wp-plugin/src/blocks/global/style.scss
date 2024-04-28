@@ -90,7 +90,7 @@
 /**
  * Rend la navighation flottante
  *
- * Une classe .is-pinned est ajoutée dynamiquement via https://davidwalsh.name/detect-sticky
+ * Une classe .is-pinned est ajoutée dynamiquement via https://davidwalsh.name/detect-sticky (implémentation dans blocks/global/index.js)
  */
 header.wp-block-template-part:has(.wp-block-navigation.is-responsive) {
 	& {
@@ -141,6 +141,13 @@ header.wp-block-template-part:has(.wp-block-navigation.is-responsive) {
 
 		&.is-pinned .wp-block-navigation.is-responsive {
 			transform: translateY(calc(50% + var(--wp--preset--spacing--xx-small)));
+		}
+
+		// La propriété transform intéragit avec la position fixed du menu ainsi ouvert.
+		// Il est donc important de la désactiver lorsque celui-ci est ouvert
+		&.is-pinned *:has(.wp-block-navigation__responsive-container.is-menu-open) {
+			transform: none;
+			transition: none;
 		}
 	}
 }
