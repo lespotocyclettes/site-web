@@ -1,0 +1,16 @@
+{
+	"type": "module",
+	"name": "@lespotocyclettes/scripts",
+	"version": "0.0.0",
+	"description": "Scripts divers",
+	"author": "Géraud Henrion",
+	"license": "GPL-2.0-or-later",
+	"devDependencies": {
+		"@types/node": "^24.2.1",
+		"tsx": "^4.20.4",
+		"typescript": "^5.9.2"
+	},
+	"dependencies": {
+		"xlsx": "^0.18.5"
+	}
+}
