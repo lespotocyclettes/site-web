@@ -33,8 +33,8 @@ export function logImportDiagnostics(content: Structure[]) {
 		addValues(accumulatedValues.marque, value.marque);
 		addValues(accumulatedValues.nom, value.nom);
 		addValues(accumulatedValues.couleur, ...value.couleur);
-		addValues(accumulatedValues.pneu.diametre, value.pneu.diametre);
-		addValues(accumulatedValues.pneu.largeur, value.pneu.largeur);
+		addValues(accumulatedValues.pneu.diametre, value.pneu?.diametre);
+		addValues(accumulatedValues.pneu.largeur, value.pneu?.largeur);
 	});
 
 	console.log(accumulatedValues.pneu.diametre, accumulatedValues.pneu.largeur);
