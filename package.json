@@ -5,6 +5,6 @@
     "./wp-plugin"
   ],
   "devDependencies": {
-    "@biomejs/biome": "1.4.1"
+    "@biomejs/biome": "2.0.6"
   }
 }
