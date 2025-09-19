@@ -8,6 +8,9 @@ import XLSX from "./xlsx.ts";
 import type { Structure } from "./types.ts";
 import { logImportDiagnostics } from "./log-diagnostics.ts";
 import { colorFormatter } from "./formatters/color.ts";
+import { placeFormatter } from "./formatters/place.ts";
+import { typeVeloFormatter } from "./formatters/type_velo.ts";
+import { marqueFormatter } from "./formatters/marque.ts";
 
 const example = "./run.ts input/Stocks.xlsx output/stocks.xlsx";
 const input =
@@ -29,12 +32,12 @@ const content: Structure[] = rawContent
 		if (!values[0]) return;
 
 		return {
-			reference: values[0] ?? fail("reference is required"),
+			reference: String(values[0] ?? fail("reference is required")),
 			fiche_velo: Boolean(values[1]),
-			stock: values[2],
-			type_transmission_caractere: values[3],
-			type_velo: [values[4]],
-			marque: values[5],
+			stock: placeFormatter(values[2]),
+			type_transmission_caractere: values[3] ? String(values[3]) : undefined,
+			type_velo: typeVeloFormatter(values[4]),
+			marque: marqueFormatter(values[5]),
 			nom: values[6],
 			couleur: colorFormatter(values[7]),
 			pneu: {
@@ -46,7 +49,7 @@ const content: Structure[] = rawContent
 			date_sortie: values[11],
 			etat: values[12],
 			vendu: Boolean(values[13]),
-		} as Structure;
+		} satisfies Structure;
 	})
 	.filter((val) => val != null);
 

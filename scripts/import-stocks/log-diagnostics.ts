@@ -15,6 +15,7 @@ export function logImportDiagnostics(content: Structure[]) {
 		type_transmission_caractere: new Map<TypeTransmission, number>(),
 		type_velo: new Map<TypeVelo, number>(),
 		marque: new Map<Marque, number>(),
+		nom: new Map<string, number>(),
 		couleur: new Map<Couleur, number>(),
 		pneu: {
 			diametre: new Map<DiametrePneu, number>(),
@@ -30,12 +31,13 @@ export function logImportDiagnostics(content: Structure[]) {
 		);
 		addValues(accumulatedValues.type_velo, ...value.type_velo);
 		addValues(accumulatedValues.marque, value.marque);
+		addValues(accumulatedValues.nom, value.nom);
 		addValues(accumulatedValues.couleur, ...value.couleur);
 		addValues(accumulatedValues.pneu.diametre, value.pneu.diametre);
 		addValues(accumulatedValues.pneu.largeur, value.pneu.largeur);
 	});
 
-	console.log(accumulatedValues);
+	console.log(accumulatedValues.pneu.diametre, accumulatedValues.pneu.largeur);
 }
 
 function addValues<T>(map: Map<T, number>, ...values: T[]) {
