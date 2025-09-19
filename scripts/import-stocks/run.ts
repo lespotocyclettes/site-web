@@ -56,7 +56,25 @@ logImportDiagnostics(content);
 
 await fs.mkdir(path.dirname(output), { recursive: true });
 
+function normalizeData(data: Structure[]) {
+	return data.map((item): Record<string, number | string | boolean> => {
+		const { couleur, type_velo, pneu, ...rest } = item;
+		return {
+			...rest,
+			couleur: couleur.join(", "),
+			type_velo: type_velo.join(", "),
+			pneu_diametre: pneu?.diametre,
+			pneu_largeur: pneu?.largeur,
+		};
+	});
+}
+
+const normalizedContent = normalizeData(content);
+
 XLSX.writeFile(
-	{ Sheets: { data: XLSX.utils.json_to_sheet(content) }, SheetNames: ["data"] },
+	{
+		Sheets: { data: XLSX.utils.json_to_sheet(normalizedContent) },
+		SheetNames: ["data"],
+	},
 	output,
 );
