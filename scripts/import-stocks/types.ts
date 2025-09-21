@@ -18,6 +18,7 @@ export type Structure = {
 	couleur: Couleur[];
 	pneu?: {
 		diametre: DiametrePneu | undefined;
+		indicateurDiametreInterne?: "a" | "b" | "c" | undefined; // norme française
 		largeur: LargeurPneu | undefined;
 	};
 	donateur?: string;
