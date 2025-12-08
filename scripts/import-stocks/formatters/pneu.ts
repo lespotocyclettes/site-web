@@ -25,7 +25,7 @@ export function pneuFormatter(
 
 	if (diametre === "(53-559)") {
 		diametre = '26"';
-		largeur = '2.10"';
+		largeur = "2.10";
 	}
 
 	diametre = diametre?.trim();
@@ -78,8 +78,6 @@ function largeurFormatter(largeur: string | undefined) {
 
 	// largeur en pouces, ex: "1.75". On rajoute l'unité (1.75")
 	if (widthAsNumber < 10) {
-		console.log("widthAsNumber", widthAsNumber);
-
 		// par convention, il y a 2 à 3 chiffres après la virgule
 		// on arrondi à 3 chiffres apres la virgule
 		const widthAsNumberString = widthAsNumber.toFixed(3);

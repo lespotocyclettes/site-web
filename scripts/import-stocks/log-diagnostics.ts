@@ -22,6 +22,8 @@ export function logImportDiagnostics(content: Structure[]) {
 			largeur: new Map<LargeurPneu, number>(),
 		},
 	};
+	const references = new Set<string>();
+	const duplicates = new Set<string>();
 
 	content.forEach((value) => {
 		addValues(accumulatedValues.stock, value.stock);
@@ -35,9 +37,14 @@ export function logImportDiagnostics(content: Structure[]) {
 		addValues(accumulatedValues.couleur, ...value.couleur);
 		addValues(accumulatedValues.pneu.diametre, value.pneu?.diametre);
 		addValues(accumulatedValues.pneu.largeur, value.pneu?.largeur);
+
+		if (references.has(value.reference)) {
+			duplicates.add(value.reference);
+		}
+		references.add(value.reference);
 	});
 
-	console.log(accumulatedValues.pneu.diametre, accumulatedValues.pneu.largeur);
+	console.log(accumulatedValues, { duplicates });
 }
 
 function addValues<T>(map: Map<T, number>, ...values: T[]) {

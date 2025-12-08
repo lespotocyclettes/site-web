@@ -12,6 +12,9 @@ import { placeFormatter } from "./formatters/place.ts";
 import { typeVeloFormatter } from "./formatters/type_velo.ts";
 import { marqueFormatter } from "./formatters/marque.ts";
 import { pneuFormatter } from "./formatters/pneu.ts";
+import { etatFormateur } from "./formatters/etat.ts";
+import { dateFormatter } from "./formatters/date.ts";
+import { parseReference } from "./formatters/reference.ts";
 
 const example = "./run.ts input/Stocks.xlsx output/stocks.xlsx";
 const input =
@@ -32,8 +35,10 @@ const content: Structure[] = rawContent
 	.map((values) => {
 		if (!values[0]) return;
 
-		return {
-			reference: String(values[0] ?? fail("reference is required")),
+		const { reference, date_entree } = parseReference(values[0]);
+		const result = {
+			reference,
+
 			fiche_velo: Boolean(values[1]),
 			stock: placeFormatter(values[2]),
 			type_transmission_caractere: values[3]
@@ -44,24 +49,27 @@ const content: Structure[] = rawContent
 			nom: values[6] ? String(values[6]).toLocaleLowerCase() : undefined,
 			couleur: colorFormatter(values[7]),
 			pneu: pneuFormatter(values[8]),
-			donateur: values[9],
-			acheteur: values[10],
-			date_sortie: values[11],
-			etat: values[12],
-			vendu: Boolean(values[13]),
+			donateur: values[9] ? String(values[9]) : undefined,
+			acheteur: values[10] ? String(values[10]) : undefined,
+			// STOCK: values[11] // on ignore la colonne 11 nommée "STOCK"
+			date_entree,
+			date_sortie: dateFormatter(values[12]),
+			etat: etatFormateur(values[13]),
+			vendu: Boolean(values[14]),
 		} satisfies Structure;
+
+		return result;
 	})
 	.filter((val) => val != null);
 
+console.log(content);
 logImportDiagnostics(content);
-
-// console.log(content)
 
 await fs.mkdir(path.dirname(output), { recursive: true });
 
 function normalizeData(data: Structure[]) {
 	return data.map(
-		(item): Record<string, number | string | boolean | undefined> => {
+		(item): Record<string, number | string | boolean | Date | undefined> => {
 			const { couleur, type_velo, pneu, ...rest } = item;
 			return {
 				...rest,
