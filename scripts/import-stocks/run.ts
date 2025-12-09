@@ -4,7 +4,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fail } from "node:assert";
 
-import XLSX from "./xlsx.ts";
+import XLSX from "../xlsx.ts";
 import type { Structure } from "./types.ts";
 import { logImportDiagnostics } from "./log-diagnostics.ts";
 import { colorFormatter } from "./formatters/color.ts";
