@@ -96,11 +96,11 @@ console.log(`
 ${asciichart.plot(toPlot.reverse(), {
 	height: 30,
 	colors: [
-		asciichart.red,
+		asciichart.blue,
 		asciichart.green,
-		asciichart.red,
+		asciichart.blue,
 		asciichart.green,
-		asciichart.red,
+		asciichart.blue,
 		asciichart.green,
 	],
 })}
