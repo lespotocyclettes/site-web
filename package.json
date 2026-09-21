@@ -2,7 +2,8 @@
   "name": "lespotocyclettes",
   "version": "0.1.0",
   "workspaces": [
-    "./wp-plugin"
+    "./wp-plugin",
+    "./app"
   ],
   "devDependencies": {
     "@biomejs/biome": "2.0.6"

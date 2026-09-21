@@ -1,0 +1,37 @@
+/*
+ * L'état invalide se lit dans le DOM, il n'y a rien à synchroniser depuis React.
+ * :not(:placeholder-shown) évite de crier sur un champ que personne n'a encore rempli.
+ */
+@layer components {
+	.form-field {
+		& {
+			display: flex;
+			flex-direction: column;
+			gap: var(--size-1);
+		}
+
+		> .label {
+			font-weight: var(--font-weight-6);
+			color: var(--color-text-heading);
+		}
+
+		> .hint {
+			font-size: var(--font-size-0);
+			color: var(--color-text-muted);
+		}
+
+		&:has(:invalid:not(:placeholder-shown)) {
+			--color-field-border: var(--color-danger);
+		}
+
+		&:has(:invalid:not(:placeholder-shown)) > .label,
+		&:has(:invalid:not(:placeholder-shown)) > .hint {
+			color: var(--color-danger);
+		}
+
+		&:has(:required) > .label::after {
+			content: " *";
+			color: var(--color-danger);
+		}
+	}
+}

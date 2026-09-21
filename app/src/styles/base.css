@@ -1,0 +1,125 @@
+/*
+ * Le HTML nu doit être présentable sans une seule classe. Même scope que le reset : ces
+ * règles visent des éléments, elles ne doivent pas déborder sur une page tierce.
+ */
+@layer base {
+	@scope (.potos-app) {
+		:scope {
+			background: var(--color-surface-page);
+			color: var(--color-text-body);
+			font-family: var(--font-body);
+			font-size: var(--font-size-1);
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			color: var(--color-text-heading);
+			font-family: var(--font-heading);
+			/* Concert One n'existe qu'en 400 : le gras du navigateur la rendrait synthétique. */
+			font-weight: var(--font-weight-4);
+			line-height: var(--font-lineheight-1);
+			text-wrap: balance;
+		}
+
+		h1 {
+			font-size: var(--font-size-fluid-3);
+		}
+		h2 {
+			font-size: var(--font-size-fluid-2);
+		}
+		h3 {
+			font-size: var(--font-size-fluid-1);
+		}
+		h4 {
+			font-size: var(--font-size-fluid-0);
+		}
+
+		p {
+			text-wrap: pretty;
+		}
+
+		:is(p, ul, ol, dl, blockquote, figure, pre, table) {
+			margin-block: var(--size-3);
+		}
+
+		:is(ul, ol) {
+			padding-inline-start: var(--size-5);
+		}
+
+		a {
+			color: var(--color-link);
+			text-underline-offset: 0.15em;
+		}
+
+		/*
+		 * L'outline transparent n'est pas décoratif : en mode contraste forcé, le système
+		 * le repeint, et c'est lui qui rend le focus visible puisque l'ombre y est ignorée.
+		 */
+		:focus-visible {
+			outline: 2px solid transparent;
+			outline-offset: 2px;
+			box-shadow:
+				0 0 0 2px var(--color-surface-page),
+				0 0 0 4px var(--color-focus-ring);
+		}
+
+		/*
+		 * font-size sous 1rem : iOS zoome sur le champ au focus. Les liens en pleine prose
+		 * sont exemptés de la taille de cible minimale (WCAG 2.5.8), pas ces contrôles.
+		 */
+		:is(input, select, textarea, button) {
+			min-height: var(--size-tap-target);
+			font-size: var(--font-size-1);
+			color: var(--color-text-heading);
+			border-radius: var(--radius-base);
+		}
+
+		:is(input, select, textarea) {
+			padding-inline: var(--size-2);
+			background: var(--color-surface-page);
+			border: 1px solid var(--color-field-border);
+		}
+
+		button {
+			padding-inline: var(--size-inset);
+			background: var(--color-surface-raised);
+			border: 1px solid var(--color-border-strong);
+			cursor: pointer;
+		}
+
+		:is(input, select, textarea, button):disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		table {
+			inline-size: 100%;
+			border-collapse: collapse;
+		}
+
+		:is(th, td) {
+			padding: var(--size-2) var(--size-3);
+			text-align: start;
+			border-block-end: 1px solid var(--color-border);
+		}
+
+		th {
+			color: var(--color-text-heading);
+			font-weight: var(--font-weight-6);
+		}
+
+		:is(code, pre, kbd, samp) {
+			font-family: var(--font-mono);
+			font-size: var(--font-size-0);
+		}
+
+		hr {
+			border: none;
+			border-block-start: 1px solid var(--color-border);
+		}
+	}
+}

@@ -1,0 +1,47 @@
+/*
+ * Les deux polices du thème du site, auto-hébergées comme le fait le thème lui-même :
+ * pas d'appel au CDN Google, donc rien qui parte chez un tiers et rien qui casse hors ligne.
+ *
+ * Asap, SIL Open Font License 1.1, Omnibus-Type. https://fonts.google.com/specimen/Asap
+ * Concert One, SIL Open Font License 1.1, Johan Kallas. https://fonts.google.com/specimen/Concert+One
+ *
+ * Seul le sous-ensemble latin est embarqué : il couvre le français. Un caractère hors de
+ * cette plage retombe sur la police système, ce que dit unicode-range.
+ * Asap est une police variable : un seul fichier couvre toutes les graisses.
+ */
+
+@font-face {
+	font-family: "Asap";
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url("./fonts/asap-latin.woff2") format("woff2");
+	unicode-range:
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+		U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+		U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: "Asap";
+	font-style: italic;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url("./fonts/asap-italic-latin.woff2") format("woff2");
+	unicode-range:
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+		U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+		U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: "Concert One";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("./fonts/concert-one-latin.woff2") format("woff2");
+	unicode-range:
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+		U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+		U+FEFF, U+FFFD;
+}

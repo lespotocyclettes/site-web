@@ -1,0 +1,19 @@
+{
+	"plugins": [
+		"@elecdeer/stylelint-rscss"
+	],
+	"rules": {
+		"rscss/class-format": [
+			true,
+			{
+				"component": "component",
+				"element": "element",
+				"maxDepth": 3
+			}
+		],
+		"rscss/no-descendant-combinator": true
+	},
+	"ignoreFiles": [
+		"src/styles/vendor/**"
+	]
+}

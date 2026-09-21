@@ -1,0 +1,39 @@
+@layer components {
+	.content-card {
+		& {
+			--_bg: var(--color-surface-raised);
+			--_border: var(--color-border);
+			--_shadow: none;
+
+			display: flex;
+			flex-direction: column;
+			gap: var(--size-3);
+			padding: var(--size-inset);
+			background: var(--_bg);
+			border: 1px solid var(--_border);
+			border-radius: var(--radius-base);
+			box-shadow: var(--_shadow);
+		}
+
+		> .title {
+			font-size: var(--font-size-3);
+			color: var(--color-text-heading);
+		}
+
+		> .footer {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--size-2);
+		}
+
+		&[data-variant="elevated"] {
+			--_border: transparent;
+			--_shadow: var(--shadow-raised);
+		}
+
+		&[data-variant="plain"] {
+			--_bg: transparent;
+			--_border: transparent;
+		}
+	}
+}

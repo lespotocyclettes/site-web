@@ -1,0 +1,67 @@
+/*
+ * Une variante ne redéfinit que des molettes : la règle qui les consomme est écrite une
+ * seule fois. Les survols se dérivent du fond courant, donc aucune couleur de survol à
+ * maintenir en double dans les tokens.
+ */
+@layer components {
+	.action-button {
+		& {
+			--_bg: var(--color-surface-raised);
+			--_fg: var(--color-text-heading);
+			--_border: var(--color-border-strong);
+			--_padding-inline: var(--size-inset);
+			--_font-size: var(--font-size-1);
+
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: var(--size-2);
+			min-block-size: var(--size-tap-target);
+			padding-inline: var(--_padding-inline);
+			font-size: var(--_font-size);
+			font-weight: var(--font-weight-6);
+			color: var(--_fg);
+			background: var(--_bg);
+			border: 1px solid var(--_border);
+			border-radius: var(--radius-button);
+			cursor: pointer;
+			transition: background-color 120ms var(--ease-2);
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		&[data-variant="primary"] {
+			--_bg: var(--color-accent);
+			--_fg: var(--color-text-on-accent);
+			--_border: transparent;
+		}
+
+		&[data-variant="secondary"] {
+			--_bg: transparent;
+			--_fg: var(--color-link);
+		}
+
+		&[data-variant="danger"] {
+			--_bg: var(--color-danger);
+			--_fg: var(--color-text-on-danger);
+			--_border: transparent;
+		}
+
+		/*
+		 * « small » allège la typographie et les marges, jamais la hauteur : la cible
+		 * tactile est un plancher, pas une variante.
+		 */
+		&[data-size="small"] {
+			--_padding-inline: var(--size-2);
+			--_font-size: var(--font-size-0);
+		}
+
+		&:hover:not(:disabled) {
+			background: color-mix(in oklab, var(--_bg), var(--color-text-heading) 8%);
+		}
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+	}
+}

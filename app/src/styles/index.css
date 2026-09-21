@@ -1,0 +1,30 @@
+/*
+ * Le manifeste. Il déclare l'ordre des couches une fois pour toutes, puis charge tout.
+ * L'app et le styleguide chargent ce seul fichier : une deuxième liste d'imports serait
+ * libre de diverger de celle-ci.
+ *
+ * Les tokens restent hors couche : le CSS hors couche l'emporte sur le CSS en couche,
+ * donc aucune règle ne peut les redéfinir par accident.
+ */
+@layer reset, base, layout, components, utilities;
+
+@import url("./vendor/props.sizes.css");
+@import url("./vendor/props.borders.css");
+@import url("./vendor/props.fonts.css");
+@import url("./vendor/props.easing.css");
+@import url("./vendor/props.shadows.css");
+
+@import url("./fonts.css");
+
+@import url("./semantic.css");
+
+@import url("./reset.css");
+@import url("./base.css");
+
+@import url("../components/layout/layout.css");
+@import url("../components/action-button/action-button.css");
+@import url("../components/form-field/form-field.css");
+@import url("../components/content-card/content-card.css");
+@import url("../components/data-table/data-table.css");
+@import url("../components/notice-block/notice-block.css");
+@import url("../components/modal-dialog/modal-dialog.css");

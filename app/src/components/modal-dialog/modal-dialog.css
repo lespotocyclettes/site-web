@@ -1,0 +1,33 @@
+/*
+ * Posé sur un <dialog> natif : l'ouverture, la pile de superposition et le piège à focus
+ * sont ceux du navigateur, il n'y a rien à réimplémenter.
+ */
+@layer components {
+	.modal-dialog {
+		& {
+			max-inline-size: min(32rem, calc(100vw - 2 * var(--size-inset)));
+			padding: var(--size-inset);
+			color: var(--color-text-body);
+			background: var(--color-surface-page);
+			border: none;
+			border-radius: var(--radius-base);
+			box-shadow: var(--shadow-overlay);
+		}
+
+		&::backdrop {
+			background: var(--color-backdrop);
+		}
+
+		> .title {
+			font-size: var(--font-size-3);
+			color: var(--color-text-heading);
+		}
+
+		> .actions {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			gap: var(--size-2);
+		}
+	}
+}

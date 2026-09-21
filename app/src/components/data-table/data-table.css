@@ -1,0 +1,27 @@
+/*
+ * Les cellules sont stylées par la couche base. Ce composant n'ajoute que ce qui relève
+ * d'un tableau de données : en-tête collant, survol de ligne, densité.
+ */
+@layer components {
+	.data-table {
+		& {
+			inline-size: 100%;
+			border-collapse: collapse;
+		}
+
+		> thead > tr > th {
+			position: sticky;
+			inset-block-start: 0;
+			background: var(--color-surface-page);
+			border-block-end: 1px solid var(--color-border-strong);
+		}
+
+		> tbody > tr:hover > td {
+			background: var(--color-surface-raised);
+		}
+
+		&[data-density="compact"] > tbody > tr > td {
+			padding-block: var(--size-1);
+		}
+	}
+}

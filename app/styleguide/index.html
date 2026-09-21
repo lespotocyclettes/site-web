@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr" class="potos-app">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Fondation CSS des Poto'Cyclettes</title>
+	<link rel="stylesheet" href="../src/styles/index.css">
+	<style>
+		/* Propre à cette page : la mise en page du styleguide n'est pas la fondation. */
+		body { max-inline-size: 60rem; margin-inline: auto; padding: var(--size-3); }
+		section { margin-block: var(--size-8); }
+		.token-swatch { block-size: var(--size-8); border: 1px solid var(--color-border); border-radius: var(--radius-base); }
+		.token-name { font-family: var(--font-mono); font-size: var(--font-size-0); }
+	</style>
+</head>
+<body>
+
+<header class="layout-cluster" style="justify-content: space-between">
+	<h1>Fondation CSS</h1>
+	<button type="button" id="theme-toggle" class="action-button" data-variant="secondary">Basculer le thème</button>
+</header>
+
+<p>Cette page est à la fois la documentation, le miroir de régression et la preuve que la
+fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il n'existe pas.</p>
+
+<section>
+	<h2>Couleurs</h2>
+	<div class="layout-grid" style="--min: 10rem" id="swatches"></div>
+</section>
+
+<section>
+	<h2>Typographie</h2>
+	<p>Deux polices, reprises du thème du site, et embarquées dans le dépôt : rien n'est
+	chargé depuis un serveur tiers, tout marche hors ligne.</p>
+
+	<h3>Concert One, pour les titres</h3>
+	<p style="font-family: var(--font-heading); font-size: var(--font-size-5)">Des vélos, de l'amour et du cambouis</p>
+
+	<h3>Asap, pour le texte courant</h3>
+	<p>Asap est une police variable : un seul fichier couvre toutes les graisses.</p>
+	<p style="font-weight: var(--font-weight-4)">Graisse 400, celle du texte courant.</p>
+	<p style="font-weight: var(--font-weight-6)">Graisse 600, celle des libellés et des en-têtes de tableau.</p>
+	<p><em>Et l'italique, qui a son propre fichier.</em></p>
+	<p>Un caractère hors du latin de base retombe sur la police système : 日本語, Ελληνικά.</p>
+</section>
+
+<section>
+	<h2>HTML nu</h2>
+	<p>Aucune classe ci-dessous. C'est la promesse de la couche <code>base</code>.</p>
+
+	<h3>Titre de niveau 3</h3>
+	<h4>Titre de niveau 4</h4>
+	<p>Un paragraphe ordinaire, avec <a href="#">un lien</a>, du <code>code en ligne</code>
+	et une <strong>emphase forte</strong>.</p>
+
+	<ul>
+		<li>Premier élément</li>
+		<li>Deuxième élément</li>
+	</ul>
+
+	<hr>
+
+	<table>
+		<thead>
+			<tr><th>Référence</th><th>Type</th><th>Statut</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>260707.01</td><td>VTT</td><td>En stock</td></tr>
+			<tr><td>260707.02</td><td>Vélo enfant</td><td>Prêt à la vente</td></tr>
+		</tbody>
+	</table>
+
+	<p>
+		<label for="nu-texte">Un champ</label>
+		<input id="nu-texte" type="text" placeholder="Peugeot">
+		<button type="button">Un bouton</button>
+	</p>
+</section>
+
+<section>
+	<h2>Mise en page</h2>
+
+	<h3><code>.layout-stack</code></h3>
+	<div class="layout-stack" style="--gap: var(--size-2)">
+		<div class="content-card" data-variant="plain">Premier</div>
+		<div class="content-card" data-variant="plain">Deuxième</div>
+	</div>
+
+	<h3><code>.layout-cluster</code></h3>
+	<div class="layout-cluster">
+		<button type="button" class="action-button">Un</button>
+		<button type="button" class="action-button">Deux</button>
+		<button type="button" class="action-button">Trois</button>
+	</div>
+
+	<h3><code>.layout-grid</code></h3>
+	<div class="layout-grid" style="--min: 12rem">
+		<div class="content-card">Colonne</div>
+		<div class="content-card">Colonne</div>
+		<div class="content-card">Colonne</div>
+	</div>
+</section>
+
+<section>
+	<h2><code>.action-button</code></h2>
+
+	<h3>Variantes</h3>
+	<div class="layout-cluster">
+		<button type="button" class="action-button">Par défaut</button>
+		<button type="button" class="action-button" data-variant="primary">Enregistrer</button>
+		<button type="button" class="action-button" data-variant="secondary">Annuler</button>
+		<button type="button" class="action-button" data-variant="danger">Supprimer</button>
+	</div>
+
+	<h3>États</h3>
+	<div class="layout-cluster">
+		<button type="button" class="action-button" data-variant="primary" disabled>Désactivé</button>
+		<button type="button" class="action-button" disabled>Désactivé</button>
+		<button type="button" class="action-button">Tabulez jusqu'ici pour voir l'anneau</button>
+	</div>
+
+	<h3>Taille</h3>
+	<div class="layout-cluster">
+		<button type="button" class="action-button" data-size="small">Petit</button>
+		<button type="button" class="action-button">Normal</button>
+	</div>
+	<p>« Petit » allège la typographie, jamais la hauteur : la cible tactile est un plancher.</p>
+</section>
+
+<section>
+	<h2><code>.form-field</code></h2>
+	<div class="layout-stack">
+		<div class="form-field">
+			<label class="label" for="marque">Marque</label>
+			<input id="marque" type="text" list="marques" placeholder="Peugeot">
+			<datalist id="marques">
+				<option value="Peugeot"></option>
+				<option value="Gitane"></option>
+				<option value="Motobécane"></option>
+			</datalist>
+			<span class="hint">Suggestions issues de la base.</span>
+		</div>
+
+		<div class="form-field">
+			<label class="label" for="courriel">Courriel du donateur</label>
+			<input id="courriel" type="email" required value="pas-un-courriel">
+			<span class="hint">L'état invalide vient de <code>:invalid</code>, rien n'est synchronisé.</span>
+		</div>
+	</div>
+</section>
+
+<section>
+	<h2><code>.content-card</code></h2>
+	<div class="layout-grid" style="--min: 14rem">
+		<article class="content-card">
+			<h3 class="title">Par défaut</h3>
+			<p>Contour discret.</p>
+		</article>
+		<article class="content-card" data-variant="elevated">
+			<h3 class="title">Surélevée</h3>
+			<p>Ombre, sans contour.</p>
+			<div class="footer">
+				<button type="button" class="action-button" data-size="small">Ouvrir</button>
+			</div>
+		</article>
+		<article class="content-card" data-variant="plain">
+			<h3 class="title">Nue</h3>
+			<p>Ni fond ni contour.</p>
+		</article>
+	</div>
+</section>
+
+<section>
+	<h2><code>.data-table</code></h2>
+	<table class="data-table">
+		<thead>
+			<tr><th>Référence</th><th>Type</th><th>Statut</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>260707.01</td><td>VTT</td><td>En stock</td></tr>
+			<tr><td>260707.02</td><td>Vélo enfant</td><td>Prêt à la vente</td></tr>
+			<tr><td>260707.03</td><td>Vélo de ville</td><td>Démonté</td></tr>
+		</tbody>
+	</table>
+
+	<h3>Densité compacte</h3>
+	<table class="data-table" data-density="compact">
+		<thead>
+			<tr><th>Référence</th><th>Type</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>260707.01</td><td>VTT</td></tr>
+			<tr><td>260707.02</td><td>Vélo enfant</td></tr>
+		</tbody>
+	</table>
+</section>
+
+<section>
+	<h2><code>.notice-block</code></h2>
+	<div class="layout-stack">
+		<div class="notice-block">
+			<p class="title">Information</p>
+			<p>Le diagnostic d'un vélo qui dort périme.</p>
+		</div>
+		<div class="notice-block" data-variant="danger">
+			<p class="title">Attention</p>
+			<p>Cette référence existe déjà.</p>
+		</div>
+		<div class="notice-block" data-variant="success">
+			<p class="title">Enregistré</p>
+			<p>Recopiez la référence 260707.04 sur la fiche.</p>
+		</div>
+	</div>
+</section>
+
+<section>
+	<h2><code>.modal-dialog</code></h2>
+	<button type="button" class="action-button" id="open-dialog">Ouvrir le dialogue</button>
+
+	<dialog class="modal-dialog" id="demo-dialog">
+		<form method="dialog" class="layout-stack">
+			<h2 class="title">Sortie de stock</h2>
+			<p>Le dialogue natif gère l'ouverture, la superposition et le piège à focus.</p>
+			<div class="actions">
+				<button type="submit" class="action-button" data-variant="secondary" value="annuler">Annuler</button>
+				<button type="submit" class="action-button" data-variant="primary" value="confirmer">Confirmer</button>
+			</div>
+		</form>
+	</dialog>
+</section>
+
+<script>
+	const COLOR_TOKENS = [
+		'color-surface-page', 'color-surface-raised', 'color-surface-section',
+		'color-border', 'color-border-strong', 'color-field-border',
+		'color-text-heading', 'color-text-body', 'color-text-muted', 'color-text-on-section',
+		'color-accent', 'color-text-on-accent', 'color-link',
+		'color-danger', 'color-text-on-danger',
+		'color-focus-ring', 'color-backdrop',
+	]
+
+	const root = document.documentElement
+
+	function renderSwatches() {
+		const styles = getComputedStyle(root)
+		document.getElementById('swatches').replaceChildren(...COLOR_TOKENS.map((token) => {
+			const cell = document.createElement('div')
+			const value = styles.getPropertyValue(`--${token}`).trim()
+			cell.innerHTML = `<div class="token-swatch" style="background:var(--${token})"></div>
+				<div class="token-name">--${token}</div><div class="token-name">${value}</div>`
+			return cell
+		}))
+	}
+
+	document.getElementById('theme-toggle').addEventListener('click', () => {
+		const isDark = root.dataset.theme === 'dark'
+		root.dataset.theme = isDark ? 'light' : 'dark'
+		renderSwatches()
+	})
+
+	document.getElementById('open-dialog').addEventListener('click', () => {
+		document.getElementById('demo-dialog').showModal()
+	})
+
+	renderSwatches()
+</script>
+
+</body>
+</html>

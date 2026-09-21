@@ -1,0 +1,39 @@
+@layer components {
+	.notice-block {
+		& {
+			--_accent: var(--color-border-strong);
+			--_bg: var(--color-surface-raised);
+
+			display: flex;
+			flex-direction: column;
+			gap: var(--size-1);
+			padding: var(--size-inset);
+			background: var(--_bg);
+			border-inline-start: var(--size-1) solid var(--_accent);
+			border-radius: var(--radius-base);
+		}
+
+		> .title {
+			font-weight: var(--font-weight-6);
+			color: var(--color-text-heading);
+		}
+
+		&[data-variant="danger"] {
+			--_accent: var(--color-danger);
+			--_bg: color-mix(
+				in oklab,
+				var(--color-danger) 8%,
+				var(--color-surface-page)
+			);
+		}
+
+		&[data-variant="success"] {
+			--_accent: var(--color-surface-section);
+			--_bg: color-mix(
+				in oklab,
+				var(--color-surface-section) 8%,
+				var(--color-surface-page)
+			);
+		}
+	}
+}
