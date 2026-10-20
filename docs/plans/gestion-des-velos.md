@@ -1,6 +1,14 @@
 # Mini-app de gestion des vélos — Les Poto'Cyclettes
 
-*Plan v3 — juillet 2026*
+*Plan v3 — juillet 2026, amendé le 21/10/2026*
+
+> **Amendements d'octobre 2026.** Le reste du document est celui de juillet.
+>
+> - **Suivi atelier** : il vit au verso de la fiche vélo, pas au recto. Le recto identifie le vélo.
+> - **Diagnostic** : il ne périme pas forcément. Il se fait au fil de l'eau, quand on a le temps.
+> - **État mécanique** : ce n'est pas un champ en base. Il vit au verso de la fiche vélo.
+> - **Outillage** : Vite est retenu pour la mini-app. La fondation CSS, elle, tourne sans build.
+> - **Composants** : la piste Shoelace est abandonnée. Les chips seront un toggle-group.
 
 ---
 
@@ -16,7 +24,7 @@ Le papier a fait ses preuves ; le maillon numérique a cassé rapidement : les f
 
 1. **Historique juridique** — savoir d'où vient et où va chaque vélo (donateur, acheteur, signatures). *Couvert par le papier, la base n'en est qu'une copie de confort.* La fiche don archivée est la source de vérité légale ; la **référence** écrite sur la fiche don ET la fiche vélo fait la jointure.
 2. **État des stocks** — répondre à « on a un vélo enfant ? un VTT ? » et savoir quoi sortir en priorité pour réparer. *C'est le besoin que la base doit servir en premier.*
-3. **Suivi atelier** — voir d'un coup d'œil ce qu'il y a à faire sur un vélo (recto de la fiche plastifiée). *Fonctionne déjà ; il manque des fiches imprimées.*
+3. **Suivi atelier** — voir d'un coup d'œil ce qu'il y a à faire sur un vélo (verso de la fiche plastifiée). *Fonctionne déjà ; il manque des fiches imprimées.*
 4. **Vitrine web** — les vélos « prêts à la vente » remontent sur le site via une vue Teable filtrable avec photos. *Bonus assumé : si ce n'est plus fait, tant pis.*
 
 ### Problèmes à résoudre
@@ -36,8 +44,8 @@ Le papier a fait ses preuves ; le maillon numérique a cassé rapidement : les f
 ### Ce qu'on ne fait pas
 
 - **Pas de table de mouvements** (comptabilité en partie double des stocks) : 1 vélo = 1 ligne, un vélo sort une fois. La simplicité prime.
-- **Pas de diagnostic exhaustif du stock dormant** : le diagnostic approfondi se fait au fil de l'eau, quand un vélo sort pour réparation. Le diagnostic d'un vélo qui dort périme.
-- **Pas d'inférence sur la taille de roue ni l'état mécanique** : non fiable depuis une photo, ces champs restent humains.
+- **Pas de diagnostic exhaustif du stock dormant** : le diagnostic approfondi se fait au fil de l'eau, quand on a le temps.
+- **Pas d'inférence sur la taille de roue ni l'état mécanique** : non fiable depuis une photo. La taille de roue reste saisie à la main, l'état mécanique vit au verso de la fiche vélo.
 - **Pas de rattrapage rétroactif détaillé** de l'historique 2015-2024 au niveau du nouveau process : enregistrement minimal.
 - **Pas de galerie photos sophistiquée** : une photo principale, les suivantes en upload simple.
 
@@ -60,9 +68,9 @@ Le papier a fait ses preuves ; le maillon numérique a cassé rapidement : les f
 | Référence | Générée côté serveur au submit (`max(jour) + 1`), jamais saisie — sauf mode « à rebours » explicite. `date_entree` toujours dérivée de la référence, jamais saisie. |
 | Photos | La première est obligatoire (sauf bypass) et sert à l'inférence ; les suivantes optionnelles en upload simple. En cas de bypass photo : marque/modèle/couleur deviennent requis pour l'identification. |
 | Validation | Rien d'autre n'est obligatoire — ne jamais bloquer une saisie dans l'atelier. |
-| UI mobile | Datalist natif (marque, modèle, couleur — suggestions depuis la base), chips tapables (type, public, taille, triage). Pas de combobox. |
-| Composants | Pas de lib de composants lourde. Si un besoin résiste : Shoelace (CDN) avant Park UI. |
-| Outillage | Décision ouverte entre deux pistes défendables : build Vite (standard, confort JSX/TS) ou **no-build Preact + htm via CDN** (maintenance par simple édition de fichier, zéro chaîne d'outils à faire survivre). Le périmètre mini-app rend Vite acceptable ; le principe de transmission garde l'avantage au no-build. À trancher avec le 2ᵉ dev. |
+| UI mobile | Datalist natif (marque, modèle, couleur — suggestions depuis la base), chips tapables (type, public, taille, triage), sous forme de toggle-group ; elles peuvent venir après la fondation. Pas de combobox. |
+| Composants | Pas de lib de composants lourde. On tranchera au premier besoin réel. |
+| Outillage | Vite retenu en octobre 2026, à co-signer avec le 2ᵉ dev. Le principe de transmission est tenu autrement : la fondation CSS n'en dépend pas et tourne sans build, son styleguide s'ouvre d'un double-clic. |
 | unreel | Autorisé sous conditions : dogfooding assumé, contenu au flux d'entrée uniquement, co-signé par le 2ᵉ dev, porte de sortie documentée (~30 lignes de localStorage équivalentes). Le core étant framework-agnostique, un **adapteur Preact** est envisageable — unreel n'impose donc ni React ni un build, et reste compatible avec la piste no-build. |
 | Sécurité | Token Teable et clé VLM en `wp-config.php`, secret partagé en header vérifié dans `permission_callback`, htaccess (Basic Auth) sur la page. Le htaccess seul ne protège **pas** `/wp-json/` — d'où le secret en header. |
 | Vitrine web | Vue Teable filtrée sur « prêt à la vente », aucune ligne de code dédiée. |
@@ -142,4 +150,4 @@ Mu-plugin unique `potocyclettes-teable-relay.php` dans `wp-content/mu-plugins/`.
 
 ---
 
-*Document vivant — amendé au fil des décisions. Dernière révision : 07/07/2026.*
+*Document vivant — amendé au fil des décisions. Dernière révision : 21/10/2026.*
