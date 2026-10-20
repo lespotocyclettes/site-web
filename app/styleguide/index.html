@@ -200,7 +200,7 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 	<div class="layout-stack">
 		<div class="notice-block">
 			<p class="title">Information</p>
-			<p>Le diagnostic d'un vélo qui dort périme.</p>
+			<p>La taille de roue se saisit à la main.</p>
 		</div>
 		<div class="notice-block" data-variant="danger">
 			<p class="title">Attention</p>
@@ -218,13 +218,11 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 	<button type="button" class="action-button" id="open-dialog">Ouvrir le dialogue</button>
 
 	<dialog class="modal-dialog" id="demo-dialog">
-		<form method="dialog" class="layout-stack">
-			<h2 class="title">Sortie de stock</h2>
-			<p>Le dialogue natif gère l'ouverture, la superposition et le piège à focus.</p>
-			<div class="actions">
-				<button type="submit" class="action-button" data-variant="secondary" value="annuler">Annuler</button>
-				<button type="submit" class="action-button" data-variant="primary" value="confirmer">Confirmer</button>
-			</div>
+		<h2 class="title">Sortie de stock</h2>
+		<p>Le dialogue natif gère l'ouverture, la superposition et le piège à focus.</p>
+		<form method="dialog" class="actions">
+			<button type="submit" class="action-button" data-variant="secondary" value="annuler">Annuler</button>
+			<button type="submit" class="action-button" data-variant="primary" value="confirmer">Confirmer</button>
 		</form>
 	</dialog>
 </section>
