@@ -3,8 +3,9 @@
  * L'app et le styleguide chargent ce seul fichier : une deuxième liste d'imports serait
  * libre de diverger de celle-ci.
  *
- * Les tokens restent hors couche : le CSS hors couche l'emporte sur le CSS en couche,
- * donc aucune règle ne peut les redéfinir par accident.
+ * Les tokens ne sont rangés dans aucune couche, exprès : une déclaration hors couche gagne
+ * sur toutes celles rangées dans une couche. Aucune règle de composant ne peut donc les
+ * écraser par accident.
  */
 @layer reset, base, layout, components, utilities;
 

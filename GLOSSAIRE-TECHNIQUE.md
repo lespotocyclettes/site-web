@@ -50,6 +50,12 @@ Un token privé à un composant, préfixé `--_`, par exemple `--_bg`. Le compos
 règle une fois en lisant ses molettes, et chaque variante ne fait que tourner les molettes.
 Le `_` dit « ne touchez pas à ça depuis l'extérieur ».
 
+**Brique de mise en page** :
+Une des trois classes `layout-stack` (empiler), `layout-cluster` (aligner en ligne, avec
+retour à la ligne) et `layout-grid` (grille). Elles rangent des éléments les uns par
+rapport aux autres, sans rien dessiner.
+_Éviter_ : « primitive », « outil de mise en page ».
+
 **Manifeste** :
 Le fichier `app/src/styles/index.css`, qui déclare l'ordre des couches et importe tout le
 reste. Un seul fichier charge la fondation. Si vous ajoutez un composant, c'est là qu'il
@@ -191,7 +197,7 @@ par nous, pas par Google.
 La liste des caractères que couvre un fichier de police. On n'embarque que le latin, qui
 suffit au français. Le reste retombe sur la police du système.
 
-## Les outils
+## Les logiciels de développement
 
 **AGENTS.md** :
 Un fichier à la racine du dépôt, écrit pour les assistants IA de code. Ils le lisent
@@ -219,7 +225,7 @@ n'en a pas besoin : elle marche telle quelle, et c'est voulu.
 
 **Dépendance de développement** :
 Une bibliothèque utile pour travailler, mais absente du produit livré. Si elle meurt,
-l'outil tourne encore. Une dépendance d'exécution, elle, part avec le produit.
+le produit tourne encore. Une dépendance d'exécution, elle, part avec le produit.
 
 ## Côté serveur
 
@@ -273,4 +279,4 @@ Le plan écrit d'avance pour se débarrasser d'une dépendance. Si elle ne tient
 quelques dizaines de lignes, ce n'est pas une porte de sortie.
 
 **Timebox** :
-Une date fixée à l'avance et tenue, quel que soit l'état de l'outil.
+Une date fixée à l'avance et tenue, quel que soit l'état du logiciel.

@@ -1,6 +1,7 @@
 /*
- * Posé sur un <dialog> natif : l'ouverture, la pile de superposition et le piège à focus
- * sont ceux du navigateur, il n'y a rien à réimplémenter.
+ * Posé sur la balise <dialog> du navigateur. Il gère seul l'ouverture, l'affichage
+ * par-dessus la page, et garde le clavier dans la fenêtre tant qu'elle est ouverte. Rien à
+ * recoder.
  */
 @layer components {
 	.modal-dialog {

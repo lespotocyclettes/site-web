@@ -1,6 +1,7 @@
 /*
- * L'état invalide se lit dans le DOM, il n'y a rien à synchroniser depuis React.
- * :not(:placeholder-shown) évite de crier sur un champ que personne n'a encore rempli.
+ * Le navigateur sait seul qu'un champ est mal rempli (:invalid) : rien à gérer depuis
+ * React. :not(:placeholder-shown) attend qu'on ait commencé à taper, pour ne pas afficher
+ * d'erreur sur un champ encore vide.
  */
 @layer components {
 	.form-field {

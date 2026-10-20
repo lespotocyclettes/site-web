@@ -1,6 +1,7 @@
 /*
- * Le HTML nu doit être présentable sans une seule classe. Même scope que le reset : ces
- * règles visent des éléments, elles ne doivent pas déborder sur une page tierce.
+ * Une page HTML doit être présentable sans une seule classe. Même portée (@scope) que le
+ * reset, pour la même raison : ces règles visent des balises, elles ne doivent pas toucher
+ * une page qui n'est pas à nous.
  */
 @layer base {
 	@scope (.potos-app) {
@@ -19,7 +20,10 @@
 		h6 {
 			color: var(--color-text-heading);
 			font-family: var(--font-heading);
-			/* Concert One n'existe qu'en 400 : le gras du navigateur la rendrait synthétique. */
+			/*
+			 * Concert One n'existe qu'en graisse 400. Sans cette ligne, le navigateur
+			 * épaissirait lui-même les titres, et le trait baverait.
+			 */
 			font-weight: var(--font-weight-4);
 			line-height: var(--font-lineheight-1);
 			text-wrap: balance;
@@ -56,8 +60,9 @@
 		}
 
 		/*
-		 * L'outline transparent n'est pas décoratif : en mode contraste forcé, le système
-		 * le repeint, et c'est lui qui rend le focus visible puisque l'ombre y est ignorée.
+		 * L'outline transparent n'est pas là pour rien. En mode contraste élevé de Windows,
+		 * les ombres disparaissent et le système recolore les contours : c'est alors ce
+		 * contour invisible, devenu visible, qui montre l'élément sélectionné au clavier.
 		 */
 		:focus-visible {
 			outline: 2px solid transparent;
@@ -68,8 +73,10 @@
 		}
 
 		/*
-		 * font-size sous 1rem : iOS zoome sur le champ au focus. Les liens en pleine prose
-		 * sont exemptés de la taille de cible minimale (WCAG 2.5.8), pas ces contrôles.
+		 * En dessous de 1rem, la taille de texte par défaut, iPhone zoome sur le champ dès
+		 * qu'on tape dedans. La hauteur minimale vient de la règle d'accessibilité WCAG 2.5.8
+		 * sur la taille des cibles : les liens au milieu d'un texte en sont dispensés, pas
+		 * ces contrôles.
 		 */
 		:is(input, select, textarea, button) {
 			min-height: var(--size-tap-target);

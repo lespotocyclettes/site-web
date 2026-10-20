@@ -16,7 +16,7 @@ première apparition.
 - **écrire de la prose** (doc, commentaire, commit) : lis la règle 9 de
   [CONCEPTION.md](./CONCEPTION.md). Un terme technique absent de
   [GLOSSAIRE-TECHNIQUE.md](./GLOSSAIRE-TECHNIQUE.md) s'y ajoute dans le même changement.
-- **ajouter une dépendance, un outil ou une étape de build** : lis la règle 4 de
+- **ajouter une dépendance, un outil de développement ou une étape de build** : lis la règle 4 de
   [CONCEPTION.md](./CONCEPTION.md). Ces choix se co-signent : propose, l'humain tranche.
 - **changer une convention qui te paraît étrange** : lis [docs/adr/](./docs/adr/). Elle est
   sans doute voulue, et la fiche dit pourquoi.

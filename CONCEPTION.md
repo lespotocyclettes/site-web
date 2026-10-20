@@ -8,7 +8,7 @@ Ce document ne décrit aucun projet. Pas de spec ici, pas de tuto : juste les r�
 décision, avec la raison derrière chacune. Elles sortent de deux endroits, le [plan de la
 mini-app vélos](./docs/plans/gestion-des-velos.md) (v3, juillet 2026) et la fondation CSS livrée en octobre 2026.
 
-Pour qui : le prochain bénévole qui reprend un outil, et l'assistant IA qui bosse avec lui.
+Pour qui : le prochain bénévole qui reprend un outil numérique, et l'assistant IA qui bosse avec lui.
 On ne suppose pas que vous êtes développeur professionnel. Les mots techniques sont
 expliqués au passage, et repris dans [GLOSSAIRE-TECHNIQUE.md](./GLOSSAIRE-TECHNIQUE.md).
 
@@ -16,7 +16,7 @@ Si une règle vous paraît fausse, dites-le. Elles sont là pour être discutée
 
 ## 1. La reprise commande tout
 
-L'asso est 100 % bénévole. Celui qui écrit un outil finira par partir, moi compris. C'est
+L'asso est 100 % bénévole. Celui qui écrit un outil numérique finira par partir, moi compris. C'est
 la contrainte dont découle à peu près tout le reste.
 
 - **Il faut toujours deux personnes qui comprennent.** Le nom technique c'est le *bus
@@ -24,7 +24,7 @@ la contrainte dont découle à peu près tout le reste.
   faire tourner. On en veut au moins deux. Concrètement, un choix important se discute avec
   un second dev avant d'être fait. Un choix que personne d'autre ne comprend, ce n'est pas
   un choix, c'est une dette.
-- **Des outils modifiables sans moi.** Quelqu'un doit pouvoir changer un libellé, ajouter
+- **Des outils numériques modifiables sans moi.** Quelqu'un doit pouvoir changer un libellé, ajouter
   un champ ou corriger une couleur sans m'appeler. C'est le critère de réussite, avant
   l'élégance et avant la rapidité.
 - **L'ennuyeux bat le malin.** Une solution banale se reprend facilement. Une solution
@@ -90,8 +90,8 @@ le projet. Les questions, dans cet ordre.
    copié garde en commentaire d'où il vient, sa version et sa licence. Résultat : aucune
    mise à jour à suivre, et rien qui casse tout seul un matin.
 3. **Est-ce que ça part avec le produit, ou est-ce que ça reste sur notre machine ?** Un
-   outil qui sert seulement à écrire le code (par exemple un vérificateur) ne part pas chez
-   l'utilisateur. S'il est abandonné, l'outil continue de fonctionner, on le remplace
+   programme qui sert seulement à écrire le code (par exemple un vérificateur) ne part pas chez
+   l'utilisateur. S'il est abandonné, le produit continue de fonctionner, on le remplace
    tranquillement. Une dépendance qui part dans le produit livré, elle, n'a pas ce luxe. On
    est donc beaucoup plus exigeant sur la seconde catégorie.
 4. **Si le projet dort deux ans, est-ce que ça repart ?** Une installation qui échoue dans
@@ -117,7 +117,7 @@ sales. Ce qui suit ne se négocie pas.
   n'arrive pas à valider son formulaire, c'est un bénévole qui repart au papier, et il a
   raison.
 - **La date d'utilisation est fixée d'avance, et elle ne bouge pas.** On choisit le jour de
-  la séance d'inventaire maintenant, pas quand l'outil sera prêt. Le jour venu, on part
+  la séance d'inventaire maintenant, pas quand l'outil numérique sera prêt. Le jour venu, on part
   avec ce qu'on a, même si c'est incomplet. Sinon la date recule indéfiniment et la séance
   n'a jamais lieu.
 
@@ -174,8 +174,8 @@ qui dessine le composant est écrite une seule fois.
 
 La *cascade*, c'est la façon dont le navigateur départage deux règles CSS qui se
 contredisent sur le même élément. Par défaut il regarde laquelle est la plus précise, ce
-qui pousse à écrire des sélecteurs de plus en plus tordus pour gagner. Deux outils récents
-évitent ce jeu.
+qui pousse à écrire des sélecteurs de plus en plus tordus pour gagner. Deux mécanismes récents
+du CSS évitent ce jeu.
 
 - **`@layer` range les règles par priorité, `@scope` limite leur territoire.** Les couches
   disent qui gagne, la portée dit où ça s'applique. Ce n'est pas le même travail, et les
@@ -195,7 +195,7 @@ toute seule, sans rien de symétrique en face, c'est l'endroit où la cohérence
 Trois décisions en découlent. Le CSS d'un composant vit dans le dossier de ce composant,
 comme ça supprimer le dossier supprime aussi le CSS et on ne laisse pas de code mort
 derrière soi. Le thème sombre vit dans le même fichier que le thème clair, sur la même
-ligne, pour qu'on ne puisse pas en modifier un en oubliant l'autre. Et les outils de mise
+ligne, pour qu'on ne puisse pas en modifier un en oubliant l'autre. Et les briques de mise
 en page respectent la convention de nommage comme tout le monde, au lieu de figurer sur
 une liste d'exceptions que personne ne pense à mettre à jour.
 
@@ -228,8 +228,8 @@ une liste d'exceptions que personne ne pense à mettre à jour.
   leur appareil, parce que le mouvement leur donne la nausée.
 - **Tout doit être atteignable au clavier**, sans souris.
 
-Ce n'est pas une liste de bonus. Un outil qu'une personne ne peut pas utiliser, c'est un
-outil cassé.
+Ce n'est pas une liste de bonus. Une page qu'une personne ne peut pas utiliser, c'est une
+page cassée.
 
 ## 9. Comment on écrit
 
@@ -259,7 +259,7 @@ outil cassé.
 Sept questions avant la première ligne de code.
 
 1. Qu'est-ce qui fonctionne déjà aujourd'hui, en papier ou autrement, et que le nouvel
-   outil ne doit surtout pas casser ?
+   outil numérique ne doit surtout pas casser ?
 2. Qu'est-ce qu'on décide de ne pas faire, et pour quelle raison ?
 3. Si la personne qui code s'arrête demain, qui reprend ? Est-ce qu'elle a déjà regardé le
    projet et dit oui ?
@@ -269,6 +269,6 @@ Sept questions avant la première ligne de code.
 6. Quelles promesses on veut pouvoir vérifier automatiquement, au lieu de se croire sur
    parole ?
 7. Quel jour on s'en sert pour de vrai ? On le fixe maintenant, et on ne le repousse pas
-   parce que l'outil n'est pas fini.
+   parce que l'outil numérique n'est pas fini.
 
 Si l'une des sept vous bloque, c'est maintenant qu'il faut en parler, pas dans trois mois.

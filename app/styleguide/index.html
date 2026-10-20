@@ -20,8 +20,10 @@
 	<button type="button" id="theme-toggle" class="action-button" data-variant="secondary">Basculer le thème</button>
 </header>
 
-<p>Cette page est à la fois la documentation, le miroir de régression et la preuve que la
-fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il n'existe pas.</p>
+<p>Cette page sert à trois choses. C'est la documentation de la fondation. C'est la page à
+rouvrir après chaque changement, pour voir si rien n'a cassé. Et c'est la preuve que la
+fondation marche sans React et sans étape de build. Si un composant n'y figure pas, il
+n'existe pas.</p>
 
 <section>
 	<h2>Couleurs</h2>
@@ -30,23 +32,23 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 
 <section>
 	<h2>Typographie</h2>
-	<p>Deux polices, reprises du thème du site, et embarquées dans le dépôt : rien n'est
-	chargé depuis un serveur tiers, tout marche hors ligne.</p>
+	<p>Deux polices, reprises du thème du site, et rangées dans le dépôt : rien n'est
+	téléchargé ailleurs, tout marche même hors ligne.</p>
 
 	<h3>Concert One, pour les titres</h3>
 	<p style="font-family: var(--font-heading); font-size: var(--font-size-5)">Des vélos, de l'amour et du cambouis</p>
 
 	<h3>Asap, pour le texte courant</h3>
-	<p>Asap est une police variable : un seul fichier couvre toutes les graisses.</p>
+	<p>Asap est une police variable : un seul fichier couvre toutes les graisses, c'est-à-dire toutes les épaisseurs de trait, du maigre au gras.</p>
 	<p style="font-weight: var(--font-weight-4)">Graisse 400, celle du texte courant.</p>
 	<p style="font-weight: var(--font-weight-6)">Graisse 600, celle des libellés et des en-têtes de tableau.</p>
 	<p><em>Et l'italique, qui a son propre fichier.</em></p>
-	<p>Un caractère hors du latin de base retombe sur la police système : 日本語, Ελληνικά.</p>
+	<p>Un caractère hors de l'alphabet latin s'affiche avec la police de l'appareil : 日本語, Ελληνικά.</p>
 </section>
 
 <section>
-	<h2>HTML nu</h2>
-	<p>Aucune classe ci-dessous. C'est la promesse de la couche <code>base</code>.</p>
+	<h2>HTML sans classe</h2>
+	<p>Aucune classe ci-dessous : c'est la couche de base, seule, qui met en forme ces éléments.</p>
 
 	<h3>Titre de niveau 3</h3>
 	<h4>Titre de niveau 4</h4>
@@ -79,6 +81,7 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 
 <section>
 	<h2>Mise en page</h2>
+	<p>Trois briques qui rangent des éléments les uns par rapport aux autres, sans rien dessiner. Elles se règlent avec <code>--gap</code> (l'espace entre les éléments), <code>--min</code> et <code>--align</code>.</p>
 
 	<h3><code>.layout-stack</code></h3>
 	<div class="layout-stack" style="--gap: var(--size-2)">
@@ -102,7 +105,7 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 </section>
 
 <section>
-	<h2><code>.action-button</code></h2>
+	<h2>Bouton <code>.action-button</code></h2>
 
 	<h3>Variantes</h3>
 	<div class="layout-cluster">
@@ -124,11 +127,11 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 		<button type="button" class="action-button" data-size="small">Petit</button>
 		<button type="button" class="action-button">Normal</button>
 	</div>
-	<p>« Petit » allège la typographie, jamais la hauteur : la cible tactile est un plancher.</p>
+	<p>« Petit » réduit le texte et les marges, jamais la hauteur : un bouton doit rester assez grand pour un doigt.</p>
 </section>
 
 <section>
-	<h2><code>.form-field</code></h2>
+	<h2>Champ de formulaire <code>.form-field</code></h2>
 	<div class="layout-stack">
 		<div class="form-field">
 			<label class="label" for="marque">Marque</label>
@@ -144,13 +147,13 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 		<div class="form-field">
 			<label class="label" for="courriel">Courriel du donateur</label>
 			<input id="courriel" type="email" required value="pas-un-courriel">
-			<span class="hint">L'état invalide vient de <code>:invalid</code>, rien n'est synchronisé.</span>
+			<span class="hint">Le rouge vient du navigateur lui-même (<code>:invalid</code>) : aucun code ne le déclenche.</span>
 		</div>
 	</div>
 </section>
 
 <section>
-	<h2><code>.content-card</code></h2>
+	<h2>Carte <code>.content-card</code></h2>
 	<div class="layout-grid" style="--min: 14rem">
 		<article class="content-card">
 			<h3 class="title">Par défaut</h3>
@@ -171,7 +174,7 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 </section>
 
 <section>
-	<h2><code>.data-table</code></h2>
+	<h2>Tableau de données <code>.data-table</code></h2>
 	<table class="data-table">
 		<thead>
 			<tr><th>Référence</th><th>Type</th><th>Statut</th></tr>
@@ -196,7 +199,7 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 </section>
 
 <section>
-	<h2><code>.notice-block</code></h2>
+	<h2>Encadré d'information <code>.notice-block</code></h2>
 	<div class="layout-stack">
 		<div class="notice-block">
 			<p class="title">Information</p>
@@ -214,12 +217,12 @@ fondation tourne sans React et sans bundler. Si un composant n'y figure pas, il 
 </section>
 
 <section>
-	<h2><code>.modal-dialog</code></h2>
-	<button type="button" class="action-button" id="open-dialog">Ouvrir le dialogue</button>
+	<h2>Fenêtre modale <code>.modal-dialog</code></h2>
+	<button type="button" class="action-button" id="open-dialog">Ouvrir la fenêtre</button>
 
 	<dialog class="modal-dialog" id="demo-dialog">
 		<h2 class="title">Sortie de stock</h2>
-		<p>Le dialogue natif gère l'ouverture, la superposition et le piège à focus.</p>
+		<p>C'est la fenêtre modale du navigateur : il gère seul l'ouverture, l'affichage par-dessus la page, et garde le clavier à l'intérieur tant qu'elle est ouverte.</p>
 		<form method="dialog" class="actions">
 			<button type="submit" class="action-button" data-variant="secondary" value="annuler">Annuler</button>
 			<button type="submit" class="action-button" data-variant="primary" value="confirmer">Confirmer</button>

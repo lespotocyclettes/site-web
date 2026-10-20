@@ -1,6 +1,7 @@
 /*
- * Le scope est ce qui empêche ces règles d'atteindre les éléments nus d'une page tierce
- * si ce CSS y était chargé un jour. La classe se pose sur <html>.
+ * @scope limite ces règles à l'intérieur de .potos-app. Sans lui, elles toucheraient
+ * toutes les balises d'une page Paheko ou WordPress où ce CSS serait chargé un jour.
+ * La classe se pose sur <html>.
  */
 @layer reset {
 	@scope (.potos-app) {
@@ -51,9 +52,10 @@
 		}
 
 		/*
-		 * Le seul !important de la fondation. Une déclaration !important dans une couche
-		 * basse l'emporte sur les couches hautes : c'est donc ici, et seulement ici, qu'on
-		 * peut garantir qu'aucun composant ne réintroduira d'animation.
+		 * Le seul !important de la fondation. Il coupe les animations pour les personnes
+		 * qui ont demandé « moins de mouvement » à leur appareil. Avec !important, l'ordre
+		 * des couches s'inverse et la plus basse gagne : placé ici, dans le reset, il
+		 * garantit qu'aucun composant ne pourra réactiver une animation.
 		 */
 		@media (prefers-reduced-motion: reduce) {
 			*,

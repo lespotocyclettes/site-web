@@ -9,7 +9,7 @@ Les classes CSS de la mini-app suivent la convention rscss pour leur structure :
 composant s'appelle en deux mots, ses parties en un seul, et on vise une partie seulement
 si elle est fille directe du composant. Les déclinaisons et les états, eux, ne sont jamais
 des classes : ce sont des attributs `data-*`. On a choisi ça parce que rscss est la seule
-convention qu'un outil sait vérifier tout seul, et parce qu'une déclinaison écrite en
+convention qu'un programme sait vérifier tout seul, et parce qu'une déclinaison écrite en
 attribut se pilote depuis le code comme une donnée.
 
 ```html
@@ -47,7 +47,7 @@ pas un relecteur qui doit penser à la repérer.
   cohérence repose sur le styleguide, où chaque composant montre toutes ses déclinaisons.
 - **Les états natifs restent natifs.** `:disabled`, `:invalid`, `[aria-expanded]` : on
   n'invente un attribut que pour ce que le HTML ne sait pas dire.
-- **Les outils de mise en page s'appellent `layout-stack`, `layout-grid`.** Deux mots,
+- **Les briques de mise en page s'appellent `layout-stack`, `layout-grid`.** Deux mots,
   donc conformes, plutôt qu'une liste d'exceptions dans la configuration du linter.
 
 Voir aussi la règle 6 de [CONCEPTION.md](../../CONCEPTION.md), et les mots *rscss*,

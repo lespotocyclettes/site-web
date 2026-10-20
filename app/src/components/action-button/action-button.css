@@ -1,7 +1,7 @@
 /*
- * Une variante ne redéfinit que des molettes : la règle qui les consomme est écrite une
- * seule fois. Les survols se dérivent du fond courant, donc aucune couleur de survol à
- * maintenir en double dans les tokens.
+ * Une variante ne change que des molettes, les variables --_* du composant. La règle qui
+ * les utilise est écrite une seule fois. La couleur de survol est calculée à partir du
+ * fond (color-mix) : pas de couleur de survol à maintenir à part dans les tokens.
  */
 @layer components {
 	.action-button {
@@ -47,8 +47,8 @@
 		}
 
 		/*
-		 * « small » allège la typographie et les marges, jamais la hauteur : la cible
-		 * tactile est un plancher, pas une variante.
+		 * « small » réduit le texte et les marges, jamais la hauteur : un bouton doit rester
+		 * assez grand pour un doigt, quelle que soit sa variante.
 		 */
 		&[data-size="small"] {
 			--_padding-inline: var(--size-2);

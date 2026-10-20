@@ -6,8 +6,9 @@
  *
  * Toute paire texte / fond est vérifiée par scripts/check-contrast.mjs.
  *
- * light-dark() lit color-scheme. Les deux thèmes se déclarent donc sur une seule ligne
- * par token, et basculer le thème à la main ne demande que de changer color-scheme.
+ * light-dark(clair, sombre) choisit sa valeur selon le thème actif, que fixe la propriété
+ * color-scheme. Chaque token tient donc ses deux thèmes sur une seule ligne, et forcer un
+ * thème revient à changer color-scheme.
  *
  * La palette du thème, pour référence. Les slugs pale-pink, vivid-purple et compagnie
  * sont la palette par défaut de WordPress et non l'identité de l'asso : ils n'y sont pas.
@@ -15,7 +16,7 @@
  *   #ffffff  background   fond de page.
  *   #0ead64  foreground   vert vif. Malgré son nom, le site s'en sert comme fond et non
  *                         comme encre : 2.9:1 sur blanc, illisible en texte. C'est notre
- *                         couleur d'accentuation, en aplat uniquement.
+ *                         couleur d'accentuation, en fond uniquement.
  *   #ff7777  primary      corail, l'accentuation du site. Écarté ici : 2.3:1 sur blanc,
  *                         et trop proche du registre « danger » pour une app de gestion.
  *   #355a45  secondary    vert foncé des sections. 7.8:1 sur blanc.
@@ -25,7 +26,7 @@
  *   #e7eeeb  outline      filet clair, nos séparateurs.
  *   #1f2937  heading      encre des titres.
  *   #4b5563  body         encre du texte courant.
- *   #6e7787  neutral      gris moyen. 4.3:1 sur nos surfaces, sous AA : notre
+ *   #6e7787  neutral      gris moyen. 4.3:1 sur nos surfaces, sous le seuil AA : notre
  *                         --color-text-muted l'assombrit un peu.
  */
 
@@ -36,9 +37,12 @@
 	--color-surface-raised: light-dark(#f5faf8, #1b2220);
 	--color-surface-section: light-dark(#355a45, #2c4a3a);
 
-	/* Filet décoratif entre deux surfaces : il doit rester discret, sans seuil à tenir. */
+	/* Filet décoratif entre deux surfaces : il reste discret, sans seuil de contraste à tenir. */
 	--color-border: light-dark(#e7eeeb, #2f3b38);
-	/* Contour porteur de sens (champ, bouton secondaire) : 3:1 exigé par WCAG 1.4.11. */
+	/*
+	 * Contour qui aide à repérer un élément (champ, bouton secondaire) : au moins 3 contre 1
+	 * de contraste avec le fond, comme l'exige la règle WCAG 1.4.11.
+	 */
 	--color-border-strong: light-dark(#7c8884, #6d7a76);
 
 	--color-text-heading: light-dark(#1f2937, #eef3f1);
@@ -47,10 +51,11 @@
 	--color-text-on-section: #ffffff;
 
 	/*
-	 * Le vert de la charte ne tient qu'en aplat. --color-link est ce même vert assombri
-	 * jusqu'à AA sur fond clair, et éclairci pour le thème sombre. Les deux valeurs sont
-	 * écrites en clair plutôt que dérivées en color-mix() : le vérificateur de contraste
-	 * lit des hex, et une couleur qu'il ne sait pas lire est une couleur non garantie.
+	 * Le vert de la charte n'est lisible qu'en fond de bouton, pas en texte. --color-link
+	 * est ce même vert, assombri pour le thème clair et éclairci pour le sombre, jusqu'au
+	 * contraste exigé pour du texte. Les deux valeurs sont écrites en entier plutôt que
+	 * calculées avec color-mix() : le script de contraste ne lit que des codes couleur
+	 * comme #097a45, et une couleur qu'il ne lit pas est une couleur qu'il ne vérifie pas.
 	 */
 	--color-accent: #0ead64;
 	--color-text-on-accent: #12271c;
@@ -61,7 +66,10 @@
 
 	--color-focus-ring: var(--color-link);
 
-	/* Molette : .form-field la repasse en rouge, les champs en héritent sans sélecteur. */
+	/*
+	 * Une molette : .form-field la passe au rouge quand la saisie est invalide, et les
+	 * champs qu'il contient prennent cette couleur sans règle supplémentaire.
+	 */
 	--color-field-border: var(--color-border-strong);
 	--color-backdrop: light-dark(rgb(31 41 55 / 40%), rgb(0 0 0 / 60%));
 }

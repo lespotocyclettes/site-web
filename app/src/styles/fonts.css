@@ -1,13 +1,15 @@
 /*
- * Les deux polices du thème du site, auto-hébergées comme le fait le thème lui-même :
- * pas d'appel au CDN Google, donc rien qui parte chez un tiers et rien qui casse hors ligne.
+ * Les deux polices du thème du site, servies depuis nos propres fichiers, comme le fait le
+ * thème lui-même. Rien n'est demandé aux serveurs de Google : aucune donnée des bénévoles
+ * ne part chez eux, et la page marche hors ligne.
  *
  * Asap, SIL Open Font License 1.1, Omnibus-Type. https://fonts.google.com/specimen/Asap
  * Concert One, SIL Open Font License 1.1, Johan Kallas. https://fonts.google.com/specimen/Concert+One
  *
- * Seul le sous-ensemble latin est embarqué : il couvre le français. Un caractère hors de
- * cette plage retombe sur la police système, ce que dit unicode-range.
- * Asap est une police variable : un seul fichier couvre toutes les graisses.
+ * Seuls les caractères latins sont embarqués, ils suffisent au français. La liste exacte
+ * est dans unicode-range : un caractère qui n'y est pas s'affiche avec la police de
+ * l'appareil. Asap est une police variable : un seul fichier couvre toutes les graisses,
+ * du maigre au gras.
  */
 
 @font-face {

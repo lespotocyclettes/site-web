@@ -1,7 +1,7 @@
 /*
- * Trois primitives, réglables par custom property. Elles décrivent une intention de mise
- * en page, pas des pixels, et elles n'ont aucune media query : c'est le contenu qui décide
- * quand ça passe à la ligne.
+ * Trois briques de mise en page, réglables par propriété personnalisée (--gap, --min,
+ * --align). Elles disent comment ranger des éléments, pas à quelle taille. Aucune ne
+ * dépend de la largeur de l'écran : c'est le contenu qui décide quand ça passe à la ligne.
  */
 @layer layout {
 	.layout-stack {

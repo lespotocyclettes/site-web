@@ -1,56 +1,91 @@
 # Fondation CSS de la mini-app
 
+Ici vit tout ce qui donne son apparence à la mini-app vélos. Pas encore de métier : juste
+les fondations, et une page pour les voir.
+
+Si un mot vous arrête, il est expliqué dans le [glossaire technique](../GLOSSAIRE-TECHNIQUE.md).
+
 Ce dossier contient :
-- les **tokens** de design (couleurs, espacements, typo)
-- une **couche de base** qui rend le HTML nu présentable, sans aucune classe
-- six composants et trois primitives de mise en page
-- un **styleguide** qui montre tout ça
+- les **tokens** : les couleurs, les espacements et les tailles de texte, chacun rangé sous
+  un nom (`--color-text-body`). On n'écrit jamais une couleur directement dans le code, on
+  passe par son nom.
+- une **couche de base**, qui rend une page HTML présentable même sans aucune classe
+- six composants (bouton, champ de formulaire, carte, tableau, encadré d'information,
+  fenêtre modale) et trois briques de mise en page
+- un **styleguide** : une page qui montre tout ça
 
-Pas de préprocesseur, pas de Tailwind, pas de CSS-in-JS. Du CSS standard, qui marche sans build.
+C'est du CSS standard, que le navigateur lit tel quel. Pas d'étape de build, rien à
+installer pour voir le résultat.
 
-Une seule chose à savoir pour brancher : le CSS de base ne s'applique qu'à l'intérieur de `.potos-app`, classe à poser sur le `<html>`. C'est ce qui l'empêche de déborder si on charge ce CSS un jour dans une page Paheko ou WordPress.
+Une seule chose à savoir pour brancher : la couche de base ne s'applique qu'à l'intérieur
+de l'élément qui porte la classe `.potos-app`, à poser sur la balise `<html>`. Comme ça, si
+on charge un jour ce CSS dans une page Paheko ou WordPress, il ne touche pas au reste de la
+page.
 
 ## Regarder le résultat
 
-Ouvrir `styleguide/index.html` dans un navigateur. Pas de serveur, pas de build.
+Double-cliquer sur `styleguide/index.html` : la page s'ouvre dans le navigateur. Pas de
+serveur, pas d'installation.
 
-C'est la doc, et c'est aussi le filet de sécurité : si un composant n'apparaît pas dans le styleguide, considérez qu'il n'existe pas.
+C'est la doc, et c'est aussi le filet de sécurité : si un composant n'apparaît pas dans le
+styleguide, considérez qu'il n'existe pas.
 
 ## Changer l'apparence
 
-Tout se joue dans `src/styles/semantic.css`. C'est le seul fichier à ouvrir pour rethémer.
+Tout se joue dans `src/styles/semantic.css`. C'est le seul fichier à ouvrir.
 
-Les couleurs viennent du thème du site et sont renommées par leur rôle (`--color-text-body`, pas `--secondary`). Chacune porte sa version claire et sa version sombre sur la même ligne, avec `light-dark()`.
+Les couleurs viennent du thème du site, mais elles sont renommées selon leur rôle :
+`--color-text-body` (le texte courant) plutôt que `--secondary` (la deuxième couleur de la
+liste). Chaque couleur porte sa version claire et sa version sombre sur la même ligne,
+grâce à la fonction `light-dark()`.
 
-Règle : **aucune couleur en dur ailleurs que dans ce fichier.**
+Règle : **aucune couleur écrite directement ailleurs que dans ce fichier.**
 
-Les polices suivent la même logique : Asap pour le texte, Concert One pour les titres, reprises du thème du site. Les fichiers sont embarqués dans `src/styles/fonts/` et déclarés dans `fonts.css`. Pour en changer, `--font-body` et `--font-heading` suffisent.
+Les polices suivent la même logique : Asap pour le texte, Concert One pour les titres,
+comme sur le site. Les fichiers de police sont rangés dans `src/styles/fonts/` et déclarés
+dans `fonts.css`. Pour en changer, il suffit de modifier `--font-body` et `--font-heading`.
 
 ## Ajouter un composant
 
 1. créer `src/components/mon-composant/mon-composant.css`
-2. l'ajouter au manifeste `src/styles/index.css`
+2. l'ajouter à la liste de `src/styles/index.css`, le fichier qui charge tous les autres
 3. l'ajouter au styleguide, avec toutes ses variantes et tous ses états
 
-La convention :
-- le composant est une classe en **deux mots** (`.action-button`), ses parties sont des classes en **un mot**, en enfant direct (`> .title`)
-- les variantes et les états sont des **data-attributes** (`data-variant="primary"`), jamais des classes
-- une variante ne redéfinit que des molettes `--_*`, jamais une règle
+La convention de nommage :
+- le composant porte un nom en **deux mots** (`.action-button`), ses parties un nom en
+  **un mot** (`.title`)
+- une partie se vise avec `>`, qui veut dire « enfant direct » : `.content-card > .title`.
+  Si vous glissez une balise entre les deux, le style ne s'applique plus, et rien ne vous
+  prévient.
+- les variantes (principal, secondaire, danger) et les états sont des **attributs**, par
+  exemple `data-variant="primary"`, jamais des classes
+- une variante ne change que des **molettes** : les variables internes du composant, qui
+  commencent par `--_`. La règle qui dessine le composant, elle, est écrite une seule fois.
 
-`npm run lint:css` refuse ce qui sort de là.
+`npm run lint:css` refuse ce qui sort de là. Pourquoi cette convention : voir la
+[fiche de décision](../docs/adr/0001-structure-rscss-variantes-en-data-attributes.md).
 
 ## Vérifier
 
 `npm run verify` enchaîne quatre contrôles :
-- la grammaire des classes (Stylelint)
-- les types (`tsc`)
-- tout `var()` pointe sur un token qui existe
-- tout couple texte / fond atteint le contraste WCAG AA
+- les noms de classes respectent la convention (c'est Stylelint qui vérifie)
+- le code React est cohérent dans ses types (c'est `tsc`, le vérificateur de TypeScript)
+- chaque token utilisé existe bien quelque part
+- chaque couple texte et fond est assez contrasté pour être lu (le seuil AA du référentiel
+  d'accessibilité WCAG)
 
-Ce que ça ne vérifie pas : le rendu. Ça reste à faire à l'œil, au clavier, et sur un vrai téléphone.
+Ce que ça ne vérifie pas : le rendu. Ça reste à faire à l'œil, au clavier, et sur un vrai
+téléphone.
 
 ## Deux pièges
 
-**Les fichiers de `src/styles/vendor/` ne s'éditent pas.** Ils viennent d'[Open Props](https://open-props.style/) et leur en-tête dit d'où. Pour les mettre à jour, re-télécharger la source. `props.shadows.css` est le seul à diverger de l'original, son en-tête explique pourquoi. Même chose pour les `.woff2` de `src/styles/fonts/`, sous licence OFL.
+**Les fichiers de `src/styles/vendor/` ne s'éditent pas.** Ils sont copiés depuis
+[Open Props](https://open-props.style/), et leur en-tête dit d'où. Pour les mettre à jour,
+on retélécharge la source. `props.shadows.css` est le seul à s'écarter de l'original, son
+en-tête explique pourquoi. Même chose pour les polices de `src/styles/fonts/`, sous licence
+libre OFL.
 
-**Le CSS hors couche bat le CSS en couche**, quelle que soit la spécificité. C'est pour ça que chaque fichier de composant déclare son `@layer components` lui-même : un fichier chargé sans sa couche gagnerait sur tout le reste.
+**Une règle rangée dans aucune couche bat une règle rangée dans une couche**, même si elle
+est moins précise. Les couches (`@layer`) servent à dire quelle règle gagne quand deux
+règles se contredisent. C'est pour ça que chaque fichier de composant déclare lui-même sa
+couche : chargé sans elle, il gagnerait sur tout le reste.

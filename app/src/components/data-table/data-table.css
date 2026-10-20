@@ -1,6 +1,7 @@
 /*
- * Les cellules sont stylées par la couche base. Ce composant n'ajoute que ce qui relève
- * d'un tableau de données : en-tête collant, survol de ligne, densité.
+ * La couche de base met déjà en forme les cellules. Ce composant n'ajoute que ce qui sert
+ * à un tableau de données : l'en-tête qui reste visible quand on fait défiler, la ligne
+ * surlignée au survol, et une version plus serrée.
  */
 @layer components {
 	.data-table {
