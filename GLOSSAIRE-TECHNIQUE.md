@@ -46,9 +46,13 @@ variable, écrite `--color-text-body`. On ne met jamais une couleur en dur dans 
 on nomme un token, et on change sa valeur à un seul endroit.
 
 **Molette** :
-Un token privé à un composant, préfixé `--_`, par exemple `--_bg`. Le composant écrit sa
-règle une fois en lisant ses molettes, et chaque variante ne fait que tourner les molettes.
-Le `_` dit « ne touchez pas à ça depuis l'extérieur ».
+Une propriété personnalisée qu'une règle CSS lit, et qu'on tourne pour changer le rendu
+sans toucher à la règle. Il y en a deux sortes.
+- **Privée**, préfixée `--_`, par exemple `--_bg`. Le composant écrit sa règle une fois en
+  lisant ses molettes, et chaque variante ne fait que les tourner. Le `_` dit « ne touchez
+  pas à ça depuis l'extérieur ».
+- **Publique**, sans `_`, par exemple `--gap` sur une brique de mise en page, ou
+  `--color-field-border`. Elle est faite pour être réglée de l'extérieur.
 
 **Brique de mise en page** :
 Une des trois classes `layout-stack` (empiler), `layout-cluster` (aligner en ligne, avec

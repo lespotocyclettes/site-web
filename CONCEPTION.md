@@ -54,7 +54,12 @@ papier, elles, tournaient toujours.
   ce qu'un humain a tapé. Pour ça, chaque champ retient deux choses : sa valeur, et qui l'a
   mise. L'IA n'a le droit d'écrire que là où l'humain n'a pas touché.
 - **Même réflexe côté interface.** Une police qui ne se charge pas retombe sur celle du
-  système, et le texte reste lisible. Un réglage manquant a toujours une valeur de secours.
+  système, et le texte reste lisible. Une brique de mise en page qu'on ne règle pas prend
+  un réglage par défaut.
+- **Ce qui vaut pour l'utilisateur ne vaut pas pour le code.** Une configuration
+  obligatoire qui manque (une adresse de serveur, une clé) fait échouer le programme tout
+  de suite, avec un message clair. Un programme qui tourne de travers sans rien dire coûte
+  bien plus cher à réparer.
 
 ## 3. Décider, c'est écrire ce qu'on ne fait pas
 
@@ -239,15 +244,17 @@ page cassée.
   [glossaire technique](./GLOSSAIRE-TECHNIQUE.md). S'il n'y est pas, on l'y ajoute. Une
   abréviation s'écrit en entier au moins une fois. Si une phrase n'est claire que pour
   celui qui l'a écrite, elle n'est pas finie.
-- **En français**, dans le code comme dans la documentation.
+- **En français** : la documentation, les commentaires, les messages de commit. Les noms
+  dans le code (variables, fonctions, classes) restent en anglais.
 - **Un commentaire, c'est l'exception.** Le code dit déjà *comment* ça marche. Le
   commentaire sert à dire *pourquoi*, surtout quand la raison ne se devine pas : une
   contrainte extérieure, un piège qu'on a rencontré, un lien vers la discussion qui a mené
   là. Pas de commentaire qui répète la ligne d'en dessous.
 - **Pas de dette signalée sans accord.** Pas de `TODO` ni de `FIXME` posés tout seul dans
   son coin : on signale le problème à quelqu'un, et quelqu'un tranche.
-- **Tabulations, fins de ligne Unix, retour à la ligne final.** C'est écrit dans le fichier
-  `.editorconfig`, et votre éditeur sait le lire.
+- **Tabulations, fins de ligne Unix, retour à la ligne final.** Pour le plugin, c'est écrit
+  dans `wp-plugin/.editorconfig`, que votre éditeur sait lire. Pour la mini-app, c'est
+  Biome, le formateur, qui s'en charge.
 - **Un fichier copié depuis l'extérieur ne s'édite pas.** Si on doit vraiment s'écarter de
   l'original, l'écart s'explique en haut du fichier, avec sa raison.
 - **Une décision difficile à défaire s'écrit dans `docs/adr/`.** Une fiche courte : ce qu'on
