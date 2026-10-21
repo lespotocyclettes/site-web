@@ -87,37 +87,57 @@ const HEX = "#[0-9a-fA-F]{6}";
 const DECLARATION = new RegExp(
 	`--([a-z0-9-]+):\\s*(light-dark\\(\\s*${HEX}\\s*,\\s*${HEX}\\s*\\)|${HEX}|var\\(--[a-z0-9-]+\\))\\s*;`,
 );
+const LIGHT_DARK_PAIR = new RegExp(
+	`light-dark\\(\\s*(${HEX})\\s*,\\s*(${HEX})\\s*\\)`,
+);
+const ALIAS_PREFIX = "var(--";
+/** Au-delà, l'alias tourne en rond : le token sera signalé comme manquant. */
+const MAX_ALIAS_HOPS = 10;
 
-function toLinear(channel) {
-	const ratio = channel / 255;
-	return ratio <= 0.04045 ? ratio / 12.92 : ((ratio + 0.055) / 1.055) ** 2.4;
+const css = await readFile(
+	new URL("../src/styles/semantic.css", import.meta.url),
+	"utf8",
+);
+const themes = parseTokens(css);
+const failures = [];
+
+for (const [themeName, tokens] of Object.entries(themes)) {
+	for (const pair of PAIRS) {
+		const text = tokens[pair.text];
+		const background = tokens[pair.background];
+
+		const isTokenMissing = !text || !background;
+		if (isTokenMissing) {
+			failures.push(
+				`${themeName} : token manquant pour ${pair.text} sur ${pair.background}`,
+			);
+			continue;
+		}
+
+		const ratio = toContrastRatio(text, background);
+		const passes = ratio >= pair.threshold;
+		const formattedRatio = ratio.toFixed(2);
+		if (!passes) {
+			failures.push(
+				`${themeName} : ${pair.text} sur ${pair.background} = ${formattedRatio}:1 (seuil ${pair.threshold})`,
+			);
+		}
+
+		const verdict = (passes ? "ok" : "ÉCHEC").padEnd(6);
+		const theme = themeName.padEnd(5);
+		console.log(
+			`${verdict} ${theme} ${pair.text} / ${pair.background} : ${formattedRatio}:1`,
+		);
+	}
 }
 
-function getRelativeLuminance(hex) {
-	const [red, green, blue] = [1, 3, 5].map((offset) =>
-		Number.parseInt(hex.slice(offset, offset + 2), 16),
-	);
-	return (
-		0.2126 * toLinear(red) + 0.7152 * toLinear(green) + 0.0722 * toLinear(blue)
-	);
+if (failures.length > 0) {
+	console.error(`\n${failures.length} paire(s) sous le seuil :`);
+	for (const failure of failures) console.error(`  ${failure}`);
+	process.exit(1);
 }
 
-function getContrastRatio(foreground, background) {
-	const [lighter, darker] = [
-		getRelativeLuminance(foreground),
-		getRelativeLuminance(background),
-	].sort((a, b) => b - a);
-	return (lighter + 0.05) / (darker + 0.05);
-}
-
-/** Une déclaration donne sa valeur claire et sa valeur sombre, identiques hors light-dark(). */
-function splitByTheme(value) {
-	const pair = value.match(
-		new RegExp(`light-dark\\(\\s*(${HEX})\\s*,\\s*(${HEX})\\s*\\)`),
-	);
-	if (pair) return { light: pair[1], dark: pair[2] };
-	return { light: value, dark: value };
-}
+console.log("\nToutes les paires atteignent leur seuil.");
 
 function parseTokens(css) {
 	const light = {};
@@ -136,6 +156,12 @@ function parseTokens(css) {
 	return { light: resolveAliases(light), dark: resolveAliases(dark) };
 }
 
+function splitByTheme(value) {
+	const pair = value.match(LIGHT_DARK_PAIR);
+	if (pair) return { light: pair[1], dark: pair[2] };
+	return { light: value, dark: value };
+}
+
 /** Un token peut pointer vers un autre : on suit la chaîne jusqu'à la valeur littérale. */
 function resolveAliases(tokens) {
 	const resolved = {};
@@ -144,8 +170,9 @@ function resolveAliases(tokens) {
 		let value = tokens[name];
 		let hops = 0;
 
-		while (value?.startsWith("var(") && hops < 10) {
-			value = tokens[value.slice(6, -1)];
+		while (isAlias(value) && hops < MAX_ALIAS_HOPS) {
+			const targetName = value.slice(ALIAS_PREFIX.length, -1);
+			value = tokens[targetName];
 			hops += 1;
 		}
 
@@ -155,43 +182,28 @@ function resolveAliases(tokens) {
 	return resolved;
 }
 
-const css = await readFile(
-	new URL("../src/styles/semantic.css", import.meta.url),
-	"utf8",
-);
-const themes = parseTokens(css);
-const failures = [];
-
-for (const [themeName, tokens] of Object.entries(themes)) {
-	for (const pair of PAIRS) {
-		const text = tokens[pair.text];
-		const background = tokens[pair.background];
-
-		if (!text || !background) {
-			failures.push(
-				`${themeName} : token manquant pour ${pair.text} sur ${pair.background}`,
-			);
-			continue;
-		}
-
-		const ratio = getContrastRatio(text, background);
-		const passes = ratio >= pair.threshold;
-		if (!passes) {
-			failures.push(
-				`${themeName} : ${pair.text} sur ${pair.background} = ${ratio.toFixed(2)}:1 (seuil ${pair.threshold})`,
-			);
-		}
-
-		console.log(
-			`${(passes ? "ok" : "ÉCHEC").padEnd(6)} ${themeName.padEnd(5)} ${pair.text} / ${pair.background} : ${ratio.toFixed(2)}:1`,
-		);
-	}
+function isAlias(value) {
+	return value?.startsWith(ALIAS_PREFIX) ?? false;
 }
 
-if (failures.length > 0) {
-	console.error(`\n${failures.length} paire(s) sous le seuil :`);
-	for (const failure of failures) console.error(`  ${failure}`);
-	process.exit(1);
+function toContrastRatio(foreground, background) {
+	const [lighter, darker] = [
+		toRelativeLuminance(foreground),
+		toRelativeLuminance(background),
+	].sort((a, b) => b - a);
+	return (lighter + 0.05) / (darker + 0.05);
 }
 
-console.log("\nToutes les paires atteignent leur seuil.");
+function toRelativeLuminance(hex) {
+	const [red, green, blue] = [1, 3, 5].map((offset) =>
+		Number.parseInt(hex.slice(offset, offset + 2), 16),
+	);
+	return (
+		0.2126 * toLinear(red) + 0.7152 * toLinear(green) + 0.0722 * toLinear(blue)
+	);
+}
+
+function toLinear(channel) {
+	const ratio = channel / 255;
+	return ratio <= 0.04045 ? ratio / 12.92 : ((ratio + 0.055) / 1.055) ** 2.4;
+}

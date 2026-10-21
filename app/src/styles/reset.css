@@ -1,4 +1,10 @@
 /*
+ * Adapté de deux resets publiés :
+ * - Josh Comeau, « My Custom CSS Reset », domaine public.
+ *   https://www.joshwcomeau.com/css/custom-css-reset/
+ * - Andy Bell, « A (more) Modern CSS Reset », licence CC BY 3.0.
+ *   https://piccalil.li/blog/a-more-modern-css-reset/
+ *
  * @scope limite ces règles à l'intérieur de .potos-app. Sans lui, elles toucheraient
  * toutes les balises d'une page Paheko ou WordPress où ce CSS serait chargé un jour.
  * La classe se pose sur <html>.
@@ -11,7 +17,11 @@
 			box-sizing: border-box;
 		}
 
-		* {
+		/*
+		 * Le <dialog> est exclu : le navigateur le centre à l'écran grâce à sa marge
+		 * automatique, et la remettre à zéro le colle dans un coin.
+		 */
+		*:not(dialog) {
 			margin: 0;
 		}
 

@@ -1,4 +1,11 @@
-import type { ComponentPropsWithoutRef, CSSProperties } from "react";
+import type { ComponentPropsWithoutRef } from "react";
+
+declare module "react" {
+	/** React ne connaît pas les propriétés personnalisées : on lui apprend leur forme. */
+	interface CSSProperties {
+		[knob: `--${string}`]: string | undefined;
+	}
+}
 
 /** Un échelon de l'échelle Open Props, pas une taille en toutes lettres : « lg » n'ordonne rien. */
 export type Space = `var(--size-${number})`;
@@ -8,34 +15,34 @@ export type TrackMinimum = `${number}rem`;
 
 export type Alignment = "start" | "center" | "end" | "baseline" | "stretch";
 
-type PrimitiveProps = ComponentPropsWithoutRef<"div">;
+type LayoutProps = ComponentPropsWithoutRef<"div">;
 
 type Knobs = Record<`--${string}`, string | undefined>;
 
-function getLayoutProps(
+function toLayoutProps(
 	layoutClass: string,
 	knobs: Knobs,
-	{ className, style, ...rest }: PrimitiveProps,
+	{ className, style, ...rest }: LayoutProps,
 ) {
 	return {
 		className: className ? `${layoutClass} ${className}` : layoutClass,
-		style: { ...style, ...knobs } as CSSProperties,
+		style: { ...style, ...knobs },
 		...rest,
 	};
 }
 
-export function Stack({ gap, ...props }: PrimitiveProps & { gap?: Space }) {
-	return <div {...getLayoutProps("layout-stack", { "--gap": gap }, props)} />;
+export function Stack({ gap, ...props }: LayoutProps & { gap?: Space }) {
+	return <div {...toLayoutProps("layout-stack", { "--gap": gap }, props)} />;
 }
 
 export function Cluster({
 	gap,
 	align,
 	...props
-}: PrimitiveProps & { gap?: Space; align?: Alignment }) {
+}: LayoutProps & { gap?: Space; align?: Alignment }) {
 	return (
 		<div
-			{...getLayoutProps(
+			{...toLayoutProps(
 				"layout-cluster",
 				{ "--gap": gap, "--align": align },
 				props,
@@ -48,10 +55,10 @@ export function Grid({
 	gap,
 	min,
 	...props
-}: PrimitiveProps & { gap?: Space; min?: TrackMinimum }) {
+}: LayoutProps & { gap?: Space; min?: TrackMinimum }) {
 	return (
 		<div
-			{...getLayoutProps("layout-grid", { "--gap": gap, "--min": min }, props)}
+			{...toLayoutProps("layout-grid", { "--gap": gap, "--min": min }, props)}
 		/>
 	);
 }
