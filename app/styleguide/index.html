@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="fr" class="potos-app">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,264 +8,333 @@
 	<link rel="stylesheet" href="../src/styles/index.css">
 	<style>
 		/* Propre à cette page : la mise en page du styleguide n'est pas la fondation. */
-		body { max-inline-size: 60rem; margin-inline: auto; padding: var(--size-3); }
-		section { margin-block: var(--size-8); }
-		.token-swatch { block-size: var(--size-8); border: 1px solid var(--color-border); border-radius: var(--radius-base); }
-		.token-name { font-family: var(--font-mono); font-size: var(--font-size-0); }
+		body {
+			max-inline-size: 60rem;
+			margin-inline: auto;
+			padding: var(--size-3);
+		}
+
+		section {
+			margin-block: var(--size-8);
+		}
+
+		.token-swatch {
+			block-size: var(--size-8);
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-base);
+		}
+
+		.token-name {
+			font-family: var(--font-mono);
+			font-size: var(--font-size-0);
+		}
 	</style>
 </head>
+
 <body>
 
-<header class="layout-cluster" style="justify-content: space-between">
-	<h1>Fondation CSS</h1>
-	<button type="button" id="theme-toggle" class="action-button" data-variant="secondary">Basculer le thème</button>
-</header>
+	<header class="layout-cluster" style="justify-content: space-between">
+		<h1>Fondation CSS</h1>
+		<button type="button" id="theme-toggle" class="action-button" data-variant="secondary">Basculer le thème</button>
+	</header>
 
-<p>Cette page sert à trois choses. C'est la documentation de la fondation. C'est la page à
-rouvrir après chaque changement, pour voir si rien n'a cassé. Et c'est la preuve que la
-fondation marche sans React et sans étape de build. Si un composant n'y figure pas, il
-n'existe pas.</p>
+	<p>Cette page sert à trois choses. C'est la documentation de la fondation. C'est la page à
+		rouvrir après chaque changement, pour voir si rien n'a cassé. Et c'est la preuve que la
+		fondation marche sans React et sans étape de build. Si un composant n'y figure pas, il
+		n'existe pas.</p>
 
-<section>
-	<h2>Couleurs</h2>
-	<div class="layout-grid" style="--min: 10rem" id="swatches"></div>
-</section>
+	<section>
+		<h2>Couleurs</h2>
+		<div class="layout-grid" style="--min: 10rem" id="swatches"></div>
+	</section>
 
-<section>
-	<h2>Typographie</h2>
-	<p>Deux polices, reprises du thème du site, et rangées dans le dépôt : rien n'est
-	téléchargé ailleurs, tout marche même hors ligne.</p>
+	<section>
+		<h2>Typographie</h2>
+		<p>Deux polices, reprises du thème du site, et rangées dans le dépôt : rien n'est
+			téléchargé ailleurs, tout marche même hors ligne.</p>
 
-	<h3>Concert One, pour les titres</h3>
-	<p style="font-family: var(--font-heading); font-size: var(--font-size-5)">Des vélos, de l'amour et du cambouis</p>
+		<h3>Concert One, pour les titres</h3>
+		<p style="font-family: var(--font-heading); font-size: var(--font-size-5)">Des vélos, de l'amour et du cambouis</p>
 
-	<h3>Asap, pour le texte courant</h3>
-	<p>Asap est une police variable : un seul fichier couvre toutes les graisses, c'est-à-dire toutes les épaisseurs de trait, du maigre au gras.</p>
-	<p style="font-weight: var(--font-weight-4)">Graisse 400, celle du texte courant.</p>
-	<p style="font-weight: var(--font-weight-6)">Graisse 600, celle des libellés et des en-têtes de tableau.</p>
-	<p><em>Et l'italique, qui a son propre fichier.</em></p>
-	<p>Un caractère hors de l'alphabet latin s'affiche avec la police de l'appareil : 日本語, Ελληνικά.</p>
-</section>
+		<h3>Asap, pour le texte courant</h3>
+		<p>Asap est une police variable : un seul fichier couvre toutes les graisses, c'est-à-dire toutes les épaisseurs de
+			trait, du maigre au gras.</p>
+		<p style="font-weight: var(--font-weight-4)">Graisse 400, celle du texte courant.</p>
+		<p style="font-weight: var(--font-weight-6)">Graisse 600, celle des libellés et des en-têtes de tableau.</p>
+		<p><em>Et l'italique, qui a son propre fichier.</em></p>
+		<p>Un caractère hors de l'alphabet latin s'affiche avec la police de l'appareil : 日本語, Ελληνικά.</p>
+	</section>
 
-<section>
-	<h2>HTML sans classe</h2>
-	<p>Aucune classe ci-dessous : c'est la couche de base, seule, qui met en forme ces éléments.</p>
+	<section>
+		<h2>HTML sans classe</h2>
+		<p>Aucune classe ci-dessous : c'est la couche de base, seule, qui met en forme ces éléments.</p>
 
-	<h3>Titre de niveau 3</h3>
-	<h4>Titre de niveau 4</h4>
-	<p>Un paragraphe ordinaire, avec <a href="#">un lien</a>, du <code>code en ligne</code>
-	et une <strong>emphase forte</strong>.</p>
+		<h3>Titre de niveau 3</h3>
+		<h4>Titre de niveau 4</h4>
+		<p>Un paragraphe ordinaire, avec <a href="#">un lien</a>, du <code>code en ligne</code>
+			et une <strong>emphase forte</strong>.</p>
 
-	<ul>
-		<li>Premier élément</li>
-		<li>Deuxième élément</li>
-	</ul>
+		<ul>
+			<li>Premier élément</li>
+			<li>Deuxième élément</li>
+		</ul>
 
-	<hr>
+		<hr>
 
-	<table>
-		<thead>
-			<tr><th>Référence</th><th>Type</th><th>Statut</th></tr>
-		</thead>
-		<tbody>
-			<tr><td>260707.01</td><td>VTT</td><td>En stock</td></tr>
-			<tr><td>260707.02</td><td>Vélo enfant</td><td>Prêt à la vente</td></tr>
-		</tbody>
-	</table>
+		<table>
+			<thead>
+				<tr>
+					<th>Référence</th>
+					<th>Type</th>
+					<th>Statut</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>260707.01</td>
+					<td>VTT</td>
+					<td>En stock</td>
+				</tr>
+				<tr>
+					<td>260707.02</td>
+					<td>Vélo enfant</td>
+					<td>Prêt à la vente</td>
+				</tr>
+			</tbody>
+		</table>
 
-	<p>
-		<label for="nu-texte">Un champ</label>
-		<input id="nu-texte" type="text" placeholder="Peugeot">
-		<button type="button">Un bouton</button>
-	</p>
-</section>
+		<p>
+			<label for="nu-texte">Un champ</label>
+			<input id="nu-texte" type="text" placeholder="Peugeot">
+			<button type="button">Un bouton</button>
+		</p>
+	</section>
 
-<section>
-	<h2>Mise en page</h2>
-	<p>Trois briques qui rangent des éléments les uns par rapport aux autres, sans rien dessiner. Elles se règlent avec <code>--gap</code> (l'espace entre les éléments), <code>--min</code> et <code>--align</code>.</p>
+	<section>
+		<h2>Mise en page</h2>
+		<p>Trois briques qui rangent des éléments les uns par rapport aux autres, sans rien dessiner. Elles se règlent avec
+			<code>--gap</code> (l'espace entre les éléments), <code>--min</code> et <code>--align</code>.
+		</p>
 
-	<h3><code>.layout-stack</code></h3>
-	<div class="layout-stack" style="--gap: var(--size-2)">
-		<div class="content-card" data-variant="plain">Premier</div>
-		<div class="content-card" data-variant="plain">Deuxième</div>
-	</div>
-
-	<h3><code>.layout-cluster</code></h3>
-	<div class="layout-cluster">
-		<button type="button" class="action-button">Un</button>
-		<button type="button" class="action-button">Deux</button>
-		<button type="button" class="action-button">Trois</button>
-	</div>
-
-	<h3><code>.layout-grid</code></h3>
-	<div class="layout-grid" style="--min: 12rem">
-		<div class="content-card">Colonne</div>
-		<div class="content-card">Colonne</div>
-		<div class="content-card">Colonne</div>
-	</div>
-</section>
-
-<section>
-	<h2>Bouton <code>.action-button</code></h2>
-
-	<h3>Variantes</h3>
-	<div class="layout-cluster">
-		<button type="button" class="action-button">Par défaut</button>
-		<button type="button" class="action-button" data-variant="primary">Enregistrer</button>
-		<button type="button" class="action-button" data-variant="secondary">Annuler</button>
-		<button type="button" class="action-button" data-variant="danger">Supprimer</button>
-	</div>
-
-	<h3>États</h3>
-	<div class="layout-cluster">
-		<button type="button" class="action-button" data-variant="primary" disabled>Désactivé</button>
-		<button type="button" class="action-button" disabled>Désactivé</button>
-		<button type="button" class="action-button">Tabulez jusqu'ici pour voir l'anneau</button>
-	</div>
-
-	<h3>Taille</h3>
-	<div class="layout-cluster">
-		<button type="button" class="action-button" data-size="small">Petit</button>
-		<button type="button" class="action-button">Normal</button>
-	</div>
-	<p>« Petit » réduit le texte et les marges, jamais la hauteur : un bouton doit rester assez grand pour un doigt.</p>
-</section>
-
-<section>
-	<h2>Champ de formulaire <code>.form-field</code></h2>
-	<div class="layout-stack">
-		<div class="form-field">
-			<label class="label" for="marque">Marque</label>
-			<input id="marque" type="text" list="marques" placeholder="Peugeot">
-			<datalist id="marques">
-				<option value="Peugeot"></option>
-				<option value="Gitane"></option>
-				<option value="Motobécane"></option>
-			</datalist>
-			<span class="hint">Suggestions issues de la base.</span>
+		<h3><code>.layout-stack</code></h3>
+		<div class="layout-stack" style="--gap: var(--size-2)">
+			<div class="content-card" data-variant="plain">Premier</div>
+			<div class="content-card" data-variant="plain">Deuxième</div>
 		</div>
 
-		<div class="form-field">
-			<label class="label" for="courriel">Courriel du donateur</label>
-			<input id="courriel" type="email" required value="pas-un-courriel">
-			<span class="hint">Le rouge vient du navigateur lui-même (<code>:invalid</code>) : aucun code ne le déclenche.</span>
+		<h3><code>.layout-cluster</code></h3>
+		<div class="layout-cluster">
+			<button type="button" class="action-button">Un</button>
+			<button type="button" class="action-button">Deux</button>
+			<button type="button" class="action-button">Trois</button>
 		</div>
-	</div>
-</section>
 
-<section>
-	<h2>Carte <code>.content-card</code></h2>
-	<div class="layout-grid" style="--min: 14rem">
-		<article class="content-card">
-			<h3 class="title">Par défaut</h3>
-			<p>Contour discret.</p>
-		</article>
-		<article class="content-card" data-variant="elevated">
-			<h3 class="title">Surélevée</h3>
-			<p>Ombre, sans contour.</p>
-			<div class="footer">
-				<button type="button" class="action-button" data-size="small">Ouvrir</button>
+		<h3><code>.layout-grid</code></h3>
+		<div class="layout-grid" style="--min: 12rem">
+			<div class="content-card">Colonne</div>
+			<div class="content-card">Colonne</div>
+			<div class="content-card">Colonne</div>
+		</div>
+	</section>
+
+	<section>
+		<h2>Bouton <code>.action-button</code></h2>
+
+		<h3>Variantes</h3>
+		<div class="layout-cluster">
+			<button type="button" class="action-button">Par défaut</button>
+			<button type="button" class="action-button" data-variant="primary">Enregistrer</button>
+			<button type="button" class="action-button" data-variant="secondary">Annuler</button>
+			<button type="button" class="action-button" data-variant="danger">Supprimer</button>
+		</div>
+
+		<h3>États</h3>
+		<div class="layout-cluster">
+			<button type="button" class="action-button" data-variant="primary" disabled>Désactivé</button>
+			<button type="button" class="action-button" disabled>Désactivé</button>
+			<button type="button" class="action-button">Tabulez jusqu'ici pour voir l'anneau</button>
+		</div>
+
+		<h3>Taille</h3>
+		<div class="layout-cluster">
+			<button type="button" class="action-button" data-size="small">Petit</button>
+			<button type="button" class="action-button">Normal</button>
+		</div>
+		<p>« Petit » réduit le texte et les marges, jamais la hauteur : un bouton doit rester assez grand pour un doigt.</p>
+	</section>
+
+	<section>
+		<h2>Champ de formulaire <code>.form-field</code></h2>
+		<div class="layout-stack">
+			<div class="form-field">
+				<label class="label" for="marque">Marque</label>
+				<input id="marque" type="text" list="marques" placeholder="Peugeot">
+				<datalist id="marques">
+					<option value="Peugeot"></option>
+					<option value="Gitane"></option>
+					<option value="Motobécane"></option>
+				</datalist>
+				<span class="hint">Suggestions issues de la base.</span>
 			</div>
-		</article>
-		<article class="content-card" data-variant="plain">
-			<h3 class="title">Nue</h3>
-			<p>Ni fond ni contour.</p>
-		</article>
-	</div>
-</section>
 
-<section>
-	<h2>Tableau de données <code>.data-table</code></h2>
-	<table class="data-table">
-		<thead>
-			<tr><th>Référence</th><th>Type</th><th>Statut</th></tr>
-		</thead>
-		<tbody>
-			<tr><td>260707.01</td><td>VTT</td><td>En stock</td></tr>
-			<tr><td>260707.02</td><td>Vélo enfant</td><td>Prêt à la vente</td></tr>
-			<tr><td>260707.03</td><td>Vélo de ville</td><td>Démonté</td></tr>
-		</tbody>
-	</table>
-
-	<h3>Densité compacte</h3>
-	<table class="data-table" data-density="compact">
-		<thead>
-			<tr><th>Référence</th><th>Type</th></tr>
-		</thead>
-		<tbody>
-			<tr><td>260707.01</td><td>VTT</td></tr>
-			<tr><td>260707.02</td><td>Vélo enfant</td></tr>
-		</tbody>
-	</table>
-</section>
-
-<section>
-	<h2>Encadré d'information <code>.notice-block</code></h2>
-	<div class="layout-stack">
-		<div class="notice-block">
-			<p class="title">Information</p>
-			<p>La taille de roue se saisit à la main.</p>
+			<div class="form-field">
+				<label class="label" for="courriel">Courriel du donateur</label>
+				<input id="courriel" type="email" required value="pas-un-courriel">
+				<span class="hint">Le rouge vient du navigateur lui-même (<code>:invalid</code>) : aucun code ne le
+					déclenche.</span>
+			</div>
 		</div>
-		<div class="notice-block" data-variant="danger">
-			<p class="title">Attention</p>
-			<p>Cette référence existe déjà.</p>
+	</section>
+
+	<section>
+		<h2>Carte <code>.content-card</code></h2>
+		<div class="layout-grid" style="--min: 14rem">
+			<article class="content-card">
+				<h3 class="title">Par défaut</h3>
+				<p>Contour discret.</p>
+			</article>
+			<article class="content-card" data-variant="elevated">
+				<h3 class="title">Surélevée</h3>
+				<p>Ombre, sans contour.</p>
+				<div class="footer">
+					<button type="button" class="action-button" data-size="small">Ouvrir</button>
+				</div>
+			</article>
+			<article class="content-card" data-variant="plain">
+				<h3 class="title">Nue</h3>
+				<p>Ni fond ni contour.</p>
+			</article>
 		</div>
-		<div class="notice-block" data-variant="success">
-			<p class="title">Enregistré</p>
-			<p>Recopiez la référence 260707.04 sur la fiche.</p>
+	</section>
+
+	<section>
+		<h2>Tableau de données <code>.data-table</code></h2>
+		<table class="data-table">
+			<thead>
+				<tr>
+					<th>Référence</th>
+					<th>Type</th>
+					<th>Statut</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>260707.01</td>
+					<td>VTT</td>
+					<td>En stock</td>
+				</tr>
+				<tr>
+					<td>260707.02</td>
+					<td>Vélo enfant</td>
+					<td>Prêt à la vente</td>
+				</tr>
+				<tr>
+					<td>260707.03</td>
+					<td>Vélo de ville</td>
+					<td>Démonté</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>Densité compacte</h3>
+		<table class="data-table" data-density="compact">
+			<thead>
+				<tr>
+					<th>Référence</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>260707.01</td>
+					<td>VTT</td>
+				</tr>
+				<tr>
+					<td>260707.02</td>
+					<td>Vélo enfant</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+
+	<section>
+		<h2>Encadré d'information <code>.notice-block</code></h2>
+		<div class="layout-stack">
+			<div class="notice-block">
+				<p class="title">Information</p>
+				<p>La taille de roue se saisit à la main.</p>
+			</div>
+			<div class="notice-block" data-variant="danger">
+				<p class="title">Attention</p>
+				<p>Cette référence existe déjà.</p>
+			</div>
+			<div class="notice-block" data-variant="success">
+				<p class="title">Enregistré</p>
+				<p>Recopiez la référence 260707.04 sur la fiche.</p>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 
-<section>
-	<h2>Fenêtre modale <code>.modal-dialog</code></h2>
-	<button type="button" class="action-button" id="open-dialog">Ouvrir la fenêtre</button>
+	<section>
+		<h2>Fenêtre modale <code>.modal-dialog</code></h2>
+		<button type="button" class="action-button" id="open-dialog">Ouvrir la fenêtre</button>
 
-	<dialog class="modal-dialog" id="demo-dialog">
-		<h2 class="title">Sortie de stock</h2>
-		<p>C'est la fenêtre modale du navigateur : il gère seul l'ouverture, l'affichage par-dessus la page, et garde le clavier à l'intérieur tant qu'elle est ouverte.</p>
-		<form method="dialog" class="actions">
-			<button type="submit" class="action-button" data-variant="secondary" value="annuler">Annuler</button>
-			<button type="submit" class="action-button" data-variant="primary" value="confirmer">Confirmer</button>
-		</form>
-	</dialog>
-</section>
+		<dialog class="modal-dialog" id="demo-dialog">
+			<h2 class="title">Sortie de stock</h2>
+			<p>C'est la fenêtre modale du navigateur : il gère seul l'ouverture, l'affichage par-dessus la page, et garde le
+				clavier à l'intérieur tant qu'elle est ouverte.</p>
+			<form method="dialog" class="actions">
+				<button type="submit" class="action-button" data-variant="secondary" value="annuler">Annuler</button>
+				<button type="submit" class="action-button" data-variant="primary" value="confirmer">Confirmer</button>
+			</form>
+		</dialog>
+	</section>
 
-<script>
-	const COLOR_TOKENS = [
-		'color-surface-page', 'color-surface-raised', 'color-surface-section',
-		'color-border', 'color-border-strong', 'color-field-border',
-		'color-text-heading', 'color-text-body', 'color-text-muted', 'color-text-on-section',
-		'color-accent', 'color-text-on-accent', 'color-link',
-		'color-danger', 'color-text-on-danger',
-		'color-focus-ring', 'color-backdrop',
-	]
+	<script>
+		/* Vérifiée par scripts/check-tokens.mjs : elle doit lister tous les --color-* de semantic.css. */
+		const COLOR_TOKENS = [
+			"color-surface-page", "color-surface-raised", "color-surface-section",
+			"color-border", "color-border-strong", "color-field-border",
+			"color-text-heading", "color-text-body", "color-text-muted", "color-text-on-section",
+			"color-accent", "color-text-on-accent", "color-link",
+			"color-danger", "color-text-on-danger",
+			"color-focus-ring", "color-backdrop",
+		];
 
-	const root = document.documentElement
+		const root = document.documentElement;
+		const prefersDark = matchMedia("(prefers-color-scheme: dark)");
 
-	function renderSwatches() {
-		const styles = getComputedStyle(root)
-		document.getElementById('swatches').replaceChildren(...COLOR_TOKENS.map((token) => {
-			const cell = document.createElement('div')
-			const value = styles.getPropertyValue(`--${token}`).trim()
-			cell.innerHTML = `<div class="token-swatch" style="background:var(--${token})"></div>
-				<div class="token-name">--${token}</div><div class="token-name">${value}</div>`
-			return cell
-		}))
-	}
+		function renderSwatches() {
+			const styles = getComputedStyle(root);
+			document.getElementById("swatches").replaceChildren(...COLOR_TOKENS.map((token) => {
+				const cell = document.createElement("div");
+				const value = styles.getPropertyValue(`--${token}`).trim();
+				cell.innerHTML = `<div class="token-swatch" style="background:var(--${token})"></div>
+				<div class="token-name">--${token}</div><div class="token-name">${value}</div>`;
+				return cell;
+			}));
+		}
 
-	document.getElementById('theme-toggle').addEventListener('click', () => {
-		const isDark = root.dataset.theme === 'dark'
-		root.dataset.theme = isDark ? 'light' : 'dark'
-		renderSwatches()
-	})
+		/* Tant qu'aucun thème n'est forcé, la page suit celui du système. */
+		function getActiveTheme() {
+			if (root.dataset.theme) return root.dataset.theme;
+			return prefersDark.matches ? "dark" : "light";
+		}
 
-	document.getElementById('open-dialog').addEventListener('click', () => {
-		document.getElementById('demo-dialog').showModal()
-	})
+		document.getElementById("theme-toggle").addEventListener("click", () => {
+			const isDark = getActiveTheme() === "dark";
+			root.dataset.theme = isDark ? "light" : "dark";
+			renderSwatches();
+		});
 
-	renderSwatches()
-</script>
+		document.getElementById("open-dialog").addEventListener("click", () => {
+			document.getElementById("demo-dialog").showModal();
+		});
+
+		prefersDark.addEventListener("change", renderSwatches);
+		renderSwatches();
+	</script>
 
 </body>
+
 </html>
