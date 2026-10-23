@@ -231,6 +231,19 @@ n'en a pas besoin : elle marche telle quelle, et c'est voulu.
 Une bibliothèque utile pour travailler, mais absente du produit livré. Si elle meurt,
 le produit tourne encore. Une dépendance d'exécution, elle, part avec le produit.
 
+**Shell** :
+Le programme qui lit les commandes tapées dans un terminal (bash, zsh…). Il coupe une
+commande à chaque espace : un chemin qui contient une espace doit être entouré de
+guillemets, sinon il devient deux morceaux.
+
+**rsync** :
+Un programme qui copie un dossier vers un autre en ne recopiant que ce qui a changé.
+`npm run dev` s'en sert pour copier le plugin dans le WordPress local.
+
+**WSL** :
+Pour *Windows Subsystem for Linux*, un Linux qui tourne à l'intérieur de Windows. Les
+outils du plugin, rsync compris, s'y lancent.
+
 ## Côté serveur
 
 **mu-plugin** :

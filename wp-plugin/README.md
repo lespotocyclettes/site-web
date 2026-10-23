@@ -12,6 +12,8 @@ Ce plugin contient :
 - Installer [Visual Studio Code (VS Code)](https://code.visualstudio.com/)
 - Installer [WP-Local](https://localwp.com/)
 - Installer nodejs. [Instructions pour windows](https://learn.microsoft.com/fr-fr/windows/dev-environment/javascript/nodejs-on-windows)
+- Installer rsync, le programme qui copie le plugin dans le site local. Il est souvent déjà
+  là sous Linux et macOS. Sous Windows, il s'installe dans WSL : `sudo apt install rsync`
 
 ### Mise en place du projet
 
@@ -30,6 +32,7 @@ A l'aide d'un terminal, aller dans le dossier du plugin et :
 
 1. Démarrer le serveur dans WP Local
 2. à l'aide d'un terminal, aller dans le dossier du plugin et exécuter `npm run dev`, ce qui observera les changements sur les fichiers et les injectera dans le site wordpress sur votre machine
+	- la copie est faite par `scripts/sync.mjs` ; chaque copie réussie affiche « Plugin à jour dans … », et une erreur s'affiche telle quelle
 3. ouvrir le projet dans VS Code
 
 ### Déployer
