@@ -1,7 +1,7 @@
 /**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
+ * Importer le style ici le fait passer par webpack, l'outil de `npm run build` qui
+ * assemble les fichiers : il compile le SCSS en CSS, dans build/. Ce CSS s'applique au site
+ * et à l'éditeur.
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */

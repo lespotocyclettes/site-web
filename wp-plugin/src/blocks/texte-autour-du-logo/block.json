@@ -6,12 +6,9 @@
 	"title": "texte-autour-du-logo",
 	"category": "widgets",
 	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
-	"example": {},
 	"supports": {
 		"html": false
 	},
-	"textdomain": "texte-autour-du-logo",
-	"editorScript": "file:./editor.js",
-	"style": "file:./style.css"
+	"textdomain": "lespotocyclettes",
+	"editorScript": "file:./editor.js"
 }

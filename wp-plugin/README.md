@@ -1,4 +1,4 @@
-# Les PotoCyclettes
+# Les Poto'Cyclettes
 
 Ce plugin contient :
 - des blocks wordpress personnalisés

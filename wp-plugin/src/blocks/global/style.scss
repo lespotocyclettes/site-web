@@ -4,7 +4,7 @@
 
 
 /*
- * Il s'agit du texte "Les poto'Cyclettes" sur la page d'accueil
+ * Il s'agit du texte "Les Poto'Cyclettes" sur la page d'accueil
  * Permet de décaler l'image pour qu'elle rentre bien dans la composition générale
  */
 .potos-logo-homepage {
@@ -64,6 +64,13 @@
 /**
  * Ajout d'un effet grain texturé
  */
+
+// Le grain est un bruit dessiné par un filtre SVG, posé sur un voile noir. D'un écran à
+// l'autre, seule change la taille du motif qui se répète.
+@function grain-background($tile-size) {
+	@return linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("data:image/svg+xml,%3Csvg viewBox=%270 0 #{$tile-size} #{$tile-size}%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.65%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url%28%23noiseFilter%29%27/%3E%3C/svg%3E") repeat;
+}
+
 .wp-site-blocks {
 	position: relative;
 }
@@ -85,14 +92,14 @@
 		// https://sass-lang.com/documentation/interpolation/
 		filter: contrast(250%) brightness(300%) #{"grayscale()"};
 		opacity: 0.5;
-		background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("data:image/svg+xml,%3Csvg viewBox=%270 0 1024 1024%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.65%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url%28%23noiseFilter%29%27/%3E%3C/svg%3E") repeat;
+		background: grain-background(1024);
 
 		@media screen and (max-width: 1024px) {
-			background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("data:image/svg+xml,%3Csvg viewBox=%270 0 768 768%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.65%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url%28%23noiseFilter%29%27/%3E%3C/svg%3E") repeat;
+			background: grain-background(768);
 		}
 
 		@media screen and (max-width: 512px) {
-			background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("data:image/svg+xml,%3Csvg viewBox=%270 0 384 384%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.65%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url%28%23noiseFilter%29%27/%3E%3C/svg%3E") repeat;
+			background: grain-background(384);
 		}
 	}
 }
@@ -105,6 +112,8 @@
 header.wp-block-template-part:has(.wp-block-navigation.is-responsive) {
 	& {
 		position: sticky;
+		// -1px, et pas 0 : c'est ce pixel qui dépasse que blocks/global/index.js détecte
+		// pour ajouter .is-pinned. À 0, la classe ne s'ajoute plus, sans aucune erreur.
 		top: -1px;
 		z-index: 10;
 	}
@@ -113,8 +122,11 @@ header.wp-block-template-part:has(.wp-block-navigation.is-responsive) {
 		pointer-events: none;
 	}
 
-	.site-logo-img {
-		transition: opacity 0.3s ease-in-out;
+	// Seulement si l'appareil n'a pas demandé moins d'animations.
+	@media (prefers-reduced-motion: no-preference) {
+		.site-logo-img {
+			transition: opacity 0.3s ease-in-out;
+		}
 	}
 
 	&.is-pinned .site-logo-img {
@@ -134,18 +146,20 @@ header.wp-block-template-part:has(.wp-block-navigation.is-responsive) {
 		border-radius: var(--wp--custom--border-radius--medium);
 	}
 
-	@media screen and (max-width: 782px) {
+	@media screen and (max-width: 781px) {
 		.wp-block-navigation.is-responsive {
 			padding-block: var(--wp--preset--spacing--x-small);
 			margin-block: calc(-1 * var(--wp--preset--spacing--x-small));
-			transition: transform 0.3s ease-in-out;
 		}
 
-		&>* {
-			transition: transform 0.3s ease-in-out;
+		@media (prefers-reduced-motion: no-preference) {
+			.wp-block-navigation.is-responsive,
+			& > * {
+				transition: transform 0.3s ease-in-out;
+			}
 		}
 
-		&.is-pinned>* {
+		&.is-pinned > * {
 			transform: translateY(-50%);
 		}
 
@@ -160,4 +174,9 @@ header.wp-block-template-part:has(.wp-block-navigation.is-responsive) {
 			transition: none;
 		}
 	}
+}
+
+.wp-block-navigation__container {
+	column-gap: var(--wp--preset--spacing--medium);
+	row-gap: var(--wp--preset--spacing--xx-small);
 }

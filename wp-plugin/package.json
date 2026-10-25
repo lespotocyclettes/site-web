@@ -4,7 +4,6 @@
 	"description": "Plugin maison pour personnaliser l'apparence et étendre les fonctionnalités du site.",
 	"author": "Géraud Henrion",
 	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build",
 		"format": "wp-scripts format",
@@ -18,9 +17,7 @@
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^26.18.0",
+		"concurrently": "^8.2.2",
 		"dotenv": "^16.3.1"
-	},
-	"dependencies": {
-		"concurrently": "^8.2.2"
 	}
 }

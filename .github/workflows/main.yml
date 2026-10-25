@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 24
           cache: 'npm'
       - name: Installation des dépendances
         run: cd ./wp-plugin && npm install
@@ -17,12 +17,16 @@ jobs:
         run: cd ./wp-plugin && npm run build
       - run: rm -rf ./wp-plugin/node_modules
 
-      # Here is the deployment action
+      # L'action reçoit les mots de passe FTP : elle est figée sur un commit précis (v3.1.0).
+      # Avec « @latest », chaque nouvelle version publiée par son auteur les recevrait
+      # sans que personne ne l'ait relue. Pour monter de version : relire, puis changer le commit.
       - name: Envoi de wp-plugin via FTP
-        uses: airvzxf/ftp-deployment-action@latest
+        uses: airvzxf/ftp-deployment-action@682e17e4065ad0568d4f4fe5a0d539797c306a6c # v3.1.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local_dir: "./wp-plugin"
           remote_dir: "/www/wp-content/plugins/lespotocyclettes"
+          # Seul le résultat du build part sur le site, pas les sources ni les outils.
+          exclude: "src/,node_modules/,package.json,scripts/,jsconfig.json,.env.example,.editorconfig,.gitignore,README.md"

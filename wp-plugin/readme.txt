@@ -1,4 +1,4 @@
-=== Lespotocyclettes ===
+=== Les Poto'Cyclettes ===
 Contributors:      Géraud Henrion
 Tags:              block
 Tested up to:      6.1
@@ -16,20 +16,22 @@ Liste des changements apportés (non exhaustive):
 - sections fond vélo / fond rouille
 - séparateurs coup de brosse / peinture
 - ajustement graphiques
-- css personnalisé pour l'affichage de la typographie "Les potocyclettes" en page d'accueil
+- css personnalisé pour l'affichage de la typographie "Les Poto'Cyclettes" en page d'accueil
 - mise en page personnalisée pour obtenir l'effet "texte encadrant le logo"
 
 
 == Installation ==
 
-Manuellement via FTP - ne pas oublier de jouer la commande `npm run build` pour générer les fichiers statiques avant de déployer.
+Automatique : chaque envoi sur la branche main du dépôt GitHub construit le plugin et l'envoie sur le site par FTP (voir README.md, section « Déployer »).
+
+À la main, par FTP : ne pas oublier de jouer la commande `npm run build` pour générer les fichiers statiques avant de déployer.
 
 == Frequently Asked Questions ==
 
 = C'est quoi `npm run build` ? =
 
-Une commande dans le terminal qui permet de préparer le plugin afin qu'il soit p^rêt à fonctionner.
-ça demande un peu de configuration et de se familiariser avec un termiunal, mais ça vaut le coup pour permettre des personnalisations acancées
+Une commande dans le terminal qui permet de préparer le plugin afin qu'il soit prêt à fonctionner.
+ça demande un peu de configuration et de se familiariser avec un terminal, mais ça vaut le coup pour permettre des personnalisations avancées
 
 = Je ne veux pas exécuter du code dans un terminal =
 

@@ -71,6 +71,7 @@
 	&+.wp-block-group,
 	&+footer {
 		position: relative;
+		--brush-height: 50px;
 	}
 
 	&::before {
@@ -78,8 +79,7 @@
 		width: 100%;
 		background-size: 120% 100%;
 
-		height: 50px !important;
-		margin-bottom: -50px;
+		height: var(--brush-height) !important;
 	}
 
 	&+.wp-block-group::before,
@@ -88,8 +88,8 @@
 		width: 100%;
 		background-size: 120% 100%;
 
-		height: 50px !important;
-		margin-top: -50px;
+		height: var(--brush-height) !important;
+		margin-top: calc(-1 * var(--brush-height));
 	}
 
 	&::before,

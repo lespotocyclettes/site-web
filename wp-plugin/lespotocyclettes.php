@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:	   Les Potocyclettes
+ * Plugin Name:	   Les Poto'Cyclettes
  * Description:	   Plugin maison pour personnaliser l'apparence et étendre les fonctionnalités du site.
  * Requires at least: 6.1
  * Requires PHP:	  7.0
@@ -13,7 +13,7 @@
  * @package		   les-potocyclettes
  */
 if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
+	exit; // Le fichier a été appelé directement, hors de WordPress : on s'arrête.
 }
 
 require_once __DIR__ . '/2FA.php';
