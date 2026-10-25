@@ -70,6 +70,11 @@ Copier le code d'une bibliothèque dans notre dépôt au lieu de l'installer com
 dépendance. Les fichiers vendorés vivent dans `app/src/styles/vendor/`, ils portent leur
 version et leur licence en en-tête, et **on ne les édite pas**.
 
+**Open Props** :
+La bibliothèque de tokens qu'on a vendorée : des échelles toutes faites d'espacements, de
+tailles de texte, d'épaisseurs de bordure (`--size-3`, `--border-size-1`). Nos tokens à
+nous sont construits par-dessus.
+
 **Styleguide** :
 La page `app/styleguide/index.html`, qui montre tous les composants avec toutes leurs
 variantes. On l'ouvre d'un double-clic, sans rien installer. Un composant qui n'y est pas
@@ -131,6 +136,15 @@ une couleur existante, plutôt que de maintenir une couleur de plus.
 **`:has()`** :
 Un sélecteur qui vise un élément d'après ce qu'il contient. Par exemple « le champ qui
 contient une saisie invalide ». Il évite de synchroniser des classes depuis JavaScript.
+
+**`:user-invalid`** :
+L'état d'un champ mal rempli, mais seulement une fois que la personne y a touché. Un champ
+obligatoire encore vide n'est donc pas rouge dès l'ouverture de la page.
+
+**`!important`** :
+Un mot posé à la fin d'une déclaration CSS pour la faire passer devant toutes les autres.
+Avec les couches, son effet s'inverse : c'est la couche la plus basse qui gagne. On en a
+un seul, dans le reset.
 
 **Spécificité** :
 Le score qui départage deux règles CSS visant le même élément. Plus un sélecteur est
@@ -222,6 +236,14 @@ quatre vérifications.
 
 **Workspace** :
 Un sous-projet dans un dépôt qui en contient plusieurs. Ici `app` en est un.
+
+**JSX** :
+Du HTML écrit au milieu du code React, par exemple `<div className="layout-stack">`.
+Un outil le traduit en JavaScript avant que le navigateur le lise.
+
+**Fichier de déclaration** :
+Un fichier `.d.ts`. Il ne contient que des types TypeScript, aucun code exécuté. Il sert à
+décrire au vérificateur de types quelque chose qu'il ne sait pas deviner seul.
 
 **Build** :
 L'étape qui transforme le code source en fichiers servis au navigateur. La fondation CSS

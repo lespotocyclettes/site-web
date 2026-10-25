@@ -28,10 +28,10 @@
 		}
 
 		&[data-variant="success"] {
-			--_accent: var(--color-surface-section);
+			--_accent: var(--color-success);
 			--_bg: color-mix(
 				in oklab,
-				var(--color-surface-section) 8%,
+				var(--color-success) 8%,
 				var(--color-surface-page)
 			);
 		}

@@ -30,8 +30,8 @@
 		}
 
 		body {
-			min-height: 100svh;
-			line-height: 1.5;
+			min-block-size: 100svh;
+			line-height: var(--font-lineheight-3);
 		}
 
 		img,
@@ -62,7 +62,8 @@
 		}
 
 		/*
-		 * Le seul !important de la fondation. Il coupe les animations pour les personnes
+		 * Le seul !important de la fondation (le mot qui fait passer une déclaration devant
+		 * toutes les autres, voir le glossaire). Il coupe les animations pour les personnes
 		 * qui ont demandé « moins de mouvement » à leur appareil. Avec !important, l'ordre
 		 * des couches s'inverse et la plus basse gagne : placé ici, dans le reset, il
 		 * garantit qu'aucun composant ne pourra réactiver une animation.

@@ -1,13 +1,9 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-declare module "react" {
-	/** React ne connaît pas les propriétés personnalisées : on lui apprend leur forme. */
-	interface CSSProperties {
-		[knob: `--${string}`]: string | undefined;
-	}
-}
-
-/** Un échelon de l'échelle Open Props, pas une taille en toutes lettres : « lg » n'ordonne rien. */
+/**
+ * Un échelon de l'échelle Open Props (les tokens copiés dans styles/vendor/), pas une
+ * taille en toutes lettres : « lg » n'ordonne rien.
+ */
 export type Space = `var(--size-${number})`;
 
 /** Largeur minimale d'une colonne avant que la grille en retire une. */
@@ -24,9 +20,13 @@ function toLayoutProps(
 	knobs: Knobs,
 	{ className, style, ...rest }: LayoutProps,
 ) {
+	/* Une molette non réglée ne doit pas effacer celle qu'on aurait passée par style. */
+	const setKnobs = Object.fromEntries(
+		Object.entries(knobs).filter(([, value]) => value !== undefined),
+	);
 	return {
 		className: className ? `${layoutClass} ${className}` : layoutClass,
-		style: { ...style, ...knobs },
+		style: { ...style, ...setKnobs },
 		...rest,
 	};
 }

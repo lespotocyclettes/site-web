@@ -1,7 +1,8 @@
 /*
- * Le navigateur sait seul qu'un champ est mal rempli (:invalid) : rien à gérer depuis
- * React. :not(:placeholder-shown) attend qu'on ait commencé à taper, pour ne pas afficher
- * d'erreur sur un champ encore vide.
+ * Le navigateur sait seul qu'un champ est mal rempli : rien à gérer depuis React.
+ * :user-invalid attend que la personne ait touché au champ (modifié puis quitté, ou tenté
+ * d'envoyer le formulaire). Un champ obligatoire encore vide ne s'affiche donc pas en
+ * erreur dès l'ouverture de la page.
  */
 @layer components {
 	.form-field {
@@ -21,13 +22,12 @@
 			color: var(--color-text-muted);
 		}
 
-		&:has(:invalid:not(:placeholder-shown)) {
+		&:has(:user-invalid) {
 			--color-field-border: var(--color-danger);
-		}
 
-		&:has(:invalid:not(:placeholder-shown)) > .label,
-		&:has(:invalid:not(:placeholder-shown)) > .hint {
-			color: var(--color-danger);
+			> :is(.label, .hint) {
+				color: var(--color-danger);
+			}
 		}
 
 		&:has(:required) > .label::after {

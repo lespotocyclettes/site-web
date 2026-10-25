@@ -14,7 +14,10 @@ const MANIFEST = resolve(STYLES, "index.css");
 const SEMANTIC = resolve(STYLES, "semantic.css");
 const STYLEGUIDE = resolve(APP_ROOT, "styleguide/index.html");
 
-/** Les molettes publiques passées depuis le JSX ne sont jamais déclarées en CSS : elles ont un défaut. */
+/**
+ * Les molettes publiques passées depuis le JSX (le HTML écrit dans le code React) ne sont
+ * jamais déclarées en CSS : elles ont un défaut.
+ */
 const REFERENCE_WITHOUT_FALLBACK = /var\(\s*(--[a-z0-9_-]+)\s*\)/gi;
 const DECLARATION = /^\s*(--[a-z0-9_-]+)\s*:/gim;
 const IMPORT = /@import\s+url\(\s*"([^"]+)"\s*\)/g;
@@ -55,7 +58,7 @@ for (const [name, file] of referenced) {
 
 const semantic = await readFile(SEMANTIC, "utf8");
 const styleguide = await readFile(STYLEGUIDE, "utf8");
-const colors = collectFirstGroups(semantic, COLOR_DECLARATION);
+const colors = new Set(collectFirstGroups(semantic, COLOR_DECLARATION));
 const shown = new Set(collectFirstGroups(styleguide, STYLEGUIDE_COLOR));
 
 for (const color of colors) {
@@ -66,8 +69,16 @@ for (const color of colors) {
 	}
 }
 
+for (const color of shown) {
+	if (!colors.has(color)) {
+		failures.push(
+			`styleguide/index.html : COLOR_TOKENS liste --${color}, absent de semantic.css`,
+		);
+	}
+}
+
 console.log(
-	`${imported.length} imports, ${declared.size} tokens déclarés, ${referenced.size} référencés sans repli, ${colors.length} couleurs déclarées.`,
+	`${imported.length} imports, ${declared.size} tokens déclarés, ${referenced.size} référencés sans repli, ${colors.size} couleurs déclarées.`,
 );
 
 if (failures.length > 0) {
@@ -93,8 +104,10 @@ function collectFirstGroups(text, pattern) {
 }
 
 async function isFile(path) {
-	return stat(path).then(
-		() => true,
-		() => false,
-	);
+	try {
+		return (await stat(path)).isFile();
+	} catch (error) {
+		if (error.code === "ENOENT") return false;
+		throw error;
+	}
 }

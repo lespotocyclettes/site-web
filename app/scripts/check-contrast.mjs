@@ -1,6 +1,7 @@
 /*
  * Vérifie que chaque paire texte / fond du design system atteint son seuil WCAG.
- * Les paires sont listées à la main : c'est le contrat, il doit se lire et se greper.
+ * Les paires sont listées à la main : c'est le contrat, il doit se lire, et se retrouver
+ * en cherchant le nom d'un token dans le texte.
  */
 import { readFile } from "node:fs/promises";
 
@@ -41,11 +42,6 @@ const PAIRS = [
 		threshold: AA_TEXT,
 	},
 	{
-		text: "color-text-on-section",
-		background: "color-surface-section",
-		threshold: AA_TEXT,
-	},
-	{
 		text: "color-text-on-accent",
 		background: "color-accent",
 		threshold: AA_TEXT,
@@ -53,6 +49,16 @@ const PAIRS = [
 	{
 		text: "color-text-on-danger",
 		background: "color-danger",
+		threshold: AA_TEXT,
+	},
+	{
+		text: "color-danger",
+		background: "color-surface-page",
+		threshold: AA_TEXT,
+	},
+	{
+		text: "color-danger",
+		background: "color-surface-raised",
 		threshold: AA_TEXT,
 	},
 	{ text: "color-link", background: "color-surface-page", threshold: AA_TEXT },
@@ -194,6 +200,10 @@ function toContrastRatio(foreground, background) {
 	return (lighter + 0.05) / (darker + 0.05);
 }
 
+/**
+ * La formule et ses constantes viennent de la définition WCAG de la luminance relative :
+ * https://www.w3.org/TR/WCAG22/#dfn-relative-luminance
+ */
 function toRelativeLuminance(hex) {
 	const [red, green, blue] = [1, 3, 5].map((offset) =>
 		Number.parseInt(hex.slice(offset, offset + 2), 16),

@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="../src/styles/index.css">
 	<style>
 		/* Propre à cette page : la mise en page du styleguide n'est pas la fondation. */
+		/* 60rem : au-delà, les cartes en grille s'étirent et la page se lit mal. */
 		body {
 			max-inline-size: 60rem;
 			margin-inline: auto;
@@ -20,7 +21,7 @@
 
 		.token-swatch {
 			block-size: var(--size-8);
-			border: 1px solid var(--color-border);
+			border: var(--border-size-1) solid var(--color-border);
 			border-radius: var(--radius-base);
 		}
 
@@ -104,8 +105,8 @@
 		</table>
 
 		<p>
-			<label for="nu-texte">Un champ</label>
-			<input id="nu-texte" type="text" placeholder="Peugeot">
+			<label for="bare-input">Un champ</label>
+			<input id="bare-input" type="text" placeholder="Peugeot">
 			<button type="button">Un bouton</button>
 		</p>
 	</section>
@@ -167,9 +168,9 @@
 		<h2>Champ de formulaire <code>.form-field</code></h2>
 		<div class="layout-stack">
 			<div class="form-field">
-				<label class="label" for="marque">Marque</label>
-				<input id="marque" type="text" list="marques" placeholder="Peugeot">
-				<datalist id="marques">
+				<label class="label" for="brand">Marque</label>
+				<input id="brand" type="text" list="brands" placeholder="Peugeot">
+				<datalist id="brands">
 					<option value="Peugeot"></option>
 					<option value="Gitane"></option>
 					<option value="Motobécane"></option>
@@ -178,10 +179,10 @@
 			</div>
 
 			<div class="form-field">
-				<label class="label" for="courriel">Courriel du donateur</label>
-				<input id="courriel" type="email" required value="pas-un-courriel">
-				<span class="hint">Le rouge vient du navigateur lui-même (<code>:invalid</code>) : aucun code ne le
-					déclenche.</span>
+				<label class="label" for="email">Courriel du donateur</label>
+				<input id="email" type="email" required value="pas-un-courriel">
+				<span class="hint">Modifiez ce champ puis quittez-le : il passe au rouge. Le navigateur le fait lui-même
+					(<code>:user-invalid</code>), aucun code ne le déclenche.</span>
 			</div>
 		</div>
 	</section>
@@ -293,17 +294,21 @@
 	<script>
 		/* Vérifiée par scripts/check-tokens.mjs : elle doit lister tous les --color-* de semantic.css. */
 		const COLOR_TOKENS = [
-			"color-surface-page", "color-surface-raised", "color-surface-section",
+			"color-surface-page", "color-surface-raised",
 			"color-border", "color-border-strong", "color-field-border",
-			"color-text-heading", "color-text-body", "color-text-muted", "color-text-on-section",
+			"color-text-heading", "color-text-body", "color-text-muted",
 			"color-accent", "color-text-on-accent", "color-link",
-			"color-danger", "color-text-on-danger",
+			"color-danger", "color-text-on-danger", "color-success",
 			"color-focus-ring", "color-backdrop",
 		];
 
 		const root = document.documentElement;
 		const prefersDark = matchMedia("(prefers-color-scheme: dark)");
 
+		/*
+		 * Rendu une seule fois : la valeur affichée est le light-dark(clair, sombre) écrit dans
+		 * semantic.css, qui montre déjà les deux thèmes. Seul l'échantillon change de couleur.
+		 */
 		function renderSwatches() {
 			const styles = getComputedStyle(root);
 			document.getElementById("swatches").replaceChildren(...COLOR_TOKENS.map((token) => {
@@ -324,14 +329,12 @@
 		document.getElementById("theme-toggle").addEventListener("click", () => {
 			const isDark = getActiveTheme() === "dark";
 			root.dataset.theme = isDark ? "light" : "dark";
-			renderSwatches();
 		});
 
 		document.getElementById("open-dialog").addEventListener("click", () => {
 			document.getElementById("demo-dialog").showModal();
 		});
 
-		prefersDark.addEventListener("change", renderSwatches);
 		renderSwatches();
 	</script>
 

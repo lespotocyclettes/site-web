@@ -65,11 +65,12 @@
 		 * contour invisible, devenu visible, qui montre l'élément sélectionné au clavier.
 		 */
 		:focus-visible {
-			outline: 2px solid transparent;
-			outline-offset: 2px;
+			outline: var(--border-size-focus) solid transparent;
+			outline-offset: var(--border-size-focus);
+			/* Un liseré couleur de page, puis l'anneau par-dessus : il se voit sur tout fond. */
 			box-shadow:
-				0 0 0 2px var(--color-surface-page),
-				0 0 0 4px var(--color-focus-ring);
+				0 0 0 var(--border-size-focus) var(--color-surface-page),
+				0 0 0 calc(2 * var(--border-size-focus)) var(--color-focus-ring);
 		}
 
 		/*
@@ -79,7 +80,7 @@
 		 * ces contrôles.
 		 */
 		:is(input, select, textarea, button) {
-			min-height: var(--size-tap-target);
+			min-block-size: var(--size-tap-target);
 			font-size: var(--font-size-1);
 			color: var(--color-text-heading);
 			border-radius: var(--radius-base);
@@ -88,18 +89,18 @@
 		:is(input, select, textarea) {
 			padding-inline: var(--size-2);
 			background: var(--color-surface-page);
-			border: 1px solid var(--color-field-border);
+			border: var(--border-size-1) solid var(--color-field-border);
 		}
 
 		button {
 			padding-inline: var(--size-inset);
 			background: var(--color-surface-raised);
-			border: 1px solid var(--color-border-strong);
+			border: var(--border-size-1) solid var(--color-border-strong);
 			cursor: pointer;
 		}
 
 		:is(input, select, textarea, button):disabled {
-			opacity: 0.5;
+			opacity: var(--opacity-disabled);
 			cursor: not-allowed;
 		}
 
@@ -111,7 +112,7 @@
 		:is(th, td) {
 			padding: var(--size-2) var(--size-3);
 			text-align: start;
-			border-block-end: 1px solid var(--color-border);
+			border-block-end: var(--border-size-1) solid var(--color-border);
 		}
 
 		th {
@@ -126,7 +127,7 @@
 
 		hr {
 			border: none;
-			border-block-start: 1px solid var(--color-border);
+			border-block-start: var(--border-size-1) solid var(--color-border);
 		}
 	}
 }

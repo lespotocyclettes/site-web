@@ -10,7 +10,7 @@
 			gap: var(--size-3);
 			padding: var(--size-inset);
 			background: var(--_bg);
-			border: 1px solid var(--_border);
+			border: var(--border-size-1) solid var(--_border);
 			border-radius: var(--radius-base);
 			box-shadow: var(--_shadow);
 		}

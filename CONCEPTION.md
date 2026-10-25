@@ -149,6 +149,9 @@ taille. En CSS ça s'écrit comme une variable, par exemple `--color-text-body`.
   noms qui mentent sans casser, c'est le pire cas de figure.
 - **Aucune couleur ni taille écrite en dur ailleurs que dans le fichier des tokens.** C'est
   ça qui permet de changer l'apparence du produit en ouvrant un seul fichier.
+- **Sauf un seuil mesuré** : la largeur où quelque chose cesse de tenir, comme une colonne
+  trop étroite ou une ligne trop longue à lire. Ce n'est pas un choix d'apparence, c'est
+  un constat. Il s'écrit en `rem` là où il sert, avec un commentaire qui dit d'où il vient.
 
 ### La grammaire des classes
 
@@ -207,9 +210,9 @@ une liste d'exceptions que personne ne pense à mettre à jour.
 ## 7. Les promesses, on les rend vérifiables
 
 - **Une affirmation qu'un relecteur ne peut pas vérifier doit devenir un test automatique,
-  ou dégager.** « Les contrastes sont conformes » et « il n'y a aucune valeur écrite en
-  dur » : à la lecture, ça ne se vérifie pas, on croit l'auteur sur parole. Ce sont deux
-  petits programmes maintenant, et ils tournent avec `npm run verify`.
+  ou dégager.** « Les contrastes sont conformes » et « chaque token utilisé existe » : à la
+  lecture, ça ne se vérifie pas, on croit l'auteur sur parole. Ce sont deux petits
+  programmes maintenant, et ils tournent avec `npm run verify`.
 - **Le styleguide est le filet, pas une annexe.** C'est la page qui montre tous les
   composants avec toutes leurs déclinaisons. Un composant qui n'y figure pas n'existe pas.
 - **Dire ce qui n'est pas vérifié.** Une vérification verte ne juge pas le rendu, ni le

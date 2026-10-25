@@ -22,7 +22,7 @@
 			font-weight: var(--font-weight-6);
 			color: var(--_fg);
 			background: var(--_bg);
-			border: 1px solid var(--_border);
+			border: var(--border-size-1) solid var(--_border);
 			border-radius: var(--radius-button);
 			cursor: pointer;
 			transition: background-color 120ms var(--ease-2);
@@ -60,7 +60,7 @@
 		}
 
 		&:disabled {
-			opacity: 0.5;
+			opacity: var(--opacity-disabled);
 			cursor: not-allowed;
 		}
 	}

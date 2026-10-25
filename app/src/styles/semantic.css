@@ -10,8 +10,9 @@
  * color-scheme. Chaque token tient donc ses deux thèmes sur une seule ligne, et forcer un
  * thème revient à changer color-scheme.
  *
- * La palette du thème, pour référence. Les slugs pale-pink, vivid-purple et compagnie
- * sont la palette par défaut de WordPress et non l'identité de l'asso : ils n'y sont pas.
+ * La palette du thème, pour référence. Les couleurs nommées pale-pink, vivid-purple et
+ * compagnie sont la palette par défaut de WordPress et non l'identité de l'asso : elles
+ * n'y sont pas.
  *
  *   #ffffff  background   fond de page.
  *   #0ead64  foreground   vert vif. Malgré son nom, le site s'en sert comme fond et non
@@ -19,7 +20,7 @@
  *                         couleur d'accentuation, en fond uniquement.
  *   #ff7777  primary      corail, l'accentuation du site. Écarté ici : 2.3:1 sur blanc,
  *                         et trop proche du registre « danger » pour une app de gestion.
- *   #355a45  secondary    vert foncé des sections. 7.8:1 sur blanc.
+ *   #355a45  secondary    vert foncé des sections. Notre couleur de succès.
  *   #841a1a  tertiary     rouge sombre. Notre couleur de danger.
  *   #fefaec  quaternary   crème. Aucun emploi dans l'app pour l'instant.
  *   #f5faf8  surface      blanc teinté de vert, nos surfaces surélevées.
@@ -35,7 +36,6 @@
 
 	--color-surface-page: light-dark(#ffffff, #121716);
 	--color-surface-raised: light-dark(#f5faf8, #1b2220);
-	--color-surface-section: light-dark(#355a45, #2c4a3a);
 
 	/* Filet décoratif entre deux surfaces : il reste discret, sans seuil de contraste à tenir. */
 	--color-border: light-dark(#e7eeeb, #2f3b38);
@@ -48,7 +48,6 @@
 	--color-text-heading: light-dark(#1f2937, #eef3f1);
 	--color-text-body: light-dark(#4b5563, #c4cfcb);
 	--color-text-muted: light-dark(#64707c, #8b9995);
-	--color-text-on-section: #ffffff;
 
 	/*
 	 * Le vert de la charte n'est lisible qu'en fond de bouton, pas en texte. --color-link
@@ -63,6 +62,8 @@
 
 	--color-danger: light-dark(#841a1a, #e35d5d);
 	--color-text-on-danger: light-dark(#ffffff, #1a0a0a);
+
+	--color-success: light-dark(#355a45, #2c4a3a);
 
 	--color-focus-ring: var(--color-link);
 
@@ -89,6 +90,10 @@
 	--size-tap-target: var(--size-8);
 	--radius-base: var(--radius-2);
 	--radius-button: var(--radius-round);
+
+	/* L'épaisseur de l'anneau qui montre l'élément sélectionné au clavier. */
+	--border-size-focus: var(--border-size-2);
+	--opacity-disabled: 0.5;
 
 	--shadow-raised: var(--shadow-2);
 	--shadow-overlay: var(--shadow-4);

@@ -6,6 +6,10 @@
 @layer components {
 	.modal-dialog {
 		& {
+			/*
+			 * 32rem, environ 65 caractères par ligne : au-delà, une ligne devient pénible à
+			 * suivre des yeux. Sur téléphone, la fenêtre garde une marge de chaque côté.
+			 */
 			max-inline-size: min(32rem, calc(100vw - 2 * var(--size-inset)));
 			padding: var(--size-inset);
 			color: var(--color-text-body);

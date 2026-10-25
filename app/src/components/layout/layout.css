@@ -20,7 +20,10 @@
 	.layout-grid {
 		display: grid;
 		gap: var(--gap, var(--size-3));
-		/* min(…, 100%) : une colonne plus large que l'écran se réduit au lieu de déborder. */
+		/*
+		 * 16rem par défaut : une colonne sur un téléphone, deux ou trois sur une tablette.
+		 * min(…, 100%) : une colonne plus large que l'écran se réduit au lieu de déborder.
+		 */
 		grid-template-columns: repeat(
 			auto-fill,
 			minmax(min(var(--min, 16rem), 100%), 1fr)
