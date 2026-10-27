@@ -1,9 +1,72 @@
-# Fondation CSS de la mini-app
+# Mini-app vélos
 
-Ici vit tout ce qui donne son apparence à la mini-app vélos. Pas encore de métier : juste
-les fondations, et une page pour les voir.
+La mini-app de gestion des vélos : chercher un vélo, voir sa fiche, changer son statut,
+enregistrer un nouveau vélo. Pour l'instant c'est un squelette : les trois écrans existent,
+mais ils sont presque vides. Ce qui reste à faire est dans la
+[feuille de route](../docs/plans/mini-app-velos-feuille-de-route.md), le pourquoi dans le
+[plan](../docs/plans/gestion-des-velos.md).
 
-Si un mot vous arrête, il est expliqué dans le [glossaire technique](../GLOSSAIRE-TECHNIQUE.md).
+Si un mot vous arrête, il est expliqué dans le [glossaire technique](../GLOSSAIRE-TECHNIQUE.md)
+ou le [glossaire métier](../GLOSSAIRE-METIER.md).
+
+## Lancer
+
+```sh
+npm install        # à la racine du dépôt, une fois
+cd app
+npm run dev        # ouvre l'app sur un serveur local, qui se recharge à chaque modification
+npm test           # lance les tests
+npm run verify     # tous les contrôles, à lancer avant de rendre son travail
+```
+
+**Tant qu'unreel n'est pas publié**, l'installation suppose son dépôt cloné dans
+`~/workspace/unreel/unreel` et compilé (`pnpm build:all` dans ce dossier). Sinon,
+`npm install` échoue. Avant la relecture par le second dev, on passera à une archive copiée
+dans `app/vendor/unreel/` (voir la [fiche 0002](../docs/adr/0002-dependances-mini-app.md)).
+
+L'app tourne contre un **faux relais** qui garde trois vélos d'exemple en mémoire : tout ce
+qu'on y fait disparaît au rechargement de la page.
+
+## Architecture
+
+```
+ écran ── useQuery(api.bikes.search.queryOptions({ input }))
+            ▼
+ src/api/          les requêtes : ce qu'on demande, et ce qu'on rafraîchit après une action
+            ▼
+ src/bike-store/   le contrat du relais (BikeStore), et ses adaptateurs :
+                   le faux relais en mémoire aujourd'hui, le vrai relais PHP demain
+ src/bike/         les règles métier pures : référence, statut, description d'un vélo
+```
+
+Un dossier par écran : `src/search/`, `src/bike-sheet/`, `src/registration/`. La navigation
+passe par le `#` de l'adresse (`src/navigation/`). `src/main.tsx` choisit le relais.
+
+## Remplacer unreel
+
+unreel enchaîne les étapes de l'enregistrement. Un seul fichier l'importe :
+`src/registration/sequencer/registration-sequencer.tsx`. Les étapes, dans
+`src/registration/steps/`, sont des composants ordinaires qui ne le connaissent pas. Pour
+s'en passer, on réécrit ce seul fichier avec un `useReducer` qui retient l'étape courante et
+une sauvegarde dans le `localStorage` : une trentaine de lignes.
+
+## Modifier un champ
+
+_À écrire avec l'incrément « fiche + actions »._ Le point de départ sera
+`src/bike/bike.ts` et le glossaire métier.
+
+## Où vit chaque secret
+
+_À écrire avec l'incrément « adaptateur relais »._ Aujourd'hui, aucun : le faux relais n'en
+a pas besoin.
+
+## Couper l'inférence
+
+_À écrire avec l'incrément « adaptateur relais »._ Le faux relais l'a déjà coupée.
+
+# La fondation CSS
+
+Ici vit tout ce qui donne son apparence à la mini-app.
 
 Ce dossier contient :
 - les **tokens** : les couleurs, les espacements et les tailles de texte, chacun rangé sous
@@ -67,12 +130,17 @@ La convention de nommage :
 
 ## Vérifier
 
-`npm run verify` enchaîne quatre contrôles :
+`npm run verify` enchaîne cinq contrôles :
 - les noms de classes respectent la convention (c'est Stylelint qui vérifie)
 - le code React est cohérent dans ses types (c'est `tsc`, le vérificateur de TypeScript)
 - chaque token utilisé existe bien quelque part
 - chaque couple texte et fond est assez contrasté pour être lu (le seuil AA du référentiel
   d'accessibilité WCAG)
+- les règles métier tiennent (c'est Vitest) : format de la référence, statut sans retour en
+  arrière, génération des références par le faux relais, saisie par-dessus l'inférence
+
+Les tests ne couvrent pas les écrans eux-mêmes, ni le branchement d'unreel : ça se vérifie
+en ouvrant l'app.
 
 Ce que ça ne vérifie pas : le rendu. Ça reste à faire à l'œil, au clavier, et sur un vrai
 téléphone.
