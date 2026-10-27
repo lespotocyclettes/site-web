@@ -277,6 +277,26 @@ mémoire des réponses déjà reçues, et leur rafraîchissement quand une donn�
 part dans le produit ; sa porte de sortie est dans la fiche
 [0002](./docs/adr/0002-dependances-mini-app.md).
 
+**Clé de requête** :
+L'étiquette sous laquelle TanStack Query range une réponse, par exemple
+`["bikes", "search", { text: "peugeot" }]`. Deux écrans qui demandent la même clé
+partagent la même réponse.
+
+**Invalider** :
+Dire à TanStack Query qu'une réponse rangée n'est plus à jour, pour qu'il la redemande.
+Après un changement de statut, on invalide tout ce qui commence par `["bikes"]` : la
+recherche comme la fiche se rafraîchissent.
+
+**Hook** :
+Une fonction React dont le nom commence par `use` (`useQuery`, `useApi`). Elle ne
+s'appelle que dans un composant, et le composant se redessine quand ce qu'elle renvoie
+change.
+
+**Contexte (React)** :
+Une valeur posée une fois en haut de l'application, que n'importe quel composant en
+dessous peut lire sans qu'on la lui passe à la main. L'api de la mini-app y vit : `main.tsx`
+y branche le faux relais ou le vrai, et chaque test y branche le sien.
+
 **Override (npm)** :
 Une ligne du `package.json` racine qui force npm à prendre une version précise d'un paquet,
 même quand un autre paquet en demande une différente. On s'en sert pour unreel, qui n'est
