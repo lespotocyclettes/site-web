@@ -156,6 +156,7 @@ _Éviter_ : « vieux stock », « backlog ».
 Enregistrer un vélo qui porte déjà une référence papier, en fournissant cette référence au
 lieu de la laisser générer. C'est une exception, pas un mode normal : dans l'interface elle
 se cache derrière un interrupteur.
+_Dans le code_ : la référence fournie s'appelle `paperReference`.
 
 ## Les artefacts papier
 

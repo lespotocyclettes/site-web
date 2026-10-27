@@ -308,6 +308,20 @@ génère les références et valide les transitions de statut. L'app ne parle ja
 directement à Teable.
 _Éviter_ : « proxy » seul, qui laisse croire qu'il ne fait que transmettre.
 
+**Port** :
+Le contrat que la mini-app attend d'un service extérieur, écrit en TypeScript sans dire
+comment il est rempli. Celui du relais s'appelle `BikeStore` (`app/src/bike-store/`). Les
+écrans dépendent du port, jamais d'un adaptateur précis : c'est ce qui permet d'en changer.
+
+**Adaptateur** :
+Un code qui remplit un port. Pour `BikeStore`, il y en a un vrai (qui appellera le relais)
+et un faux.
+
+**Faux relais** :
+L'adaptateur de `BikeStore` qui garde les vélos en mémoire, le temps d'une page ouverte. Il
+imite les règles du vrai relais. Il sert à construire les écrans avant que le relais
+existe, et aux tests.
+
 **Route** :
 Une adresse que le serveur sait traiter, par exemple `POST /velo`. Le verbe (`GET`, `POST`,
 `PATCH`) dit ce qu'on veut en faire.
