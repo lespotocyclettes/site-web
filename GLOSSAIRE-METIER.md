@@ -10,6 +10,10 @@ qui débarque dans le projet.
 Pour le vocabulaire informatique, voir [GLOSSAIRE-TECHNIQUE.md](./GLOSSAIRE-TECHNIQUE.md).
 Pour les règles de décision, [CONCEPTION.md](./CONCEPTION.md).
 
+Les lignes _Dans le code_ donnent le nom que porte chaque terme dans le code. Les noms y
+sont en anglais (règle 9 de CONCEPTION.md), mais les **valeurs** restent en français : un
+bénévole qui exporte la base en tableur doit pouvoir la lire sans rien traduire.
+
 ## L'association
 
 **Les Poto'Cyclettes** :
@@ -64,6 +68,15 @@ _Éviter_ : « acquisition », « achat », « entrée de stock » pour parler d
 La personne qui donne un vélo. Distinct de l'acheteur, qui le récupère à la sortie.
 _Dans le code_ : `donor`.
 
+**Marquage** :
+Le numéro antivol gravé ou collé sur le cadre et inscrit au fichier national de l'APIC
+(Association pour la Promotion de l'Identification des Cycles), par exemple un Bicycode.
+Les vélos récents sont presque tous marqués. **On n'accepte pas un vélo marqué**, sauf si
+son propriétaire nous en transfère la propriété sur le site de l'APIC, ou si le vélo y est
+déclaré hors d'usage (le terme exact de l'APIC reste à vérifier). Vérifier le marquage est
+donc obligatoire à chaque don : c'est la seule saisie qui peut arrêter un enregistrement.
+_Dans le code_ : `marking`.
+
 **Enregistrement** :
 Le geste qui fait exister un vélo dans la base : une photo, une description, puis le
 serveur lui attribue sa référence. Il suit un don du jour, ou rattrape un vélo du stock
@@ -93,7 +106,7 @@ sorti, démonté  → fin du parcours
 Un vélo peut donc sortir en l'état, ou partir au démontage sans avoir été réparé.
 _Éviter_ : « état », qui désigne l'état mécanique du vélo. « En stock » pour la première
 valeur : un vélo prêt à la vente est en stock lui aussi.
-_Dans le code_ : `status`, qui vaut `to-process`, `ready-for-sale`, `out` ou `dismantled`.
+_Dans le code_ : `status`, qui vaut `à traiter`, `prêt à la vente`, `sorti` ou `démonté`.
 
 **En stock** :
 Tout vélo encore chez nous : à traiter ou prêt à la vente. C'est une notion déduite du
@@ -107,8 +120,8 @@ Le vélo est réparé et peut partir. C'est ce statut qui alimente la vitrine we
 Le départ d'un vélo, par vente ou par don. Elle enregistre l'acheteur, le prix et le type
 de sortie. C'est le miroir légal de la fiche don.
 _Éviter_ : « suppression », « archivage ». Un vélo sorti reste en base.
-_Dans le code_ : `exit`, avec `buyer`, `price` et `exitKind`, qui vaut `sale` ou `gift`.
-On évite `sold` : un vélo peut sortir par don.
+_Dans le code_ : `exit`, avec `buyer`, `price` et `exitKind`, qui vaut `vente` ou `don`.
+Un don n'a pas de prix.
 
 **Démonté** :
 Le vélo a fini en pièces détachées. C'est une fin de parcours au même titre que la sortie.
@@ -120,7 +133,7 @@ Le verdict grossier posé à l'arrivée ou à l'inventaire : à vendre, à répa
 démonter. Il tient en quelques secondes.
 _Éviter_ : de le confondre avec le diagnostic, ou avec le statut : un vélo trié « à
 démonter » reste « à traiter » tant qu'on ne l'a pas démonté.
-_Dans le code_ : `triage`, qui vaut `sell`, `repair` ou `dismantle`.
+_Dans le code_ : `triage`, qui vaut `à vendre`, `à réparer` ou `à démonter`.
 
 **Diagnostic** :
 L'examen mécanique complet d'un vélo, 10 à 15 minutes. Il se fait au fil de l'eau, quand on
@@ -162,13 +175,32 @@ don, et c'est cette référence qui fait la jointure entre les deux.
 ## Décrire un vélo
 
 **Type de vélo** :
-Trois facettes distinctes, à ne pas écraser dans un seul champ : le type (VTT, VTC, vélo de
-ville), le public (adulte, enfant) et le genre de cadre (cadre haut, cadre bas dit "femme").
-_Dans le code_ : `kind`, `audience` et `frame`.
+Trois facettes distinctes, à ne pas écraser dans un seul champ, chacune avec une seule
+valeur :
+- le type : `vtt`, `vtc`, `ville`, `route`, `course`, `demi-course`, `randonneur`, `pliant`
+  ou `bmx`. La liste est ouverte, une valeur s'ajoute sans toucher au reste ;
+- le public : `adulte` ou `enfant` ;
+- la forme du cadre : `haut`, `bas` (qu'on dit souvent « cadre femme ») ou `mixte` (deux
+  tubes jumeaux qui descendent de la douille de direction jusqu'à l'arrière).
+
+_Éviter_ : « genre de cadre » : `mixte` décrit une forme, pas un genre. « Électrique » comme
+type : un VTT peut l'être, c'est une caractéristique.
+_Dans le code_ : `kind`, `audience` et `frameShape`.
 
 **Changement de vitesses** :
 Comment le vélo change de vitesse, s'il en a : `sans`, `sur le cadre`, ou `manettes au guidon`. C'est
-une question qui revient souvent chez les acheteuses et les acheteurs.
+une question qui revient souvent chez les acheteuses et les acheteurs (« pas de manettes au
+cadre »), d'où une facette à part plutôt qu'une caractéristique.
+_Dans le code_ : `gearShift`.
+
+**Caractéristique** :
+Un mot qui décrit le vélo en dehors des facettes : `électrique`, `garde-boues`,
+`porte-bagages`, `vintage`, `réservé`… Un vélo en a autant qu'on veut. Comme la marque,
+elles sont suggérées depuis les valeurs déjà saisies, jamais imposées. Si la liste enfle
+au point de se contredire (`garde-boue`, `gardes-boues`), c'est le signal qu'il faut trier,
+et peut-être en promouvoir une en facette.
+_Éviter_ : « mot-clé », « tag », « étiquette ».
+_Dans le code_ : `features`.
 
 **Taille de roue** :
 Son unité dépend du vélo : en pouces pour les VTT, en convention française pour les vélos

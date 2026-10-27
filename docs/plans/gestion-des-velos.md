@@ -24,6 +24,13 @@
 > - **Brouillon** : pas de brouillon maison. unreel va permettre une clé de persistance
 >   choisie par l'étape (`persistenceKey`), indépendante de la photo.
 > - **Dépendances** : voir la fiche [0002](../adr/0002-dependances-mini-app.md).
+> - **Modèle cible** : la mini-app code le modèle décrit au glossaire (facettes séparées,
+>   vrai champ statut, caractéristiques libres). Le schéma Teable actuel n'y correspond pas
+>   (facettes mêlées dans « Type de vélo », statut déduit de cases à cocher) : il faudra
+>   l'adapter. Les valeurs restent en français, pour qu'un export se lise sans traduire.
+> - **Marquage** : vérifier le marquage APIC est obligatoire à l'enregistrement. Un vélo
+>   marqué dont la propriété n'est pas transférée arrête l'enregistrement. C'est la seule
+>   exception à « ne jamais bloquer une saisie ».
 
 ---
 
