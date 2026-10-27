@@ -62,6 +62,15 @@ _Éviter_ : « acquisition », « achat », « entrée de stock » pour parler d
 
 **Donateur** :
 La personne qui donne un vélo. Distinct de l'acheteur, qui le récupère à la sortie.
+_Dans le code_ : `donor`.
+
+**Enregistrement** :
+Le geste qui fait exister un vélo dans la base : une photo, une description, puis le
+serveur lui attribue sa référence. Il suit un don du jour, ou rattrape un vélo du stock
+dormant pendant une session d'inventaire, en saisie à rebours s'il porte déjà une référence
+papier. Le plan de la mini-app l'appelle aussi « flux d'entrée ».
+_Éviter_ : « entrée de stock », « création », « ajout ».
+_Dans le code_ : `registration`, `registerBike`.
 
 **Référence** :
 L'identifiant d'un vélo, au format `AAMMJJ.NN` : la date d'entrée suivie d'un compteur du
@@ -69,11 +78,27 @@ jour. Par exemple `260707.03` pour le troisième vélo du 7 juillet 2026. Elle e
 par le serveur au moment de l'enregistrement, jamais saisie à la main, sauf en saisie à
 rebours. La `date_entree` se déduit toujours de la référence.
 _Éviter_ : « numéro », « identifiant », « ID ». On dit la référence.
+_Dans le code_ : `reference`.
 
 **Statut** :
-Où en est un vélo. Quatre valeurs, et les transitions sont contrôlées côté serveur :
-`en stock` → `prêt à la vente` → `sorti` ou `démonté`. On ne revient pas en arrière.
-_Éviter_ : « état », qui désigne l'état mécanique du vélo.
+Où en est un vélo dans son parcours. Quatre valeurs, et les transitions sont contrôlées
+côté serveur. On ne revient pas en arrière.
+
+```
+à traiter       → prêt à la vente, sorti ou démonté
+prêt à la vente → sorti ou démonté
+sorti, démonté  → fin du parcours
+```
+
+Un vélo peut donc sortir en l'état, ou partir au démontage sans avoir été réparé.
+_Éviter_ : « état », qui désigne l'état mécanique du vélo. « En stock » pour la première
+valeur : un vélo prêt à la vente est en stock lui aussi.
+_Dans le code_ : `status`, qui vaut `to-process`, `ready-for-sale`, `out` ou `dismantled`.
+
+**En stock** :
+Tout vélo encore chez nous : à traiter ou prêt à la vente. C'est une notion déduite du
+statut, pas une valeur du statut. C'est elle que vise la question « on a un vélo enfant en
+stock ? ».
 
 **Prêt à la vente** :
 Le vélo est réparé et peut partir. C'est ce statut qui alimente la vitrine web.
@@ -82,6 +107,8 @@ Le vélo est réparé et peut partir. C'est ce statut qui alimente la vitrine we
 Le départ d'un vélo, par vente ou par don. Elle enregistre l'acheteur, le prix et le type
 de sortie. C'est le miroir légal de la fiche don.
 _Éviter_ : « suppression », « archivage ». Un vélo sorti reste en base.
+_Dans le code_ : `exit`, avec `buyer`, `price` et `exitKind`, qui vaut `sale` ou `gift`.
+On évite `sold` : un vélo peut sortir par don.
 
 **Démonté** :
 Le vélo a fini en pièces détachées. C'est une fin de parcours au même titre que la sortie.
@@ -91,7 +118,9 @@ démonté.
 **Triage** :
 Le verdict grossier posé à l'arrivée ou à l'inventaire : à vendre, à réparer, ou à
 démonter. Il tient en quelques secondes.
-_Éviter_ : de le confondre avec le diagnostic.
+_Éviter_ : de le confondre avec le diagnostic, ou avec le statut : un vélo trié « à
+démonter » reste « à traiter » tant qu'on ne l'a pas démonté.
+_Dans le code_ : `triage`, qui vaut `sell`, `repair` ou `dismantle`.
 
 **Diagnostic** :
 L'examen mécanique complet d'un vélo, 10 à 15 minutes. Il se fait au fil de l'eau, quand on
@@ -135,6 +164,7 @@ don, et c'est cette référence qui fait la jointure entre les deux.
 **Type de vélo** :
 Trois facettes distinctes, à ne pas écraser dans un seul champ : le type (VTT, VTC, vélo de
 ville), le public (adulte, enfant) et le genre de cadre (cadre haut, cadre bas dit "femme").
+_Dans le code_ : `kind`, `audience` et `frame`.
 
 **Changement de vitesses** :
 Comment le vélo change de vitesse, s'il en a : `sans`, `sur le cadre`, ou `manettes au guidon`. C'est
@@ -156,6 +186,7 @@ _Éviter_ : « statut », qui désigne la place du vélo dans son parcours.
 **Marque, modèle, couleur** :
 Les champs d'identification. Suggérés depuis la base via une liste de valeurs déjà saisies,
 jamais imposés.
+_Dans le code_ : `brand`, `model` et `colors` (un vélo peut en avoir plusieurs).
 
 ## Les logiciels tiers
 

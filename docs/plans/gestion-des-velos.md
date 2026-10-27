@@ -9,6 +9,21 @@
 > - **État mécanique** : ce n'est pas un champ en base. Il vit au verso de la fiche vélo.
 > - **Outillage** : Vite est retenu pour la mini-app. La fondation CSS, elle, tourne sans build.
 > - **Composants** : la piste Shoelace est abandonnée. Les chips seront un toggle-group.
+>
+> **Amendements du 27/10/2026** (préparation du squelette de la mini-app).
+>
+> - **Statut** : la première valeur s'appelle « à traiter », pas « en stock ». « En stock »
+>   désigne tout vélo encore chez nous, à traiter ou prêt à la vente. Un vélo à traiter peut
+>   aussi sortir ou être démonté directement. La table est dans le
+>   [glossaire métier](../../GLOSSAIRE-METIER.md).
+> - **Enregistrement** : c'est le nom du « flux d'entrée ».
+> - **Concurrence** : on ne stocke plus `{value, source}` par champ. On garde deux jeux de
+>   valeurs, ce que l'inférence a deviné et ce que le bénévole a saisi, et le formulaire
+>   affiche la saisie par-dessus l'inférence. Une valeur effacée par le bénévole vaut
+>   `null` : elle cache l'inférence. Le submit vaut confirmation des valeurs devinées.
+> - **Brouillon** : pas de brouillon maison. unreel va permettre une clé de persistance
+>   choisie par l'étape (`persistenceKey`), indépendante de la photo.
+> - **Dépendances** : voir la fiche [0002](../adr/0002-dependances-mini-app.md).
 
 ---
 
