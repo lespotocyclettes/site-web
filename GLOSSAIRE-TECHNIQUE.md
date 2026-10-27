@@ -253,6 +253,36 @@ n'en a pas besoin : elle marche telle quelle, et c'est voulu.
 Une bibliothèque utile pour travailler, mais absente du produit livré. Si elle meurt,
 le produit tourne encore. Une dépendance d'exécution, elle, part avec le produit.
 
+**Vite** :
+L'outil de build de la mini-app. `npm run dev` lance un serveur local qui recharge la page à
+chaque modification, `npm run build` produit les fichiers à déposer sur le serveur. Il ne
+part pas dans le produit.
+
+**Vitest** :
+Le lanceur de tests de la mini-app : `npm test` exécute tous les fichiers `*.test.ts`. Il lit
+la même configuration que Vite.
+
+**happy-dom** :
+Une imitation de navigateur qui tourne dans le terminal. Elle permet de tester un composant
+React sans ouvrir de vraie page.
+
+**Testing Library** :
+Une bibliothèque de test qui manipule les composants comme le ferait un bénévole : elle
+trouve un bouton par son libellé, pas par sa classe CSS. Un test écrit comme ça casse quand
+l'usage change, pas quand on renomme une classe.
+
+**TanStack Query** :
+La bibliothèque qui gère les appels au relais depuis les écrans : l'attente, l'erreur, la
+mémoire des réponses déjà reçues, et leur rafraîchissement quand une donnée change. Elle
+part dans le produit ; sa porte de sortie est dans la fiche
+[0002](./docs/adr/0002-dependances-mini-app.md).
+
+**Override (npm)** :
+Une ligne du `package.json` racine qui force npm à prendre une version précise d'un paquet,
+même quand un autre paquet en demande une différente. On s'en sert pour unreel, qui n'est
+pas encore publié : son paquet React réclame son paquet de base sous une forme que seul son
+propre dépôt comprend, l'override dit à npm où le trouver.
+
 **Shell** :
 Le programme qui lit les commandes tapées dans un terminal (bash, zsh…). Il coupe une
 commande à chaque espace : un chemin qui contient une espace doit être entouré de
