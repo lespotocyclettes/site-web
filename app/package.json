@@ -2,6 +2,7 @@
 	"name": "@lespotocyclettes/app",
 	"version": "0.1.0",
 	"private": true,
+	"type": "module",
 	"description": "Mini-app de gestion des vélos.",
 	"license": "GPL-2.0-or-later",
 	"scripts": {

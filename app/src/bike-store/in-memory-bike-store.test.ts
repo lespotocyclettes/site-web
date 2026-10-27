@@ -1,21 +1,8 @@
 import { describe, expect, test } from "vitest";
-import type { BikeDescription } from "../bike/bike";
+import { EMPTY_BIKE_DESCRIPTION } from "../bike/bike";
 import { parseReference, type Reference } from "../bike/reference";
 import { ReferenceTakenError } from "./bike-store";
 import { createInMemoryBikeStore } from "./in-memory-bike-store";
-
-const EMPTY_DESCRIPTION: BikeDescription = {
-	kind: null,
-	audience: null,
-	frameShape: null,
-	gearShift: null,
-	triage: null,
-	brand: null,
-	model: null,
-	colors: [],
-	features: [],
-	donor: null,
-};
 
 function toReference(text: string): Reference {
 	const reference = parseReference(text);
@@ -32,7 +19,7 @@ describe("génération des références", () => {
 		const store = createStoreOn("2026-10-27");
 
 		const { reference } = await store.register({
-			description: EMPTY_DESCRIPTION,
+			description: EMPTY_BIKE_DESCRIPTION,
 		});
 
 		expect(reference).toBe("261027.01");
@@ -41,12 +28,12 @@ describe("génération des références", () => {
 	test("une référence papier compte dans le maximum du jour", async () => {
 		const store = createStoreOn("2026-10-27");
 		await store.register({
-			description: EMPTY_DESCRIPTION,
+			description: EMPTY_BIKE_DESCRIPTION,
 			paperReference: toReference("261027.05"),
 		});
 
 		const { reference } = await store.register({
-			description: EMPTY_DESCRIPTION,
+			description: EMPTY_BIKE_DESCRIPTION,
 		});
 
 		expect(reference).toBe("261027.06");
@@ -55,10 +42,13 @@ describe("génération des références", () => {
 	test("une référence papier déjà prise est refusée", async () => {
 		const store = createStoreOn("2026-10-27");
 		const paperReference = toReference("260707.03");
-		await store.register({ description: EMPTY_DESCRIPTION, paperReference });
+		await store.register({
+			description: EMPTY_BIKE_DESCRIPTION,
+			paperReference,
+		});
 
 		const second = store.register({
-			description: EMPTY_DESCRIPTION,
+			description: EMPTY_BIKE_DESCRIPTION,
 			paperReference,
 		});
 
