@@ -63,5 +63,30 @@
 			opacity: var(--opacity-disabled);
 			cursor: not-allowed;
 		}
+
+		/* Une action en cours : le bouton est désactivé, une roue tourne à côté du libellé. */
+		&[aria-busy="true"] {
+			cursor: progress;
+
+			&::after {
+				content: "";
+				inline-size: 1em;
+				block-size: 1em;
+				border: var(--border-size-2) solid currentColor;
+				border-inline-end-color: transparent;
+				border-radius: var(--radius-round);
+				animation: action-button-spin 700ms linear infinite;
+
+				@media (prefers-reduced-motion: reduce) {
+					animation: none;
+				}
+			}
+		}
+	}
+}
+
+@keyframes action-button-spin {
+	to {
+		rotate: 1turn;
 	}
 }

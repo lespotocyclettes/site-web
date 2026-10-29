@@ -55,7 +55,9 @@ données les reçoit et les lit avec `useSuspenseQuery` :
 
 Un bouton s'écrit `<ActionButton variant="primary">` (`src/components/action-button/`),
 jamais `<button className="action-button">` à la main : le composant n'oublie ni le
-`type="button"` ni la classe.
+`type="button"` ni la classe. Si son `onClick` renvoie une promesse (par exemple
+`() => mutation.mutateAsync(…)`), il reste désactivé avec une roue jusqu'à la fin de
+l'action : elle ne peut pas partir deux fois. Afficher l'échec reste le travail de l'écran.
 
 ## Remplacer unreel
 
@@ -152,7 +154,8 @@ La convention de nommage :
 - chaque couple texte et fond est assez contrasté pour être lu (le seuil AA du référentiel
   d'accessibilité WCAG)
 - les règles métier tiennent (c'est Vitest) : format de la référence, statut sans retour en
-  arrière, génération des références par le faux relais, saisie par-dessus l'inférence
+  arrière, génération des références par le faux relais, saisie par-dessus l'inférence, un
+  bouton qui ne relance pas une action en cours
 
 Les tests ne couvrent pas les écrans eux-mêmes, ni le branchement d'unreel : ça se vérifie
 en ouvrant l'app.
