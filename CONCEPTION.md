@@ -51,8 +51,9 @@ papier, elles, tournaient toujours.
   réussite : si ça tombe en panne, personne ne s'en aperçoit. Le formulaire s'affiche vide
   et on remplit à la main, comme avant.
 - **L'utilisateur a toujours raison.** Une valeur devinée par la machine n'écrase jamais
-  ce qu'un humain a tapé. Pour ça, chaque champ retient deux choses : sa valeur, et qui l'a
-  mise. L'IA n'a le droit d'écrire que là où l'humain n'a pas touché.
+  ce qu'un humain a tapé. Pour ça, le formulaire garde deux jeux de valeurs séparés : ce
+  que l'IA a deviné, et ce que l'humain a saisi. Ce qui s'affiche, c'est la saisie posée
+  par-dessus. L'IA peut deviner autant qu'elle veut, elle ne touche jamais à la saisie.
 - **Même réflexe côté interface.** Une police qui ne se charge pas retombe sur celle du
   système, et le texte reste lisible. Une brique de mise en page qu'on ne règle pas prend
   un réglage par défaut.
@@ -120,7 +121,9 @@ sales. Ce qui suit ne se négocie pas.
   place.
 - **Jamais bloquer une saisie.** Seul le strict nécessaire est obligatoire. Un bénévole qui
   n'arrive pas à valider son formulaire, c'est un bénévole qui repart au papier, et il a
-  raison.
+  raison. Une seule exception : un vélo marqué (voir *Marquage*
+  dans le [glossaire métier](./GLOSSAIRE-METIER.md)) dont on ne nous a pas transféré la
+  propriété ne s'enregistre pas.
 - **La date d'utilisation est fixée d'avance, et elle ne bouge pas.** On choisit le jour de
   la séance d'inventaire maintenant, pas quand l'outil numérique sera prêt. Le jour venu, on part
   avec ce qu'on a, même si c'est incomplet. Sinon la date recule indéfiniment et la séance
