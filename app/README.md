@@ -42,6 +42,17 @@ qu'on y fait disparaît au rechargement de la page.
 Un dossier par écran : `src/search/`, `src/bike-sheet/`, `src/registration/`. La navigation
 passe par le `#` de l'adresse (`src/navigation/`). `src/main.tsx` choisit le relais.
 
+Chaque écran suit la même forme. Il pose `ScreenLayout` (`src/screen/`), qui affiche le
+titre puis, autour du contenu, un skeleton pendant le chargement et un message avec
+« Réessayer » en cas d'erreur. L'écran prépare les requêtes ; le composant qui affiche les
+données les reçoit et les lit avec `useSuspenseQuery` :
+
+```tsx
+<ScreenLayout title={`Vélo ${reference}`}>
+	<BikeDetails bikeQuery={api.bikes.get.queryOptions({ input: reference })} />
+</ScreenLayout>
+```
+
 ## Remplacer unreel
 
 unreel enchaîne les étapes de l'enregistrement. Un seul fichier l'importe :

@@ -79,6 +79,9 @@ _Porte de sortie_ : remplacer le contenu de `sequencer/` par une trentaine de li
   marcherait avec notre relais PHP. Écartée pour l'instant : ce serait une dépendance de plus
   dans le produit, pour un motif qui tient en une trentaine de lignes. Comme on garde la même
   forme d'appel, passer à oRPC plus tard ne toucherait pas les écrans.
+- **react-error-boundary**, pour attraper les erreurs d'affichage. Écartée : React impose
+  d'écrire ce composant en classe, mais on n'a besoin que d'« attraper, afficher,
+  réessayer », soit une vingtaine de lignes (`app/src/screen/error-boundary.tsx`).
 - **Un routeur** pour passer d'un écran à l'autre. Écarté : le navigateur sait déjà le faire
   avec le `#` de l'adresse, et trois écrans n'en demandent pas plus.
 

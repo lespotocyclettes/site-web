@@ -10,8 +10,8 @@ export function App() {
 		<Stack gap="var(--size-5)">
 			<nav>
 				<Cluster gap="var(--size-3)">
-					<a href={formatRoute({ screen: "search" })}>Recherche</a>
-					<a href={formatRoute({ screen: "registration" })}>
+					<a href={formatRoute({ screen: "recherche" })}>Recherche</a>
+					<a href={formatRoute({ screen: "enregistrement" })}>
 						Enregistrer un vélo
 					</a>
 				</Cluster>
@@ -26,11 +26,11 @@ export function App() {
 function CurrentScreen() {
 	const route = useRoute();
 	switch (route.screen) {
-		case "search":
+		case "recherche":
 			return <SearchScreen />;
-		case "bike":
+		case "velo":
 			return <BikeSheet reference={route.reference} />;
-		case "registration":
+		case "enregistrement":
 			return <RegistrationFlow />;
 	}
 }

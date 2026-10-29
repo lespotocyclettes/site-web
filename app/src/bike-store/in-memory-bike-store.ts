@@ -32,7 +32,7 @@ export function createInMemoryBikeStore({
 
 	function getBike(reference: Reference): Bike {
 		const bike = bikesByReference.get(reference);
-		if (!bike) throw new Error(`bike ${reference} does not exist`);
+		if (!bike) throw new Error(`le vélo ${reference} n'existe pas`);
 		return bike;
 	}
 

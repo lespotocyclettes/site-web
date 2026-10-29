@@ -1,0 +1,33 @@
+/*
+ * Des lignes grises qui tiennent la place du contenu pendant son chargement. La page ne
+ * saute pas quand il arrive, et on voit que quelque chose se prépare.
+ */
+@layer components {
+	.loading-skeleton {
+		& {
+			--_line-size: var(--size-3);
+
+			display: flex;
+			flex-direction: column;
+			gap: var(--size-2);
+		}
+
+		> .line {
+			block-size: var(--_line-size);
+			background: var(--color-border);
+			border-radius: var(--radius-base);
+			animation: loading-skeleton-pulse 900ms var(--ease-in-out-2) infinite
+				alternate;
+
+			@media (prefers-reduced-motion: reduce) {
+				animation: none;
+			}
+		}
+	}
+}
+
+@keyframes loading-skeleton-pulse {
+	to {
+		opacity: 0.4;
+	}
+}

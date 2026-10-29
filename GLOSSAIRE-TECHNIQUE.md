@@ -297,6 +297,20 @@ Une valeur posée une fois en haut de l'application, que n'importe quel composan
 dessous peut lire sans qu'on la lui passe à la main. L'api de la mini-app y vit : `main.tsx`
 y branche le faux relais ou le vrai, et chaque test y branche le sien.
 
+**Suspense** :
+Un composant React qui affiche un remplaçant (chez nous, un skeleton) tant que ce qu'il
+contient attend ses données. Avec `useSuspenseQuery`, un composant ne s'affiche qu'une fois
+ses données arrivées : il n'a pas d'état « en chargement » à gérer.
+
+**Error boundary** :
+Un composant React qui attrape les erreurs des composants qu'il contient et affiche un
+message à leur place, au lieu d'une page blanche. Chez nous, il propose « Réessayer ». La
+mini-app en a un seul, écrit à la main (`app/src/screen/error-boundary.tsx`).
+
+**Skeleton** :
+Des formes grises qui tiennent la place du contenu pendant son chargement : la page ne
+saute pas quand il arrive. Le composant s'appelle `.loading-skeleton`.
+
 **Override (npm)** :
 Une ligne du `package.json` racine qui force npm à prendre une version précise d'un paquet,
 même quand un autre paquet en demande une différente. On s'en sert pour unreel, qui n'est
