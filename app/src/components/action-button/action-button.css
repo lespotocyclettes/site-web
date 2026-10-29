@@ -55,11 +55,15 @@
 			--_font-size: var(--font-size-0);
 		}
 
-		&:hover:not(:disabled) {
+		/*
+		 * Deux façons d'être désactivé : ActionButton pose aria-disabled, qui garde le bouton
+		 * atteignable au clavier ; un <button disabled> écrit à la main reste habillé pareil.
+		 */
+		&:hover:not(:disabled, [aria-disabled="true"]) {
 			background: color-mix(in oklab, var(--_bg), var(--color-text-heading) 8%);
 		}
 
-		&:disabled {
+		&:is(:disabled, [aria-disabled="true"]) {
 			opacity: var(--opacity-disabled);
 			cursor: not-allowed;
 		}

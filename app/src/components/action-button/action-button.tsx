@@ -36,8 +36,15 @@ export function ActionButton({
 	...props
 }: ActionButtonProps) {
 	const [isPending, setIsPending] = useState(false);
+	const isDisabled = Boolean(disabled) || isPending;
 
 	async function runAction(event: MouseEvent<HTMLButtonElement>) {
+		/* aria-disabled ne bloque rien tout seul : sans ça, un type="submit" enverrait le formulaire. */
+		if (isDisabled) {
+			event.preventDefault();
+			return;
+		}
+
 		const result = onClick?.(event);
 		const isAsync = result instanceof Promise;
 		if (!isAsync) return;
@@ -57,7 +64,11 @@ export function ActionButton({
 			className="action-button"
 			data-variant={variant}
 			data-size={size}
-			disabled={disabled || isPending}
+			/*
+			 * aria-disabled plutôt que disabled : le bouton reste atteignable au clavier et lu par
+			 * les lecteurs d'écran, et il garde le focus quand son action démarre.
+			 */
+			aria-disabled={isDisabled}
 			aria-busy={isPending}
 			/*
 			 * L'échec de l'action n'est pas rattrapé ici : c'est à l'écran de l'afficher (par

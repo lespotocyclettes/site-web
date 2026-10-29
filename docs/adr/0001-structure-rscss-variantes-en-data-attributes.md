@@ -47,6 +47,11 @@ pas un relecteur qui doit penser à la repérer.
   cohérence repose sur le styleguide, où chaque composant montre toutes ses déclinaisons.
 - **Les états natifs restent natifs.** `:disabled`, `:invalid`, `[aria-expanded]` : on
   n'invente un attribut que pour ce que le HTML ne sait pas dire.
+- **Sauf pour désactiver un bouton** (précision du 30/10/2026) : `ActionButton` pose
+  `aria-disabled`, pas `disabled`. Un bouton `disabled` sort de l'ordre de tabulation :
+  au clavier ou au lecteur d'écran on ne tombe plus dessus, et il perd le focus quand son
+  action démarre. Avec
+  `aria-disabled`, c'est le composant qui bloque le clic. Le CSS habille les deux formes.
 - **Les briques de mise en page s'appellent `layout-stack`, `layout-grid`.** Deux mots,
   donc conformes, plutôt qu'une liste d'exceptions dans la configuration du linter.
 
