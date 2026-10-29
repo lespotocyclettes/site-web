@@ -177,7 +177,7 @@ function resolveAliases(tokens) {
 		let hops = 0;
 
 		while (isAlias(value) && hops < MAX_ALIAS_HOPS) {
-			const targetName = value.slice(ALIAS_PREFIX.length, -1);
+			const targetName = value.slice(ALIAS_PREFIX.length, -")".length);
 			value = tokens[targetName];
 			hops += 1;
 		}
@@ -205,9 +205,11 @@ function toContrastRatio(foreground, background) {
  * https://www.w3.org/TR/WCAG22/#dfn-relative-luminance
  */
 function toRelativeLuminance(hex) {
-	const [red, green, blue] = [1, 3, 5].map((offset) =>
-		Number.parseInt(hex.slice(offset, offset + 2), 16),
-	);
+	const channelLength = "ff".length;
+	const [red, green, blue] = [0, 1, 2].map((channel) => {
+		const start = "#".length + channel * channelLength;
+		return Number.parseInt(hex.slice(start, start + channelLength), 16);
+	});
 	return (
 		0.2126 * toLinear(red) + 0.7152 * toLinear(green) + 0.0722 * toLinear(blue)
 	);

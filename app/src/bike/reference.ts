@@ -17,6 +17,9 @@ export type ReferenceParts = {
 
 const REFERENCE_PATTERN = /^(\d{2})(\d{2})(\d{2})\.(\d{2})$/;
 
+/** La référence n'écrit que deux chiffres de l'année : on est au XXIᵉ siècle. */
+const CENTURY_PREFIX = "20";
+
 /** Deux chiffres dans la référence : au-delà de 99 vélos par jour, elle ne s'écrit plus. */
 const MAX_DAY_COUNTER = 99;
 
@@ -25,7 +28,9 @@ export function parseReference(text: string): Reference | undefined {
 	if (!match) return undefined;
 
 	const [, year, month, day, counter] = match;
-	const isDateValid = isExistingDate(`20${year}-${month}-${day}`);
+	const isDateValid = isExistingDate(
+		`${CENTURY_PREFIX}${year}-${month}-${day}`,
+	);
 	const isCounterValid = Number(counter) >= 1;
 	if (!isDateValid || !isCounterValid) return undefined;
 
@@ -41,19 +46,22 @@ export function formatReference({
 		throw new Error(`day counter out of range : ${dayCounter}`);
 	}
 
-	const yymmdd = entryDate.slice(2).replaceAll("-", "");
-	const counter = String(dayCounter).padStart(2, "0");
+	const yymmdd = entryDate.slice(CENTURY_PREFIX.length).replaceAll("-", "");
+	const counter = String(dayCounter).padStart("NN".length, "0");
 	return `${yymmdd}.${counter}` as Reference;
 }
 
 /** La date d'entrée ne se saisit jamais : elle se lit dans la référence. */
 export function getReferenceParts(reference: Reference): ReferenceParts {
-	const year = reference.slice(0, 2);
-	const month = reference.slice(2, 4);
-	const day = reference.slice(4, 6);
+	const match = REFERENCE_PATTERN.exec(reference);
+	if (!match) {
+		throw new Error(`should not happen : ${reference} is not a reference`);
+	}
+
+	const [, year, month, day, counter] = match;
 	return {
-		entryDate: `20${year}-${month}-${day}`,
-		dayCounter: Number(reference.slice(7)),
+		entryDate: `${CENTURY_PREFIX}${year}-${month}-${day}`,
+		dayCounter: Number(counter),
 	};
 }
 
