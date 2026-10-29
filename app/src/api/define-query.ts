@@ -2,8 +2,8 @@ import { mutationOptions, queryOptions } from "@tanstack/react-query";
 import type { CallOptions } from "../bike-store/bike-store";
 
 /*
- * Le motif d'oRPC (https://orpc.unnoq.com), écrit à la main parce que notre relais est en
- * PHP. Chaque appel expose des options toutes prêtes, que l'écran passe à useQuery,
+ * Le motif d'oRPC (https://orpc.unnoq.com), écrit à la main pour s'épargner une dépendance
+ * (voir la fiche 0002). Chaque appel expose des options toutes prêtes, que l'écran passe à useQuery,
  * useSuspenseQuery ou prefetchQuery selon son besoin :
  *
  *     useQuery(api.bikes.search.queryOptions({ input: { text, statuses } }))

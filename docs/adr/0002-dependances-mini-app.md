@@ -74,8 +74,11 @@ _Porte de sortie_ : remplacer le contenu de `sequencer/` par une trentaine de li
   c'est la forme qui fait naître les bugs d'attente, d'annulation et de cache, et elle se
   répète dans chaque écran.
 - **oRPC**, dont on reprend pourtant la forme des appels
-  (`api.bikes.search.queryOptions({ input })`). Écartée : il suppose un serveur oRPC, et
-  notre relais est en PHP. On en reproduit le motif à la main, en une trentaine de lignes.
+  (`api.bikes.search.queryOptions({ input })`). oRPC n'impose pas son serveur : il accepte
+  un contrat écrit à la main (`createORPCReactQueryUtils` de `@orpc/react-query`), donc il
+  marcherait avec notre relais PHP. Écartée pour l'instant : ce serait une dépendance de plus
+  dans le produit, pour un motif qui tient en une trentaine de lignes. Comme on garde la même
+  forme d'appel, passer à oRPC plus tard ne toucherait pas les écrans.
 - **Un routeur** pour passer d'un écran à l'autre. Écarté : le navigateur sait déjà le faire
   avec le `#` de l'adresse, et trois écrans n'en demandent pas plus.
 
