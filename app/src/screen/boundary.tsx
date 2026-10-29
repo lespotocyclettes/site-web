@@ -1,5 +1,6 @@
 import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import { type ReactNode, Suspense } from "react";
+import { ActionButton } from "../components/action-button/action-button";
 import { LoadingSkeleton } from "../components/loading-skeleton/loading-skeleton";
 import { ErrorBoundary } from "./error-boundary";
 
@@ -41,9 +42,7 @@ function ErrorNotice({
 		<div className="notice-block" data-variant="danger" role="alert">
 			<p className="title">Ça n'a pas marché</p>
 			<p>{error.message}</p>
-			<button type="button" className="action-button" onClick={onRetry}>
-				Réessayer
-			</button>
+			<ActionButton onClick={onRetry}>Réessayer</ActionButton>
 		</div>
 	);
 }

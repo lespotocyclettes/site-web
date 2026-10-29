@@ -43,7 +43,7 @@ Un dossier par écran : `src/search/`, `src/bike-sheet/`, `src/registration/`. L
 passe par le `#` de l'adresse (`src/navigation/`). `src/main.tsx` choisit le relais.
 
 Chaque écran suit la même forme. Il pose `ScreenLayout` (`src/screen/`), qui affiche le
-titre puis, autour du contenu, un skeleton pendant le chargement et un message avec
+titre (et nomme l'onglet du navigateur) puis, autour du contenu, un skeleton pendant le chargement et un message avec
 « Réessayer » en cas d'erreur. L'écran prépare les requêtes ; le composant qui affiche les
 données les reçoit et les lit avec `useSuspenseQuery` :
 
@@ -52,6 +52,10 @@ données les reçoit et les lit avec `useSuspenseQuery` :
 	<BikeDetails bikeQuery={api.bikes.get.queryOptions({ input: reference })} />
 </ScreenLayout>
 ```
+
+Un bouton s'écrit `<ActionButton variant="primary">` (`src/components/action-button/`),
+jamais `<button className="action-button">` à la main : le composant n'oublie ni le
+`type="button"` ni la classe.
 
 ## Remplacer unreel
 

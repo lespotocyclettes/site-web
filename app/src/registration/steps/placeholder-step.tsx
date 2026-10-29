@@ -1,3 +1,4 @@
+import { ActionButton } from "../../components/action-button/action-button";
 import { Stack } from "../../components/layout/layout";
 
 /*
@@ -17,14 +18,9 @@ export function PlaceholderStep({
 	return (
 		<Stack gap="var(--size-3)">
 			<p>{text}</p>
-			<button
-				type="button"
-				className="action-button"
-				data-variant="primary"
-				onClick={onAction}
-			>
+			<ActionButton variant="primary" onClick={onAction}>
 				{actionLabel}
-			</button>
+			</ActionButton>
 		</Stack>
 	);
 }
