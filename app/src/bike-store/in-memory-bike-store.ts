@@ -5,6 +5,7 @@ import {
 	getReferenceParts,
 	type Reference,
 } from "../bike/reference";
+import { matchesSearch } from "../bike/search";
 import { isTransitionAllowed } from "../bike/status";
 import {
 	type BikeStore,
@@ -37,16 +38,9 @@ export function createInMemoryBikeStore({
 	}
 
 	return {
-		async search({ text, statuses }) {
-			const needle = text.trim().toLowerCase();
+		async search(input) {
 			return [...bikesByReference.values()].filter((bike) => {
-				const haystack = [bike.reference, bike.brand, bike.model]
-					.join(" ")
-					.toLowerCase();
-				const matchesText = haystack.includes(needle);
-				const matchesStatus =
-					statuses.length === 0 || statuses.includes(bike.status);
-				return matchesText && matchesStatus;
+				return matchesSearch(bike, input);
 			});
 		},
 

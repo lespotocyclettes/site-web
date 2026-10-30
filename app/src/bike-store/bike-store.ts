@@ -1,5 +1,6 @@
 import type { Bike, BikeDescription, Kind, Transition } from "../bike/bike";
 import type { Reference } from "../bike/reference";
+import type { BikeSearch } from "../bike/search";
 import type { Status } from "../bike/status";
 
 /*
@@ -8,7 +9,7 @@ import type { Status } from "../bike/status";
  * relais en mémoire (développement, tests) et, plus tard, celui qui appelle /wp-json/.
  */
 export type BikeStore = {
-	search(input: SearchInput, options?: CallOptions): Promise<readonly Bike[]>;
+	search(input: BikeSearch, options?: CallOptions): Promise<readonly Bike[]>;
 	get(reference: Reference, options?: CallOptions): Promise<Bike>;
 	register(input: RegisterInput): Promise<{ reference: Reference }>;
 	changeStatus(reference: Reference, transition: Transition): Promise<Bike>;
@@ -20,13 +21,6 @@ export type BikeStore = {
 
 /** Le `signal` permet d'abandonner une requête devenue inutile, une recherche périmée par exemple. */
 export type CallOptions = { signal?: AbortSignal };
-
-export type SearchInput = {
-	/** Cherché dans la référence, la marque et le modèle. */
-	text: string;
-	/** Aucun statut coché : tous les statuts. */
-	statuses: readonly Status[];
-};
 
 export type RegisterInput = {
 	description: BikeDescription;

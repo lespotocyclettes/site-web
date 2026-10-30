@@ -1,10 +1,7 @@
 import type { Transition } from "../bike/bike";
 import type { Reference } from "../bike/reference";
-import type {
-	BikeStore,
-	RegisterInput,
-	SearchInput,
-} from "../bike-store/bike-store";
+import type { BikeSearch } from "../bike/search";
+import type { BikeStore, RegisterInput } from "../bike-store/bike-store";
 import { defineMutation, defineQuery } from "./define-query";
 
 /** Tout changement sur un vélo rafraîchit la recherche comme la fiche. */
@@ -13,12 +10,9 @@ const ALL_BIKE_QUERIES = [["bikes"]];
 export function createApi(store: BikeStore) {
 	return {
 		bikes: {
-			search: defineQuery(
-				["bikes", "search"],
-				(input: SearchInput, options) => {
-					return store.search(input, options);
-				},
-			),
+			search: defineQuery(["bikes", "search"], (input: BikeSearch, options) => {
+				return store.search(input, options);
+			}),
 			get: defineQuery(["bikes", "get"], (reference: Reference, options) => {
 				return store.get(reference, options);
 			}),

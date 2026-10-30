@@ -1,5 +1,15 @@
-/** Les valeurs restent en français : elles s'affichent et s'exportent telles quelles. */
-export type Status = "à traiter" | "prêt à la vente" | "sorti" | "démonté";
+/**
+ * Les valeurs restent en français : elles s'affichent et s'exportent telles quelles. Une
+ * liste plutôt qu'un simple type : une adresse tapée à la main se vérifie contre elle.
+ */
+export const STATUSES = [
+	"à traiter",
+	"prêt à la vente",
+	"sorti",
+	"démonté",
+] as const;
+
+export type Status = (typeof STATUSES)[number];
 
 /** Un vélo à traiter peut sortir en l'état, ou partir au démontage sans être réparé. */
 const NEXT_STATUSES = {

@@ -13,7 +13,7 @@ export function SearchScreen() {
 		<ScreenLayout title="Recherche">
 			<SearchResults
 				bikesQuery={api.bikes.search.queryOptions({
-					input: { text: "", statuses: [] },
+					input: { text: "", statuses: [], audiences: [] },
 				})}
 			/>
 		</ScreenLayout>

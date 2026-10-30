@@ -15,7 +15,9 @@ export type Kind =
 	| "pliant"
 	| "bmx";
 
-export type Audience = "adulte" | "enfant";
+export const AUDIENCES = ["adulte", "enfant"] as const;
+
+export type Audience = (typeof AUDIENCES)[number];
 
 export type FrameShape = "haut" | "bas" | "mixte";
 

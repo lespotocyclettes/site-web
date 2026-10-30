@@ -112,6 +112,7 @@ _Dans le code_ : `status`, qui vaut `à traiter`, `prêt à la vente`, `sorti` o
 Tout vélo encore chez nous : à traiter ou prêt à la vente. C'est une notion déduite du
 statut, pas une valeur du statut. C'est elle que vise la question « on a un vélo enfant en
 stock ? ».
+_Dans le code_ : `isInStock`, et `IN_STOCK_SEARCH`, la recherche où arrive le bénévole.
 
 **Prêt à la vente** :
 Le vélo est réparé et peut partir. C'est ce statut qui alimente la vitrine web.
