@@ -312,6 +312,11 @@ Un composant React qui affiche un remplaçant (chez nous, un skeleton) tant que 
 contient attend ses données. Avec `useSuspenseQuery`, un composant ne s'affiche qu'une fois
 ses données arrivées : il n'a pas d'état « en chargement » à gérer.
 
+**`useDeferredValue`** :
+Un hook React qui laisse une valeur prendre du retard sur la saisie. La recherche s'en sert
+pour garder les résultats précédents affichés pendant que les nouveaux chargent, au lieu de
+repasser par le skeleton de Suspense à chaque lettre tapée.
+
 **Error boundary** :
 Un composant React qui attrape les erreurs des composants qu'il contient et affiche un
 message à leur place, au lieu d'une page blanche. Chez nous, il propose « Réessayer ». La

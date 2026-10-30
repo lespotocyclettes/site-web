@@ -42,6 +42,11 @@ qu'on y fait disparaît au rechargement de la page.
 Un dossier par écran : `src/search/`, `src/bike-sheet/`, `src/registration/`. La navigation
 passe par le `#` de l'adresse (`src/navigation/`). `src/main.tsx` choisit le relais.
 
+La recherche vit dans l'adresse (`#recherche?q=peugeot&public=enfant`), pas dans l'écran :
+le bouton retour, un rechargement ou un lien partagé retrouvent la même liste. Son
+formulaire réécrit l'adresse avec `navigate()`, qui ajoute une entrée d'historique pour une
+chip et remplace la courante pendant la frappe.
+
 Chaque écran suit la même forme. Il pose `ScreenLayout` (`src/screen/`), qui affiche le
 titre (et nomme l'onglet du navigateur) puis, autour du contenu, un skeleton pendant le chargement et un message avec
 « Réessayer » en cas d'erreur. L'écran prépare les requêtes ; le composant qui affiche les

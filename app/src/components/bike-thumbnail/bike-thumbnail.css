@@ -1,0 +1,57 @@
+/*
+ * La vignette entière est un lien : un tap n'importe où ouvre la fiche. La photo garde
+ * toujours le même cadre, recadrée s'il le faut, pour que la grille reste alignée quelles
+ * que soient les photos.
+ */
+@layer components {
+	.bike-thumbnail {
+		& {
+			display: flex;
+			flex-direction: column;
+			gap: var(--size-1);
+			padding-block-end: var(--size-2);
+			overflow: hidden;
+			color: var(--color-text-body);
+			text-decoration: none;
+			background: var(--color-surface-raised);
+			border: var(--border-size-1) solid var(--color-border);
+			border-radius: var(--radius-base);
+		}
+
+		&:hover {
+			border-color: var(--color-border-strong);
+		}
+
+		> :is(.photo, .placeholder) {
+			inline-size: 100%;
+			aspect-ratio: 4 / 3;
+		}
+
+		> .photo {
+			object-fit: cover;
+		}
+
+		> .placeholder {
+			display: grid;
+			place-items: center;
+			font-size: var(--font-size-0);
+			color: var(--color-text-muted);
+			background: var(--color-surface-page);
+		}
+
+		> :is(.reference, .description, .status) {
+			padding-inline: var(--size-2);
+		}
+
+		> .reference {
+			font-weight: var(--font-weight-6);
+			font-variant-numeric: tabular-nums;
+			color: var(--color-text-heading);
+		}
+
+		> .status {
+			font-size: var(--font-size-0);
+			color: var(--color-text-muted);
+		}
+	}
+}

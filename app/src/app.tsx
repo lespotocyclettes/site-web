@@ -27,7 +27,7 @@ function CurrentScreen() {
 	const route = useRoute();
 	switch (route.screen) {
 		case "recherche":
-			return <SearchScreen />;
+			return <SearchScreen search={route.search} />;
 		case "velo":
 			return <BikeSheet reference={route.reference} />;
 		case "enregistrement":
