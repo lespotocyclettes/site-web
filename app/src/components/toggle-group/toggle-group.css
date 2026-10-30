@@ -1,0 +1,70 @@
+/*
+ * Une chip est un <label> qui contient sa case à cocher. La case, rendue invisible, couvre
+ * toute la chip : un tap n'importe où la coche, et c'est elle qui reçoit le focus clavier.
+ * La chip lit l'état de sa case par :has(), sans attribut à tenir à jour depuis React.
+ */
+@layer components {
+	.toggle-group {
+		& {
+			margin: 0;
+			padding: 0;
+			border: none;
+		}
+
+		> .legend {
+			padding: 0;
+			margin-block-end: var(--size-2);
+			font-weight: var(--font-weight-6);
+			color: var(--color-text-heading);
+		}
+
+		> .options {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--size-2);
+		}
+
+		> .options > .option {
+			position: relative;
+			display: inline-flex;
+			align-items: center;
+			gap: var(--size-1);
+			min-block-size: var(--size-tap-target);
+			padding-inline: var(--size-inset);
+			color: var(--color-text-heading);
+			background: var(--color-surface-raised);
+			border: var(--border-size-1) solid var(--color-border-strong);
+			border-radius: var(--radius-button);
+			cursor: pointer;
+		}
+
+		> .options > .option > .input {
+			position: absolute;
+			inset: 0;
+			min-block-size: 0;
+			margin: 0;
+			opacity: 0;
+			cursor: pointer;
+		}
+
+		/* La coche redit l'état autrement que par la couleur, pour qui ne la distingue pas. */
+		> .options > .option:has(:checked) {
+			color: var(--color-text-on-accent);
+			background: var(--color-accent);
+			border-color: transparent;
+
+			&::before {
+				content: "✓";
+			}
+		}
+
+		/* La case est invisible : son anneau de focus doit se voir sur la chip. Même anneau que base.css. */
+		> .options > .option:has(:focus-visible) {
+			outline: var(--border-size-focus) solid transparent;
+			outline-offset: var(--border-size-focus);
+			box-shadow:
+				0 0 0 var(--border-size-focus) var(--color-surface-page),
+				0 0 0 calc(2 * var(--border-size-focus)) var(--color-focus-ring);
+		}
+	}
+}

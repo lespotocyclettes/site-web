@@ -192,6 +192,38 @@
 	</section>
 
 	<section>
+		<h2>Chips <code>.toggle-group</code></h2>
+		<div class="layout-stack">
+			<fieldset class="toggle-group">
+				<legend class="legend">Statut</legend>
+				<div class="options">
+					<label class="option"><input class="input" type="checkbox" name="statut" value="à traiter" checked> à traiter</label>
+					<label class="option"><input class="input" type="checkbox" name="statut" value="prêt à la vente" checked> prêt à la vente</label>
+					<label class="option"><input class="input" type="checkbox" name="statut" value="sorti"> sorti</label>
+					<label class="option"><input class="input" type="checkbox" name="statut" value="démonté"> démonté</label>
+				</div>
+			</fieldset>
+
+			<fieldset class="toggle-group">
+				<legend class="legend">Type de vélo, quand la place manque</legend>
+				<div class="options">
+					<label class="option"><input class="input" type="checkbox" name="type" value="vtt"> vtt</label>
+					<label class="option"><input class="input" type="checkbox" name="type" value="vtc" checked> vtc</label>
+					<label class="option"><input class="input" type="checkbox" name="type" value="ville"> ville</label>
+					<label class="option"><input class="input" type="checkbox" name="type" value="route"> route</label>
+					<label class="option"><input class="input" type="checkbox" name="type" value="demi-course"> demi-course</label>
+					<label class="option"><input class="input" type="checkbox" name="type" value="randonneur"> randonneur</label>
+					<label class="option"><input class="input" type="checkbox" name="type" value="pliant"> pliant</label>
+					<label class="option"><input class="input" type="checkbox" name="type" value="bmx"> bmx</label>
+				</div>
+			</fieldset>
+		</div>
+		<p>Ce sont de vraies cases à cocher : tapez une chip pour la cocher, ou tabulez jusqu'à
+			elle et appuyez sur Espace. La coche « ✓ » redit l'état sans passer par la couleur.
+			Les chips passent à la ligne quand la place manque.</p>
+	</section>
+
+	<section>
 		<h2>Carte <code>.content-card</code></h2>
 		<div class="layout-grid" style="--min: 14rem">
 			<article class="content-card">

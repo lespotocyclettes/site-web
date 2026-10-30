@@ -59,6 +59,10 @@ jamais `<button className="action-button">` à la main : le composant n'oublie n
 `() => mutation.mutateAsync(…)`), il reste désactivé avec une roue jusqu'à la fin de
 l'action : elle ne peut pas partir deux fois. Afficher l'échec reste le travail de l'écran.
 
+Des chips s'écrivent `<ToggleGroup legend="Statut" name="statut" options={…} checked={…}>`
+(`src/components/toggle-group/`). Ce sont des cases à cocher dans un `<fieldset>` : le
+formulaire qui les contient les lit avec `FormData`, comme n'importe quel champ.
+
 ## Remplacer unreel
 
 unreel enchaîne les étapes de l'enregistrement. Un seul fichier l'importe :
@@ -90,8 +94,8 @@ Ce dossier contient :
   un nom (`--color-text-body`). On n'écrit jamais une couleur directement dans le code, on
   passe par son nom.
 - une **couche de base**, qui rend une page HTML présentable même sans aucune classe
-- six composants (bouton, champ de formulaire, carte, tableau, encadré d'information,
-  fenêtre modale) et trois briques de mise en page
+- huit composants (bouton, champ de formulaire, chips, carte, tableau, encadré
+  d'information, fenêtre modale, chargement) et trois briques de mise en page
 - un **styleguide** : une page qui montre tout ça
 
 C'est du CSS standard, que le navigateur lit tel quel. Pas d'étape de build, rien à
