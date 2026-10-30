@@ -38,10 +38,18 @@ La base actuelle ne correspond pas au modèle du glossaire. Il faut l'adapter :
   caractéristiques (« vintage », « réservé »).
 - Les deux lignes de test (« Test », « TEST-20260713 ») disparaissent.
 
-## 1. Recherche
+## Fait : 1. Recherche
 
-Le champ texte (référence, marque, modèle), les chips de statut sous forme de toggle-group,
-dont une « en stock », et la grille de vignettes photo.
+Le champ texte (référence, marque, modèle), les chips de statut et de public
+(`ToggleGroup`, des cases à cocher), la grille de vignettes photo. La recherche vit dans
+l'adresse. « En stock » n'est pas une chip : c'est la recherche où mène le lien du menu,
+à traiter et prêt à la vente cochés.
+
+Restent pour plus tard :
+- une **pagination**, quand le vrai relais renverra des centaines de vélos ;
+- un **délai avant d'envoyer la requête** pendant la frappe. Aujourd'hui, chaque lettre
+  lance une recherche, ce qui ne coûte rien contre le faux relais. Contre le vrai, à
+  décider avec l'incrément 4.
 
 ## 2. Fiche + actions
 

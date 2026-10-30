@@ -23,6 +23,14 @@
 >   `null` : elle cache l'inférence. Le submit vaut confirmation des valeurs devinées.
 > - **Brouillon** : pas de brouillon maison. unreel va permettre une clé de persistance
 >   choisie par l'étape (`persistenceKey`), indépendante de la photo.
+>
+> **Amendement du 30/10/2026** (écran de recherche).
+>
+> - **Recherche** : le texte cherche dans la référence, la marque et le modèle. Les chips
+>   filtrent par statut et par public, pour répondre à « un vélo enfant en stock ? ».
+>   `GET /velos` reçoit donc aussi le modèle et le public, et doit répondre comme la règle
+>   de `app/src/bike/search.ts`. On arrive sur la recherche « en stock » : à traiter et
+>   prêt à la vente cochés.
 > - **Dépendances** : voir la fiche [0002](../adr/0002-dependances-mini-app.md).
 > - **Modèle cible** : la mini-app code le modèle décrit au glossaire (facettes séparées,
 >   vrai champ statut, caractéristiques libres). Le schéma Teable actuel n'y correspond pas
