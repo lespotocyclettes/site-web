@@ -287,6 +287,16 @@ Dire à TanStack Query qu'une réponse rangée n'est plus à jour, pour qu'il la
 Après un changement de statut, on invalide tout ce qui commence par `["bikes"]` : la
 recherche comme la fiche se rafraîchissent.
 
+**Chaîne de requête** :
+La fin d'une adresse, après le `?` : `q=peugeot&public=enfant`. Chaque paire
+`nom=valeur` est un paramètre, et un nom peut revenir plusieurs fois. La recherche y garde
+ses filtres. Rien à voir avec la clé de requête, malgré le mot commun.
+
+**Historique de navigation** :
+La liste des adresses visitées dans l'onglet, que remonte le bouton retour. Un lien y
+ajoute une entrée ; `history.replaceState` remplace l'entrée courante sans en ajouter, ce
+que fait la frappe dans le champ de recherche.
+
 **Hook** :
 Une fonction React dont le nom commence par `use` (`useQuery`, `useApi`). Elle ne
 s'appelle que dans un composant, et le composant se redessine quand ce qu'elle renvoie
