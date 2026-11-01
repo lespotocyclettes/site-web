@@ -29,7 +29,7 @@ const registrationWorkflow = defineWorkflow({
 export function RegistrationSequencer() {
 	const [client] = useState(() => {
 		return new WorkflowClient({
-			defaultWfOptions: { persistence: createFromLocalStorage(localStorage) },
+			defaultWfOptions: { storage: createFromLocalStorage(localStorage) },
 		});
 	});
 
