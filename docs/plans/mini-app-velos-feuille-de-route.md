@@ -23,6 +23,19 @@ Vite et les tests, le domaine (`src/bike/`), le contrat du relais et le faux rel
 (`src/bike-store/`), la couche de requêtes (`src/api/`), trois écrans presque vides, unreel
 branché par une étape factice. Voir le [README de l'app](../../app/README.md).
 
+## Prochaine passe : les styles de texte
+
+Les composants répètent les mêmes associations de graisse, de taille et d'interligne. On
+les regroupe en tokens de rôle, écrits pour le raccourci `font` :
+`font: var(--font-label)`. Il y aura `--font-label`, `--font-caption` et des titres. La
+couleur reste à part.
+
+- `--font-reference` prend la police à chasse fixe (`--font-mono`), pour que toutes les
+  références aient la même largeur.
+- Le raccourci `font` remet à zéro les autres réglages de police : ce qu'il ne porte pas
+  s'écrit après lui.
+- La convention mérite une fiche dans `docs/adr/`.
+
 ## 0. Migration du schéma Teable
 
 La base actuelle ne correspond pas au modèle du glossaire. Il faut l'adapter :
