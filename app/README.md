@@ -95,6 +95,11 @@ Des chips s'écrivent `<ToggleGroup legend="Statut" name="statut" options={…} 
 (`src/components/toggle-group/`). Ce sont des cases à cocher dans un `<fieldset>` : le
 formulaire qui les contient les lit avec `FormData`, comme n'importe quel champ.
 
+Une carte s'écrit `<ContentCard>` (`src/components/content-card/`), avec ses parties
+`.media` (une photo de bord à bord), `.title`, `.meta` et `.footer`. Avec un `href`, elle
+devient un lien tout entier. `BikeCard` en est un exemple : la carte d'un vélo dans la
+recherche.
+
 ## Remplacer unreel
 
 unreel enchaîne les étapes de l'enregistrement. Un seul fichier l'importe :

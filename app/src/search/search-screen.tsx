@@ -5,7 +5,7 @@ import type { QueryOptionsOf } from "../api/define-query";
 import { AUDIENCES, type Bike } from "../bike/bike";
 import type { BikeSearch } from "../bike/search";
 import { STATUSES } from "../bike/status";
-import { BikeThumbnail } from "../components/bike-thumbnail/bike-thumbnail";
+import { BikeCard } from "../components/bike-card/bike-card";
 import { Grid, Stack } from "../components/layout/layout";
 import { ToggleGroup } from "../components/toggle-group/toggle-group";
 import { navigate } from "../navigation/navigate";
@@ -102,7 +102,7 @@ function SearchResults({
 	return (
 		<Grid gap="var(--size-3)" min="9rem">
 			{bikes.map((bike) => {
-				return <BikeThumbnail key={bike.reference} bike={bike} />;
+				return <BikeCard key={bike.reference} bike={bike} />;
 			})}
 		</Grid>
 	);

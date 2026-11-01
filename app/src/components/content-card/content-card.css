@@ -4,20 +4,66 @@
 			--_bg: var(--color-surface-raised);
 			--_border: var(--color-border);
 			--_shadow: none;
+			--_padding: var(--size-inset);
 
 			display: flex;
 			flex-direction: column;
 			gap: var(--size-3);
-			padding: var(--size-inset);
+			padding: var(--_padding);
+			/* Rogne ce qui déborde, dont la photo de .media, aux coins arrondis de la carte. */
+			overflow: clip;
+			color: var(--color-text-body);
 			background: var(--_bg);
 			border: var(--border-size-1) solid var(--_border);
 			border-radius: var(--radius-base);
 			box-shadow: var(--_shadow);
 		}
 
+		/* Une carte avec un href est un lien tout entier : un tap n'importe où l'ouvre. */
+		&[href] {
+			text-decoration: none;
+		}
+
+		&[href]:hover {
+			--_border: var(--color-border-strong);
+		}
+
+		/*
+		 * Une photo de bord à bord. Les marges négatives annulent le padding de la carte : elles
+		 * restent dans le composant, leur effet ne sort pas de la carte. Seule une photo placée
+		 * en tête remonte jusqu'au bord du haut ; ailleurs, elle ne déborde que sur les côtés.
+		 * Le cadre est toujours en 4/3, photo ou pas : une grille de cartes reste alignée. Sans
+		 * image, son texte (« Pas de photo ») s'affiche au centre.
+		 */
+		> .media {
+			display: grid;
+			place-items: center;
+			aspect-ratio: 4 / 3;
+			margin-inline: calc(-1 * var(--_padding));
+			font-size: var(--font-size-0);
+			color: var(--color-text-muted);
+			background: var(--color-surface-page);
+
+			&:first-child {
+				margin-block-start: calc(-1 * var(--_padding));
+			}
+		}
+
+		/* L'image remplit le cadre de .media, recadrée s'il le faut : les cartes restent alignées. */
+		> .media > .image {
+			inline-size: 100%;
+			block-size: 100%;
+			object-fit: cover;
+		}
+
 		> .title {
 			font-size: var(--font-size-3);
 			color: var(--color-text-heading);
+		}
+
+		> .meta {
+			font-size: var(--font-size-0);
+			color: var(--color-text-muted);
 		}
 
 		> .footer {
