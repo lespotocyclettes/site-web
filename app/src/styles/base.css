@@ -67,10 +67,7 @@
 		:focus-visible {
 			outline: var(--border-size-focus) solid transparent;
 			outline-offset: var(--border-size-focus);
-			/* Un liseré couleur de page, puis l'anneau par-dessus : il se voit sur tout fond. */
-			box-shadow:
-				0 0 0 var(--border-size-focus) var(--color-surface-page),
-				0 0 0 calc(2 * var(--border-size-focus)) var(--color-focus-ring);
+			box-shadow: var(--shadow-focus-ring);
 		}
 
 		/*

@@ -97,4 +97,8 @@
 
 	--shadow-raised: var(--shadow-2);
 	--shadow-overlay: var(--shadow-4);
+	/* Un liseré couleur de page, puis l'anneau par-dessus : il se voit sur tout fond. */
+	--shadow-focus-ring:
+		0 0 0 var(--border-size-focus) var(--color-surface-page),
+		0 0 0 calc(2 * var(--border-size-focus)) var(--color-focus-ring);
 }
