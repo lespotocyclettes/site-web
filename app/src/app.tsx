@@ -1,19 +1,15 @@
-import { BikeSheet } from "./bike-sheet/bike-sheet";
 import { Cluster, Stack } from "./components/layout/layout";
-import { formatRoute, IN_STOCK_ROUTE } from "./navigation/route";
-import { useRoute } from "./navigation/use-route";
-import { RegistrationFlow } from "./registration/registration-flow";
-import { SearchScreen } from "./search/search-screen";
+import { useScreen } from "./navigation/use-screen";
+import { registrationRoute } from "./routes/enregistrement";
+import { IN_STOCK_HREF, ROUTES } from "./routes/index";
 
 export function App() {
 	return (
 		<Stack gap="var(--size-5)">
 			<nav>
 				<Cluster gap="var(--size-3)">
-					<a href={formatRoute(IN_STOCK_ROUTE)}>Recherche</a>
-					<a href={formatRoute({ screen: "enregistrement" })}>
-						Enregistrer un vélo
-					</a>
+					<a href={IN_STOCK_HREF}>Recherche</a>
+					<a href={registrationRoute.href()}>Enregistrer un vélo</a>
 				</Cluster>
 			</nav>
 			<main>
@@ -24,13 +20,5 @@ export function App() {
 }
 
 function CurrentScreen() {
-	const route = useRoute();
-	switch (route.screen) {
-		case "recherche":
-			return <SearchScreen search={route.search} />;
-		case "velo":
-			return <BikeSheet reference={route.reference} />;
-		case "enregistrement":
-			return <RegistrationFlow />;
-	}
+	return useScreen(ROUTES, IN_STOCK_HREF);
 }

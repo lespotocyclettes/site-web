@@ -1,22 +1,19 @@
-import { formatRoute, type Route } from "./route";
-
 /*
- * Change d'adresse depuis le code, quand un lien ne suffit pas. Le choix est explicite :
- * - "push" ajoute une entrée à l'historique, comme un clic sur un lien ;
- * - "replace" remplace l'entrée courante : taper « peugeot » ne doit pas laisser sept
- *   entrées derrière soi, qu'il faudrait remonter une à une avec le bouton retour.
+ * Change d'adresse depuis le code, quand un lien ne suffit pas. Par défaut, comme un clic
+ * sur un lien, une entrée s'ajoute à l'historique. Avec `replace`, l'entrée courante est
+ * remplacée : taper « peugeot » ne doit pas laisser sept entrées derrière soi, qu'il
+ * faudrait remonter une à une avec le bouton retour.
  */
 export function navigate(
-	route: Route,
-	{ history }: { history: "push" | "replace" },
+	href: string,
+	{ replace = false }: { replace?: boolean } = {},
 ): void {
-	const hash = formatRoute(route);
-	if (history === "push") {
-		window.location.hash = hash;
+	if (!replace) {
+		window.location.hash = href;
 		return;
 	}
 
-	window.history.replaceState(null, "", hash);
-	/* replaceState ne prévient personne : on émet l'événement qu'écoute useRoute. */
+	window.history.replaceState(null, "", href);
+	/* replaceState ne prévient personne : on émet l'événement qu'écoute useScreen. */
 	window.dispatchEvent(new HashChangeEvent("hashchange"));
 }

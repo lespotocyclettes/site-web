@@ -6,7 +6,7 @@ import type { Reference } from "../bike/reference";
 import { ScreenLayout } from "../screen/screen-layout";
 
 /** Pour l'instant, le statut. Les champs et les actions viennent ensuite. */
-export function BikeSheet({ reference }: { reference: Reference }) {
+export function BikeSheet({ params: reference }: { params: Reference }) {
 	const api = useApi();
 
 	return (

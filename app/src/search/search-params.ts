@@ -1,6 +1,8 @@
 import { AUDIENCES } from "../bike/bike";
 import type { BikeSearch } from "../bike/search";
 import { STATUSES } from "../bike/status";
+import type { ParamsCodec } from "../navigation/define-route";
+import { toQueryString } from "../navigation/query-string";
 
 /*
  * La recherche s'écrit dans l'adresse, après le `?` :
@@ -8,34 +10,33 @@ import { STATUSES } from "../bike/status";
  * cochée y apparaît une fois par valeur. Les champs du formulaire de l'écran portent ces
  * mêmes noms : le formulaire et l'adresse se lisent par la même fonction.
  */
-export const SEARCH_FIELDS = {
+export const SEARCH_PARAM = {
 	text: "q",
 	statuses: "statut",
 	audiences: "public",
 } as const;
 
-/** L'adresse est une saisie comme une autre : une valeur inconnue y est ignorée. */
-export function parseSearchParams(params: URLSearchParams): BikeSearch {
-	return {
-		text: params.get(SEARCH_FIELDS.text) ?? "",
-		statuses: keepKnown(STATUSES, params.getAll(SEARCH_FIELDS.statuses)),
-		audiences: keepKnown(AUDIENCES, params.getAll(SEARCH_FIELDS.audiences)),
-	};
-}
+/* `satisfies` plutôt qu'une annotation : decode garde son type exact, une recherche n'est jamais `null`. */
+export const searchCodec = {
+	encode(search) {
+		const query = toQueryString({
+			[SEARCH_PARAM.text]: search.text,
+			[SEARCH_PARAM.statuses]: search.statuses,
+			[SEARCH_PARAM.audiences]: search.audiences,
+		});
+		return query === "" ? "" : `?${query}`;
+	},
 
-export function formatSearchParams(search: BikeSearch): string {
-	const params = new URLSearchParams();
-	if (search.text !== "") {
-		params.set(SEARCH_FIELDS.text, search.text);
-	}
-	for (const status of search.statuses) {
-		params.append(SEARCH_FIELDS.statuses, status);
-	}
-	for (const audience of search.audiences) {
-		params.append(SEARCH_FIELDS.audiences, audience);
-	}
-	return params.toString();
-}
+	/* L'adresse est une saisie comme une autre : une valeur inconnue y est ignorée. */
+	decode(rest): BikeSearch {
+		const params = new URLSearchParams(rest);
+		return {
+			text: params.get(SEARCH_PARAM.text) ?? "",
+			statuses: keepKnown(STATUSES, params.getAll(SEARCH_PARAM.statuses)),
+			audiences: keepKnown(AUDIENCES, params.getAll(SEARCH_PARAM.audiences)),
+		};
+	},
+} satisfies ParamsCodec<BikeSearch>;
 
 /** Ce que le bénévole a coché dans le formulaire de recherche, validé comme une adresse. */
 export function readSearch(form: HTMLFormElement): BikeSearch {
@@ -46,7 +47,7 @@ export function readSearch(form: HTMLFormElement): BikeSearch {
 			params.append(name, value);
 		}
 	}
-	return parseSearchParams(params);
+	return searchCodec.decode(params.toString());
 }
 
 /*

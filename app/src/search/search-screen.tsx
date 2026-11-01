@@ -9,15 +9,16 @@ import { BikeThumbnail } from "../components/bike-thumbnail/bike-thumbnail";
 import { Grid, Stack } from "../components/layout/layout";
 import { ToggleGroup } from "../components/toggle-group/toggle-group";
 import { navigate } from "../navigation/navigate";
+import { searchRoute } from "../routes/recherche";
 import { Boundary } from "../screen/boundary";
 import { ScreenLayout } from "../screen/screen-layout";
-import { readSearch, SEARCH_FIELDS } from "./search-params";
+import { readSearch, SEARCH_PARAM } from "./search-params";
 
 /*
  * La recherche vit dans l'adresse, pas dans l'écran : le formulaire l'affiche, et chaque
  * changement la réécrit dans l'adresse, d'où elle revient par `search`.
  */
-export function SearchScreen({ search }: { search: BikeSearch }) {
+export function SearchScreen({ params: search }: { params: BikeSearch }) {
 	const api = useApi();
 	/*
 	 * Pendant qu'une nouvelle recherche charge, la grille garde les résultats précédents
@@ -27,13 +28,13 @@ export function SearchScreen({ search }: { search: BikeSearch }) {
 
 	function updateSearch(
 		form: HTMLFormElement | null,
-		history: "push" | "replace",
+		{ replace = false }: { replace?: boolean } = {},
 	) {
 		if (!form) {
 			return;
 		}
 
-		navigate({ screen: "recherche", search: readSearch(form) }, { history });
+		navigate(searchRoute.href(readSearch(form)), { replace });
 	}
 
 	return (
@@ -49,29 +50,29 @@ export function SearchScreen({ search }: { search: BikeSearch }) {
 							<input
 								id="search-text"
 								type="search"
-								name={SEARCH_FIELDS.text}
+								name={SEARCH_PARAM.text}
 								value={search.text}
 								onChange={(event) => {
-									updateSearch(event.currentTarget.form, "replace");
+									updateSearch(event.currentTarget.form, { replace: true });
 								}}
 							/>
 						</div>
 						<ToggleGroup
 							legend="Statut"
-							name={SEARCH_FIELDS.statuses}
+							name={SEARCH_PARAM.statuses}
 							options={STATUSES}
 							checked={search.statuses}
 							onChange={(event) => {
-								updateSearch(event.currentTarget.form, "push");
+								updateSearch(event.currentTarget.form);
 							}}
 						/>
 						<ToggleGroup
 							legend="Public"
-							name={SEARCH_FIELDS.audiences}
+							name={SEARCH_PARAM.audiences}
 							options={AUDIENCES}
 							checked={search.audiences}
 							onChange={(event) => {
-								updateSearch(event.currentTarget.form, "push");
+								updateSearch(event.currentTarget.form);
 							}}
 						/>
 					</Stack>

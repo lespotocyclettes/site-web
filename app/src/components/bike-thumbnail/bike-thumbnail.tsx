@@ -1,5 +1,5 @@
 import type { Bike } from "../../bike/bike";
-import { formatRoute } from "../../navigation/route";
+import { bikeSheetRoute } from "../../routes/velo";
 
 /*
  * Un vélo dans la grille de la recherche, habillé par bike-thumbnail.css : sa photo, de
@@ -13,10 +13,7 @@ export function BikeThumbnail({ bike }: { bike: Bike }) {
 		.join(" · ");
 
 	return (
-		<a
-			className="bike-thumbnail"
-			href={formatRoute({ screen: "velo", reference: bike.reference })}
-		>
+		<a className="bike-thumbnail" href={bikeSheetRoute.href(bike.reference)}>
 			{photo ? (
 				<img className="photo" src={photo.url} alt="" />
 			) : (

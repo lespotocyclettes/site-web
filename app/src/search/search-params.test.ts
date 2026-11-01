@@ -1,10 +1,6 @@
 import { expect, test } from "vitest";
 import type { BikeSearch } from "../bike/search";
-import { formatSearchParams, parseSearchParams } from "./search-params";
-
-function roundTrip(search: BikeSearch): BikeSearch {
-	return parseSearchParams(new URLSearchParams(formatSearchParams(search)));
-}
+import { searchCodec } from "./search-params";
 
 test.each<BikeSearch>([
 	{ text: "", statuses: [], audiences: [] },
@@ -14,25 +10,17 @@ test.each<BikeSearch>([
 		audiences: ["enfant"],
 	},
 ])("écrire puis relire l'adresse redonne la même recherche", (search) => {
-	expect(roundTrip(search)).toEqual(search);
+	expect(searchCodec.decode(searchCodec.encode(search))).toEqual(search);
 });
 
 test("une valeur inconnue dans l'adresse est ignorée", () => {
-	const params = new URLSearchParams(
-		"statut=volé&statut=sorti&public=chien&public=enfant",
-	);
-
-	expect(parseSearchParams(params)).toEqual({
-		text: "",
-		statuses: ["sorti"],
-		audiences: ["enfant"],
-	});
+	expect(
+		searchCodec.decode("?statut=volé&statut=sorti&public=chien&public=enfant"),
+	).toEqual({ text: "", statuses: ["sorti"], audiences: ["enfant"] });
 });
 
 test("l'ordre des chips dans l'adresse ne change pas la recherche", () => {
-	expect(
-		parseSearchParams(new URLSearchParams("statut=sorti&statut=à+traiter")),
-	).toEqual(
-		parseSearchParams(new URLSearchParams("statut=à+traiter&statut=sorti")),
+	expect(searchCodec.decode("?statut=sorti&statut=à+traiter")).toEqual(
+		searchCodec.decode("?statut=à+traiter&statut=sorti"),
 	);
 });

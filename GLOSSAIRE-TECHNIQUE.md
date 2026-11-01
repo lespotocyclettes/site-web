@@ -287,6 +287,12 @@ Dire à TanStack Query qu'une réponse rangée n'est plus à jour, pour qu'il la
 Après un changement de statut, on invalide tout ce qui commence par `["bikes"]` : la
 recherche comme la fiche se rafraîchissent.
 
+**Codec** :
+Une paire de fonctions qui traduisent une valeur dans un format, et retour : `encode` écrit,
+`decode` relit. Chaque écran a le codec de ses paramètres, qui les écrit dans l'adresse et
+les relit. Un codec bien fait vérifie l'aller-retour : relire ce qu'on a écrit redonne la
+même valeur.
+
 **Chaîne de requête** :
 La fin d'une adresse, après le `?` : `q=peugeot&public=enfant`. Chaque paire
 `nom=valeur` est un paramètre, et un nom peut revenir plusieurs fois. La recherche y garde

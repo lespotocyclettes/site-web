@@ -39,13 +39,40 @@ qu'on y fait disparaît au rechargement de la page.
  src/bike/         les règles métier pures : référence, statut, description d'un vélo
 ```
 
-Un dossier par écran : `src/search/`, `src/bike-sheet/`, `src/registration/`. La navigation
-passe par le `#` de l'adresse (`src/navigation/`). `src/main.tsx` choisit le relais.
+Un dossier par écran : `src/search/`, `src/bike-sheet/`, `src/registration/`.
+`src/main.tsx` choisit le relais.
+
+La navigation passe par le `#` de l'adresse. **Chaque adresse a son fichier dans
+`src/routes/`**, nommé comme elle (`routes/velo.ts` pour `#velo/261027.01`). Il dit le nom
+de l'adresse, le codec de ses paramètres et l'écran qu'elle ouvre :
+
+```ts
+export const bikeSheetRoute = defineRoute({
+	name: "velo",
+	params: referenceCodec,  // Reference ↔ "/261027.01"
+	Screen: BikeSheet,       // reçoit { params: Reference }
+});
+```
+
+- **Un lien** : `<a href={bikeSheetRoute.href(reference)}>`. On n'écrit jamais une adresse
+  à la main.
+- **Changer d'écran depuis le code** : `navigate(href)`, ou `navigate(href, { replace: true })`
+  pour remplacer l'entrée courante de l'historique au lieu d'en ajouter une.
+- **Ajouter un écran** : un fichier dans `src/routes/`, et une ligne dans
+  `src/routes/index.ts`. Oublié dans cette liste, l'écran ne s'ouvre pas : son adresse mène
+  à la recherche.
+
+Les routes s'importent en boucle (la recherche mène à la fiche, qui ramène à la
+recherche). Le navigateur le supporte, parce qu'on ne lit une route qu'au moment
+d'afficher un écran. Le prix : en développement, Vite recharge parfois toute la page
+plutôt que le seul composant modifié. Si ce mécanisme devient trop court, TanStack Router
+suit le même principe (une route déclarée par écran) et prendra sa suite sans tout
+réécrire.
 
 La recherche vit dans l'adresse (`#recherche?q=peugeot&public=enfant`), pas dans l'écran :
 le bouton retour, un rechargement ou un lien partagé retrouvent la même liste. Son
-formulaire réécrit l'adresse avec `navigate()`, qui ajoute une entrée d'historique pour une
-chip et remplace la courante pendant la frappe.
+formulaire réécrit l'adresse à chaque changement : une chip ajoute une entrée
+d'historique, la frappe remplace la courante.
 
 Chaque écran suit la même forme. Il pose `ScreenLayout` (`src/screen/`), qui affiche le
 titre (et nomme l'onglet du navigateur) puis, autour du contenu, un skeleton pendant le chargement et un message avec
