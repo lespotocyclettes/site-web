@@ -15,16 +15,12 @@ export function BikeCard({ bike }: { bike: Bike }) {
 
 	return (
 		<ContentCard href={bikeSheetRoute.href(bike.reference)}>
-			<div className="media">
-				{photo ? (
-					<img className="image" src={photo.url} alt="" />
-				) : (
-					"Pas de photo"
-				)}
-			</div>
-			<span className="title">{bike.reference}</span>
+			<ContentCard.Media ratio="4 / 3">
+				{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
+			</ContentCard.Media>
+			<ContentCard.Title>{bike.reference}</ContentCard.Title>
 			{description !== "" && <span>{description}</span>}
-			<span className="meta">{bike.status}</span>
+			<ContentCard.Meta>{bike.status}</ContentCard.Meta>
 		</ContentCard>
 	);
 }

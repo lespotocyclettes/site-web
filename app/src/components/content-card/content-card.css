@@ -32,14 +32,16 @@
 		 * Une photo de bord à bord. Les marges négatives annulent le padding de la carte : elles
 		 * restent dans le composant, leur effet ne sort pas de la carte. Seule une photo placée
 		 * en tête remonte jusqu'au bord du haut ; ailleurs, elle ne déborde que sur les côtés.
-		 * Le cadre est toujours en 4/3, photo ou pas : une grille de cartes reste alignée. Sans
-		 * image, son texte (« Pas de photo ») s'affiche au centre.
+		 *
+		 * --_ratio vient de ContentCard.Media. Seul, aspect-ratio n'est qu'une préférence : un
+		 * contenu plus haut agrandit la boîte. overflow: clip la fige à ses proportions.
 		 */
 		> .media {
-			display: grid;
-			place-items: center;
-			aspect-ratio: 4 / 3;
+			--_ratio: auto;
+
+			aspect-ratio: var(--_ratio);
 			margin-inline: calc(-1 * var(--_padding));
+			overflow: clip;
 			font-size: var(--font-size-0);
 			color: var(--color-text-muted);
 			background: var(--color-surface-page);
@@ -47,10 +49,17 @@
 			&:first-child {
 				margin-block-start: calc(-1 * var(--_padding));
 			}
+
+			/* Sans image, son texte (« Pas de photo ») s'affiche au centre du cadre. */
+			&:not(:has(> img)) {
+				display: grid;
+				place-items: center;
+			}
 		}
 
-		/* L'image remplit le cadre de .media, recadrée s'il le faut : les cartes restent alignées. */
-		> .media > .image {
+		/* L'image remplit le cadre, recadrée s'il le faut ; sans ratio, elle garde les siennes. */
+		> .media > img {
+			display: block;
 			inline-size: 100%;
 			block-size: 100%;
 			object-fit: cover;
