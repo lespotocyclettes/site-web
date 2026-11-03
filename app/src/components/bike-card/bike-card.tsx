@@ -14,13 +14,13 @@ export function BikeCard({ bike }: { bike: Bike }) {
 		.join(" · ");
 
 	return (
-		<ContentCard href={bikeSheetRoute.href(bike.reference)}>
+		<ContentCard.Root href={bikeSheetRoute.href(bike.reference)}>
 			<ContentCard.Media ratio="4 / 3">
 				{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
 			</ContentCard.Media>
 			<ContentCard.Title>{bike.reference}</ContentCard.Title>
 			{description !== "" && <span>{description}</span>}
 			<ContentCard.Meta>{bike.status}</ContentCard.Meta>
-		</ContentCard>
+		</ContentCard.Root>
 	);
 }

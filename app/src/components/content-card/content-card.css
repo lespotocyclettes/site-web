@@ -33,13 +33,18 @@
 		 * restent dans le composant, leur effet ne sort pas de la carte. Seule une photo placée
 		 * en tête remonte jusqu'au bord du haut ; ailleurs, elle ne déborde que sur les côtés.
 		 *
-		 * --_ratio vient de ContentCard.Media. Seul, aspect-ratio n'est qu'une préférence : un
-		 * contenu plus haut agrandit la boîte. overflow: clip la fige à ses proportions.
+		 * --_ratio vient de ContentCard.Media. Deux règles empêchent une photo haute d'agrandir
+		 * son cadre :
+		 * - aspect-ratio n'est qu'une préférence : un contenu plus haut agrandit la boîte, sauf
+		 *   si elle rogne ce qui dépasse (overflow: clip) ;
+		 * - dans un flex, un enfant ne descend jamais sous la hauteur de son contenu, sauf avec
+		 *   min-block-size: 0. Le cadre suit alors son ratio, et la photo y est recadrée.
 		 */
 		> .media {
 			--_ratio: auto;
 
 			aspect-ratio: var(--_ratio);
+			min-block-size: 0;
 			margin-inline: calc(-1 * var(--_padding));
 			overflow: clip;
 			font-size: var(--font-size-0);
