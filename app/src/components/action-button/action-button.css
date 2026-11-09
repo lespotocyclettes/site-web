@@ -10,7 +10,7 @@
 			--_fg: var(--color-text-heading);
 			--_border: var(--color-border-strong);
 			--_padding-inline: var(--size-inset);
-			--_font-size: var(--font-size-1);
+			--_font-size: 1rem;
 
 			display: inline-flex;
 			align-items: center;
@@ -18,8 +18,8 @@
 			gap: var(--size-2);
 			min-block-size: var(--size-tap-target);
 			padding-inline: var(--_padding-inline);
+			font: var(--text-label);
 			font-size: var(--_font-size);
-			font-weight: var(--font-weight-6);
 			color: var(--_fg);
 			background: var(--_bg);
 			border: var(--border-size-1) solid var(--_border);
@@ -52,7 +52,7 @@
 		 */
 		&[data-size="small"] {
 			--_padding-inline: var(--size-2);
-			--_font-size: var(--font-size-0);
+			--_font-size: 0.75rem;
 		}
 
 		/*

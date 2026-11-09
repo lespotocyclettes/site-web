@@ -22,7 +22,7 @@
 		> .legend {
 			float: inline-start;
 			padding: 0;
-			font-weight: var(--font-weight-6);
+			font: var(--text-label);
 			color: var(--color-text-heading);
 		}
 

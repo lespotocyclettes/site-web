@@ -24,7 +24,7 @@
 		}
 
 		> .title {
-			font-size: var(--font-size-3);
+			font: var(--text-title-3);
 			color: var(--color-text-heading);
 		}
 
