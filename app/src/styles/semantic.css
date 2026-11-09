@@ -86,6 +86,33 @@
 	--font-body: "Asap", var(--font-sans);
 	--font-heading: "Concert One", var(--font-sans);
 
+	/*
+	 * Les styles de texte, un par rôle. Chacun s'emploie avec le raccourci font, qui règle
+	 * d'un coup la graisse, la taille, l'interligne et la police : font: var(--text-label).
+	 * Le raccourci remet à leur valeur par défaut les réglages qu'il ne porte pas. Chaque
+	 * token écrit donc son interligne, et une retouche s'écrit après lui.
+	 *
+	 * Les tailles sont écrites en dur, sans renvoyer aux échelles d'Open Props : ces tokens
+	 * sont la seule référence, une indirection de plus n'apporterait rien. Les interlignes
+	 * tombent sur une grille de 0,25rem (4 px). Le rem vaut la taille de texte choisie dans
+	 * le navigateur : 1rem fait 16 px par défaut, et suit le réglage de la personne.
+	 */
+	--text-body: 400 1rem / 1.5rem var(--font-body);
+	--text-label: 600 1rem / 1.5rem var(--font-body);
+	--text-caption: 400 0.75rem / 1rem var(--font-body);
+	/* La chasse fixe donne la même largeur à tous les caractères : les références s'alignent. */
+	--text-reference: 400 1.25rem / 1.75rem var(--font-mono);
+	--text-code: 400 0.75rem / 1rem var(--font-mono);
+
+	/*
+	 * Concert One n'existe qu'en graisse 400. Une autre graisse, et le navigateur épaissirait
+	 * lui-même les titres : le trait baverait.
+	 */
+	--text-title-1: 400 2rem / 2.5rem var(--font-heading);
+	--text-title-2: 400 1.5rem / 2rem var(--font-heading);
+	--text-title-3: 400 1rem / 1.5rem var(--font-heading);
+	--text-title-4: 400 0.75rem / 1rem var(--font-heading);
+
 	--size-inset: var(--size-3);
 	--size-tap-target: var(--size-8);
 	--radius-base: var(--radius-2);
@@ -101,4 +128,18 @@
 	--shadow-focus-ring:
 		0 0 0 var(--border-size-focus) var(--color-surface-page),
 		0 0 0 calc(2 * var(--border-size-focus)) var(--color-focus-ring);
+}
+
+/*
+ * Au-delà de 40rem de large (640 px par défaut), les titres passent à leur grand palier.
+ * Une media query applique ses règles seulement quand la fenêtre remplit la condition.
+ * Le seuil s'écrit en dur : var() n'est pas permis dans la condition d'une media query.
+ */
+@media (width >= 40rem) {
+	:root {
+		--text-title-1: 400 3.5rem / 4rem var(--font-heading);
+		--text-title-2: 400 2.5rem / 3rem var(--font-heading);
+		--text-title-3: 400 1.5rem / 2rem var(--font-heading);
+		--text-title-4: 400 1rem / 1.5rem var(--font-heading);
+	}
 }
