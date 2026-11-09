@@ -1,0 +1,12 @@
+/*
+ * La référence d'un vélo, partout où elle s'affiche. Sa police à chasse fixe donne la même
+ * largeur à chaque chiffre : dans une grille, les références s'alignent et se comparent
+ * d'un coup d'œil.
+ */
+@layer components {
+	.bike-reference {
+		& {
+			font: var(--text-reference);
+		}
+	}
+}

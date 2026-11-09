@@ -18,7 +18,9 @@ export function BikeCard({ bike }: { bike: Bike }) {
 			<ContentCard.Media ratio="4 / 3">
 				{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
 			</ContentCard.Media>
-			<ContentCard.Title>{bike.reference}</ContentCard.Title>
+			<ContentCard.Title>
+				<span className="bike-reference">{bike.reference}</span>
+			</ContentCard.Title>
 			{description !== "" && <span>{description}</span>}
 			<ContentCard.Meta>{bike.status}</ContentCard.Meta>
 		</ContentCard.Root>
