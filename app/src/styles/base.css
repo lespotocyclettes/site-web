@@ -7,9 +7,8 @@
 	@scope (.potos-app) {
 		:scope {
 			background: var(--color-surface-page);
+			font: var(--text-body);
 			color: var(--color-text-body);
-			font-family: var(--font-body);
-			font-size: var(--font-size-1);
 		}
 
 		h1,
@@ -19,27 +18,20 @@
 		h5,
 		h6 {
 			color: var(--color-text-heading);
-			font-family: var(--font-heading);
-			/*
-			 * Concert One n'existe qu'en graisse 400. Sans cette ligne, le navigateur
-			 * épaissirait lui-même les titres, et le trait baverait.
-			 */
-			font-weight: var(--font-weight-4);
-			line-height: var(--font-lineheight-1);
 			text-wrap: balance;
 		}
 
 		h1 {
-			font-size: var(--font-size-fluid-3);
+			font: var(--text-title-1);
 		}
 		h2 {
-			font-size: var(--font-size-fluid-2);
+			font: var(--text-title-2);
 		}
 		h3 {
-			font-size: var(--font-size-fluid-1);
+			font: var(--text-title-3);
 		}
-		h4 {
-			font-size: var(--font-size-fluid-0);
+		:is(h4, h5, h6) {
+			font: var(--text-title-4);
 		}
 
 		p {
@@ -78,7 +70,7 @@
 		 */
 		:is(input, select, textarea, button) {
 			min-block-size: var(--size-tap-target);
-			font-size: var(--font-size-1);
+			font: var(--text-body);
 			color: var(--color-text-heading);
 			border-radius: var(--radius-base);
 		}
@@ -113,13 +105,12 @@
 		}
 
 		th {
+			font: var(--text-label);
 			color: var(--color-text-heading);
-			font-weight: var(--font-weight-6);
 		}
 
 		:is(code, pre, kbd, samp) {
-			font-family: var(--font-mono);
-			font-size: var(--font-size-0);
+			font: var(--text-code);
 		}
 
 		hr {
