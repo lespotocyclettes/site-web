@@ -26,8 +26,11 @@
 		}
 
 		.token-name {
-			font-family: var(--font-mono);
-			font-size: var(--font-size-0);
+			font: var(--text-code);
+		}
+
+		.text-style {
+			margin-block: var(--size-3);
 		}
 	</style>
 </head>
@@ -64,6 +67,12 @@
 		<p style="font-weight: var(--font-weight-6)">Graisse 600, celle des libellés et des en-têtes de tableau.</p>
 		<p><em>Et l'italique, qui a son propre fichier.</em></p>
 		<p>Un caractère hors de l'alphabet latin s'affiche avec la police de l'appareil : 日本語, Ελληνικά.</p>
+
+		<h3>Les styles de texte</h3>
+		<p>Un style par rôle, qui s'emploie avec le raccourci <code>font</code> :
+			<code>font: var(--text-label)</code>. Les titres changent de taille au-delà de 40rem de
+			large (640 px par défaut) : élargis ou rétrécis la fenêtre pour voir les deux paliers.</p>
+		<div id="text-styles"></div>
 	</section>
 
 	<section>
@@ -404,6 +413,12 @@
 			"color-focus-ring", "color-backdrop",
 		];
 
+		/* Vérifiée par scripts/check-tokens.mjs : elle doit lister tous les --text-* de semantic.css. */
+		const TEXT_TOKENS = [
+			"text-title-1", "text-title-2", "text-title-3", "text-title-4",
+			"text-body", "text-label", "text-caption", "text-reference", "text-code",
+		];
+
 		const root = document.documentElement;
 		const prefersDark = matchMedia("(prefers-color-scheme: dark)");
 
@@ -422,6 +437,26 @@
 			}));
 		}
 
+		/*
+		 * La valeur affichée est celle du palier en cours : on la relit quand la fenêtre passe
+		 * le seuil des titres.
+		 */
+		const wideScreen = matchMedia("(width >= 40rem)");
+
+		function renderTextStyles() {
+			const styles = getComputedStyle(root);
+			document.getElementById("text-styles").replaceChildren(...TEXT_TOKENS.map((token) => {
+				const cell = document.createElement("div");
+				cell.className = "text-style";
+				const value = styles.getPropertyValue(`--${token}`).trim();
+				cell.innerHTML = `<div style="font:var(--${token})">Des vélos, de l'amour et du cambouis</div>
+				<div class="token-name">--${token} · ${value}</div>`;
+				return cell;
+			}));
+		}
+
+		wideScreen.addEventListener("change", renderTextStyles);
+
 		/* Tant qu'aucun thème n'est forcé, la page suit celui du système. */
 		function getActiveTheme() {
 			if (root.dataset.theme) return root.dataset.theme;
@@ -438,6 +473,7 @@
 		});
 
 		renderSwatches();
+		renderTextStyles();
 	</script>
 
 </body>
