@@ -185,6 +185,11 @@ coup d'œil.
 **Mobile-first** :
 Écrire d'abord pour le petit écran, puis élargir. Jamais l'inverse.
 
+**Media query** :
+Un bloc de CSS qui ne s'applique que si une condition est remplie, le plus souvent une
+largeur de fenêtre : `@media (width >= 40rem) { … }`. Nos titres y prennent leur grand
+palier.
+
 **Cible tactile** :
 La surface tapable d'un bouton. Minimum 48 px de haut chez nous. C'est un plancher.
 
@@ -206,6 +211,20 @@ Un réglage système qui dit « j'ai besoin de moins d'animation ». On le respe
 **Police variable** :
 Un seul fichier de police qui couvre toutes les graisses, du maigre au gras, au lieu d'un
 fichier par graisse. Asap, notre police de texte, en est une.
+
+**Raccourci `font`** :
+Une seule propriété CSS qui règle d'un coup la graisse, la taille, l'interligne et la
+police : `font: var(--text-label)`. Ce qu'elle ne précise pas revient à sa valeur par
+défaut. Nos styles de texte `--text-*` s'écrivent pour elle (fiche
+[0003](./docs/adr/0003-styles-de-texte-en-raccourci-font.md)).
+
+**rem** :
+L'unité de taille qui vaut la taille de texte choisie dans le navigateur : 16 px par
+défaut. Une taille en rem grandit avec le réglage de la personne, une taille en px non.
+
+**Chasse fixe** :
+Une police où chaque caractère a la même largeur, comme sur une machine à écrire. Nos
+références de vélo s'y écrivent, pour s'aligner.
 
 **woff2** :
 Le format de police du web. Nos fichiers sont dans `app/src/styles/fonts/` et sont servis
