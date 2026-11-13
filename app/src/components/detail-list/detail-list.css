@@ -1,0 +1,26 @@
+/*
+ * Une liste de couples libellé / valeur, comme le recto d'une fiche. C'est un <dl>, la
+ * liste de définitions du HTML : chaque <dt> (le libellé) est suivi de son <dd> (la valeur).
+ *
+ * La colonne des libellés prend au plus 40 % de la largeur : sur un petit téléphone, un
+ * libellé long (« Changement de vitesses ») passe à la ligne au lieu d'écraser sa valeur.
+ */
+@layer components {
+	.detail-list {
+		& {
+			display: grid;
+			grid-template-columns: fit-content(40%) 1fr;
+			gap: var(--size-2) var(--size-3);
+			margin: 0;
+		}
+
+		> .term {
+			font: var(--text-label);
+			color: var(--color-text-heading);
+		}
+
+		> .value {
+			margin: 0;
+		}
+	}
+}

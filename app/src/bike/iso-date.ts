@@ -13,3 +13,13 @@ export function getTodayIsoDate(): IsoDate {
 	const day = String(now.getDate()).padStart(2, "0");
 	return `${year}-${month}-${day}`;
 }
+
+/**
+ * `2018-11-21` → `21/11/2018`. Le fuseau UTC est imposé : la date est lue comme minuit à
+ * Greenwich, et un fuseau à l'ouest de Greenwich l'afficherait sinon la veille.
+ */
+export function formatFrenchDate(date: IsoDate): string {
+	return new Intl.DateTimeFormat("fr-FR", { timeZone: "UTC" }).format(
+		new Date(date),
+	);
+}
