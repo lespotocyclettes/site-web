@@ -230,6 +230,17 @@
 		<p>Ce sont de vraies cases à cocher : tapez une chip pour la cocher, ou tabulez jusqu'à
 			elle et appuyez sur Espace. La coche « ✓ » redit l'état sans passer par la couleur.
 			Les chips passent à la ligne quand la place manque.</p>
+
+		<h3>Un seul choix, en boutons radio</h3>
+		<fieldset class="toggle-group">
+			<legend class="legend">Type de sortie</legend>
+			<div class="options">
+				<label class="option"><input class="input" type="radio" name="type-de-sortie" value="vente" required checked> vente</label>
+				<label class="option"><input class="input" type="radio" name="type-de-sortie" value="don" required> don</label>
+			</div>
+		</fieldset>
+		<p>Cocher une chip décoche l'autre. Au clavier, les flèches passent de l'une à l'autre.
+			Le choix est obligatoire : le formulaire ne part pas sans lui.</p>
 	</section>
 
 	<section>
