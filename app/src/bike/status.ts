@@ -11,20 +11,23 @@ export const STATUSES = [
 
 export type Status = (typeof STATUSES)[number];
 
+/** On ne revient jamais à « à traiter » : c'est le statut d'arrivée. */
+export type NextStatus = Exclude<Status, "à traiter">;
+
 /** Un vélo à traiter peut sortir en l'état, ou partir au démontage sans être réparé. */
 const NEXT_STATUSES = {
 	"à traiter": ["prêt à la vente", "sorti", "démonté"],
 	"prêt à la vente": ["sorti", "démonté"],
 	sorti: [],
 	démonté: [],
-} as const satisfies Record<Status, readonly Status[]>;
+} as const satisfies Record<Status, readonly NextStatus[]>;
 
-export function getNextStatuses(status: Status): readonly Status[] {
+export function getNextStatuses(status: Status): readonly NextStatus[] {
 	return NEXT_STATUSES[status];
 }
 
 export function isTransitionAllowed(from: Status, to: Status): boolean {
-	return getNextStatuses(from).includes(to);
+	return getNextStatuses(from).some((next) => next === to);
 }
 
 /** « En stock » n'est pas un statut : c'est tout vélo encore chez nous. */

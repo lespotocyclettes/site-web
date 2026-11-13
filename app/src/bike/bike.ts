@@ -54,6 +54,10 @@ export const EMPTY_BIKE_DESCRIPTION: BikeDescription = {
 	donor: null,
 };
 
+export const EXIT_KINDS = ["vente", "don"] as const;
+
+export type ExitKind = (typeof EXIT_KINDS)[number];
+
 /** Un don n'a pas de prix : le type ne laisse pas en écrire un. */
 export type Exit =
 	| { exitKind: "vente"; buyer: string; price: Euros }

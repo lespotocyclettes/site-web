@@ -5,10 +5,12 @@ import type { QueryOptionsOf } from "../api/define-query";
 import type { Bike } from "../bike/bike";
 import type { Reference } from "../bike/reference";
 import { ContentCard } from "../components/content-card/content-card";
+import { Stack } from "../components/layout/layout";
 import { ScreenLayout } from "../screen/screen-layout";
+import { BikeActions } from "./bike-actions";
 import { getBikeDetails } from "./bike-details";
 
-/** Le recto de la fiche vélo : de quoi identifier le vélo. */
+/** Le recto de la fiche vélo, qui identifie le vélo, puis ses actions. */
 export function BikeSheet({ params: reference }: { params: Reference }) {
 	const api = useApi();
 
@@ -30,20 +32,23 @@ function BikeDetails({ bikeQuery }: { bikeQuery: QueryOptionsOf<Bike> }) {
 	const [photo] = bike.photos;
 
 	return (
-		<ContentCard.Root>
-			<ContentCard.Media ratio="4 / 3">
-				{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
-			</ContentCard.Media>
-			<dl className="detail-list">
-				{getBikeDetails(bike).map(({ label, value }) => {
-					return (
-						<Fragment key={label}>
-							<dt className="term">{label}</dt>
-							<dd className="value">{value}</dd>
-						</Fragment>
-					);
-				})}
-			</dl>
-		</ContentCard.Root>
+		<Stack>
+			<ContentCard.Root>
+				<ContentCard.Media ratio="4 / 3">
+					{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
+				</ContentCard.Media>
+				<dl className="detail-list">
+					{getBikeDetails(bike).map(({ label, value }) => {
+						return (
+							<Fragment key={label}>
+								<dt className="term">{label}</dt>
+								<dd className="value">{value}</dd>
+							</Fragment>
+						);
+					})}
+				</dl>
+			</ContentCard.Root>
+			<BikeActions bike={bike} />
+		</Stack>
 	);
 }
