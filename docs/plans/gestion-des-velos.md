@@ -1,6 +1,6 @@
 # Mini-app de gestion des vélos — Les Poto'Cyclettes
 
-*Plan v3 — juillet 2026, amendé le 21/10/2026*
+*Plan v3 — juillet 2026, amendé jusqu'au 14/11/2026*
 
 > **Amendements d'octobre 2026.** Le reste du document est celui de juillet.
 >
@@ -37,8 +37,16 @@
 >   (facettes mêlées dans « Type de vélo », statut déduit de cases à cocher) : il faudra
 >   l'adapter. Les valeurs restent en français, pour qu'un export se lise sans traduire.
 > - **Marquage** : vérifier le marquage APIC est obligatoire à l'enregistrement. Un vélo
->   marqué dont la propriété n'est pas transférée arrête l'enregistrement. C'est la seule
->   exception à « ne jamais bloquer une saisie ».
+>   marqué dont la propriété n'est pas transférée arrête l'enregistrement. C'est une des
+>   deux exceptions à « ne jamais bloquer une saisie », avec la sortie de stock.
+>
+> **Amendement du 14/11/2026** (fiche vélo).
+>
+> - **Confirmation** : chaque action se déplie sur place, sous la rangée de boutons. « Prêt
+>   à la vente » et « démonté » demandent une confirmation ; « sortie de stock » déplie son
+>   formulaire au même endroit. Pas de fenêtre modale.
+> - **Sortie de stock** : miroir légal de la fiche don, elle bloque. L'acheteur est requis,
+>   et le prix pour une vente.
 
 ---
 

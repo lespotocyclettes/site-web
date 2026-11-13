@@ -58,11 +58,16 @@ Restent pour plus tard :
   lance une recherche, ce qui ne coûte rien contre le faux relais. Contre le vrai, à
   décider avec l'incrément 4.
 
-## 2. Fiche + actions
+## Fait : 2. Fiche + actions
 
-Le recto à l'écran : photo et champs. Les actions selon `getNextStatuses` : « prêt à la
-vente » et « démonté » en un tap plus une confirmation ; « sortie de stock » ouvre le
-mini-formulaire (acheteur, prix, vente ou don).
+Le recto à l'écran : la première photo, puis les champs, un champ vide affiché avec un
+tiret (`.detail-list`). Les actions suivent `getNextStatuses`. Un tap ne change rien : il
+déplie sur place la confirmation, ou le formulaire de sortie (vente ou don en chips radio,
+acheteur requis, prix requis pour une vente). Un vélo sorti montre sa sortie.
+
+Restent pour plus tard :
+- les **photos suivantes**, qui arrivent avec l'enregistrement ;
+- le **verso** (suivi atelier, état mécanique), qui vit sur la fiche plastifiée.
 
 ## 3. Enregistrement — ⚠ attend unreel
 
@@ -106,5 +111,3 @@ Chacun entrera au glossaire métier avec le code qui l'utilise.
 
 - Co-signer la [fiche 0002](../adr/0002-dependances-mini-app.md) (les dépendances).
 - Passer unreel du lien vers son dossier à une archive copiée dans `app/vendor/unreel/`.
-- Le styleguide montre encore « En stock » comme statut d'exemple : le remplacer par « à
-  traiter ».

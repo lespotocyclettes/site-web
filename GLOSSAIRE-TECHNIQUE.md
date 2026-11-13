@@ -190,6 +190,10 @@ Un bloc de CSS qui ne s'applique que si une condition est remplie, le plus souve
 largeur de fenêtre : `@media (width >= 40rem) { … }`. Nos titres y prennent leur grand
 palier.
 
+**Bouton radio** :
+Une case de formulaire qu'on choisit parmi d'autres : en cocher une décoche les autres du
+même groupe. Le choix « vente ou don » de la sortie de stock en est un.
+
 **Cible tactile** :
 La surface tapable d'un bouton. Minimum 48 px de haut chez nous. C'est un plancher.
 
@@ -300,6 +304,11 @@ part dans le produit ; sa porte de sortie est dans la fiche
 L'étiquette sous laquelle TanStack Query range une réponse, par exemple
 `["bikes", "search", { text: "peugeot" }]`. Deux écrans qui demandent la même clé
 partagent la même réponse.
+
+**Mutation** :
+Pour TanStack Query, une action qui change des données sur le serveur, comme passer un
+vélo « démonté ». Elle sait si elle est en cours ou si elle a échoué, et l'écran s'en sert
+pour bloquer un second tap ou afficher l'erreur.
 
 **Invalider** :
 Dire à TanStack Query qu'une réponse rangée n'est plus à jour, pour qu'il la redemande.
