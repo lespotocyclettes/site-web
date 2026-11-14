@@ -15,7 +15,7 @@
 		> .line {
 			block-size: var(--_line-size);
 			background: var(--color-border);
-			border-radius: var(--radius-base);
+			border-radius: var(--radius-surface);
 			animation: loading-skeleton-pulse 900ms var(--ease-in-out-2) infinite
 				alternate;
 

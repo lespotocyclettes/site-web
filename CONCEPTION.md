@@ -150,6 +150,11 @@ taille. En CSS ça s'écrit comme une variable, par exemple `--color-text-body`.
   `tertiary`, ça désigne une place dans une liste. Le jour où on échange deux couleurs,
   toutes les mentions de `secondary` deviennent fausses, et pourtant rien ne plante. Des
   noms qui mentent sans casser, c'est le pire cas de figure.
+- **Un token de rôle sert plusieurs composants.** Son nom dit un rôle partagé
+  (`--radius-surface` pour tout ce qui a des coins, `--radius-pill` pour la pilule), pas
+  un composant. Un token qu'un seul composant emploie est un *token miroir* : il redit le
+  composant sans rien partager. Le composant prend alors sa valeur dans l'échelle, par une
+  de ses molettes (`--_*`).
 - **Aucune couleur ni taille écrite en dur ailleurs que dans le fichier des tokens.** C'est
   ça qui permet de changer l'apparence du produit en ouvrant un seul fichier.
 - **Sauf un seuil mesuré** : la largeur où quelque chose cesse de tenir, comme une colonne

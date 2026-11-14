@@ -119,8 +119,14 @@
 	--size-control-small: var(--size-7);
 	/* La largeur maximale d'une page : au-delà, les cartes en grille s'étirent et se lisent mal. */
 	--size-container: 60rem;
-	--radius-base: var(--radius-2);
-	--radius-button: var(--radius-round);
+	/*
+	 * Deux formes, chacune nommée par son rôle et non par un composant. Une surface (carte,
+	 * fenêtre, champ, bouton) a des coins à peine arrondis ; une pilule (chip) est arrondie
+	 * aux deux bouts. La forme suffit à distinguer un bouton, qui agit, d'une chip, qui
+	 * filtre ou choisit.
+	 */
+	--radius-surface: var(--radius-2);
+	--radius-pill: var(--radius-round);
 
 	/* L'épaisseur de l'anneau qui montre l'élément sélectionné au clavier. */
 	--border-size-focus: var(--border-size-2);

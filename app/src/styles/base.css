@@ -72,7 +72,7 @@
 			min-block-size: var(--size-tap-target);
 			font: var(--text-body);
 			color: var(--color-text-heading);
-			border-radius: var(--radius-base);
+			border-radius: var(--radius-surface);
 		}
 
 		:is(input, select, textarea) {

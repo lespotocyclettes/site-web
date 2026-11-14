@@ -21,7 +21,7 @@
 		.token-swatch {
 			block-size: var(--size-8);
 			border: var(--border-size-1) solid var(--color-border);
-			border-radius: var(--radius-base);
+			border-radius: var(--radius-surface);
 		}
 
 		.token-name {
@@ -164,6 +164,9 @@
 			<button type="button" class="action-button" data-variant="secondary">Annuler</button>
 			<button type="button" class="action-button" data-variant="danger">Supprimer</button>
 		</div>
+		<p>Une ombre pleine, sans flou, sous chaque bouton : il dépasse de la page, on peut
+			l'enfoncer. Survolez-le, il monte ; appuyez, il s'enfonce. Une chip n'a pas d'ombre :
+			c'est ce qui les distingue.</p>
 
 		<h3>États</h3>
 		<div class="layout-cluster">
@@ -191,6 +194,22 @@
 		<p>« Petit » se dessine à 32 px de haut (<code>--size-control-small</code>), mais sa cible
 			tactile garde 48 px : une zone invisible déborde de 8 px en haut et en bas. Elle ne
 			prend aucune place dans la mise en page.</p>
+
+		<h3>Bouton ou chip ?</h3>
+		<fieldset class="toggle-group">
+			<legend class="legend">Des chips : elles filtrent ou choisissent</legend>
+			<div class="options">
+				<label class="option"><input class="input" type="checkbox" name="bouton-ou-chip" checked> à traiter</label>
+				<label class="option"><input class="input" type="checkbox" name="bouton-ou-chip"> prêt à la vente</label>
+			</div>
+		</fieldset>
+		<div class="layout-cluster">
+			<button type="button" class="action-button" data-size="small" data-variant="secondary"><span aria-hidden="true">🏷️</span>Mettre en vente</button>
+			<button type="button" class="action-button" data-size="small" data-variant="danger"><span aria-hidden="true">🔧</span>Démonter</button>
+		</div>
+		<p>Une chip est une pilule plate (<code>--radius-pill</code>) qui porte une valeur. Un
+			bouton a des coins à peine arrondis (<code>--radius-surface</code>) et une ombre, et son
+			libellé est un verbe à l'infinitif : il déclenche une action.</p>
 
 		<h3>Avec icône</h3>
 		<div class="layout-cluster">

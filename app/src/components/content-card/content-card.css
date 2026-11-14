@@ -15,7 +15,7 @@
 			color: var(--color-text-body);
 			background: var(--_bg);
 			border: var(--border-size-1) solid var(--_border);
-			border-radius: var(--radius-base);
+			border-radius: var(--radius-surface);
 			box-shadow: var(--_shadow);
 		}
 

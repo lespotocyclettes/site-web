@@ -45,6 +45,11 @@ Une valeur de design nommée, par exemple une couleur ou un espacement. En CSS c
 variable, écrite `--color-text-body`. On ne met jamais une couleur en dur dans le code :
 on nomme un token, et on change sa valeur à un seul endroit.
 
+**Token miroir** :
+Un token qu'un seul composant emploie, comme `--radius-chip` pour les chips. Il redit le
+nom du composant sans rien partager. On l'évite : un token de rôle sert plusieurs
+composants (règle dans [CONCEPTION.md](./CONCEPTION.md)).
+
 **Molette** :
 Une propriété personnalisée qu'une règle CSS lit, et qu'on tourne pour changer le rendu
 sans toucher à la règle. Il y en a deux sortes.

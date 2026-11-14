@@ -42,7 +42,7 @@
 			color: var(--color-text-heading);
 			background: var(--color-surface-raised);
 			border: var(--border-size-1) solid var(--color-border-strong);
-			border-radius: var(--radius-button);
+			border-radius: var(--radius-pill);
 			cursor: pointer;
 		}
 
