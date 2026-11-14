@@ -4,8 +4,9 @@ import { useApi } from "../api/api-context";
 import type { QueryOptionsOf } from "../api/define-query";
 import type { Bike } from "../bike/bike";
 import type { Reference } from "../bike/reference";
+import { ActionButton } from "../components/action-button/action-button";
 import { ContentCard } from "../components/content-card/content-card";
-import { Stack } from "../components/layout/layout";
+import { Cluster, Stack } from "../components/layout/layout";
 import { ScreenLayout } from "../screen/screen-layout";
 import { BikeActions } from "./bike-actions";
 import { getBikeDetails } from "./bike-details";
@@ -15,11 +16,37 @@ export function BikeSheet({ params: reference }: { params: Reference }) {
 	const api = useApi();
 
 	return (
-		<ScreenLayout title={`Vélo ${reference}`}>
-			<BikeDetails
-				bikeQuery={api.bikes.get.queryOptions({ input: reference })}
-			/>
-		</ScreenLayout>
+		<Stack gap="var(--size-2)">
+			<BackButton />
+			<ScreenLayout title={`Vélo ${reference}`}>
+				<BikeDetails
+					bikeQuery={api.bikes.get.queryOptions({ input: reference })}
+				/>
+			</ScreenLayout>
+		</Stack>
+	);
+}
+
+/*
+ * Revient à l'écran précédent, le plus souvent la recherche, avec ses filtres. Ouverte
+ * depuis un lien partagé, la fiche n'a pas d'écran précédent dans l'app : le retour quitte
+ * alors l'app.
+ *
+ * Retour intelligent, à faire : un vrai lien vers la recherche, qui se comporte comme
+ * history.back() quand l'entrée précédente de l'historique est cette même recherche, aux
+ * paramètres de requête près. On garderait les filtres, sans jamais sortir de l'app.
+ */
+function BackButton() {
+	return (
+		<Cluster>
+			<ActionButton
+				variant="secondary"
+				size="small"
+				onClick={() => window.history.back()}
+			>
+				← Retour
+			</ActionButton>
+		</Cluster>
 	);
 }
 
