@@ -181,7 +181,16 @@
 			<button type="button" class="action-button" data-size="small">Petit</button>
 			<button type="button" class="action-button">Normal</button>
 		</div>
-		<p>« Petit » réduit le texte et les marges, jamais la hauteur : un bouton doit rester assez grand pour un doigt.</p>
+		<div class="layout-cluster">
+			<button type="button" class="action-button" data-size="small">Par défaut</button>
+			<button type="button" class="action-button" data-size="small" data-variant="primary">Enregistrer</button>
+			<button type="button" class="action-button" data-size="small" data-variant="secondary">Annuler</button>
+			<button type="button" class="action-button" data-size="small" data-variant="danger">Supprimer</button>
+			<button type="button" class="action-button" data-size="small" data-variant="primary" aria-disabled="true" aria-busy="true">En cours</button>
+		</div>
+		<p>« Petit » se dessine à 32 px de haut (<code>--size-control-small</code>), mais sa cible
+			tactile garde 48 px : une zone invisible déborde de 8 px en haut et en bas. Elle ne
+			prend aucune place dans la mise en page.</p>
 	</section>
 
 	<section>

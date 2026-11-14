@@ -47,12 +47,26 @@
 		}
 
 		/*
-		 * « small » réduit le texte et les marges, jamais la hauteur : un bouton doit rester
-		 * assez grand pour un doigt, quelle que soit sa variante.
+		 * « small » se dessine plus petit, mais sa cible tactile ne rapetisse pas : un doigt doit
+		 * pouvoir le toucher. Un pseudo-élément invisible (::before) déborde en haut et en bas,
+		 * jusqu'à --size-tap-target, et reçoit le tap. Placé en position absolue, il ne prend
+		 * aucune place : la mise en page ne voit que le bouton dessiné.
+		 *
+		 * ::after porte déjà la roue de chargement : la cible prend ::before.
 		 */
 		&[data-size="small"] {
 			--_padding-inline: var(--size-2);
 			--_font-size: 0.75rem;
+
+			position: relative;
+			min-block-size: var(--size-control-small);
+
+			&::before {
+				content: "";
+				position: absolute;
+				inset-inline: 0;
+				inset-block: calc((var(--size-tap-target) - 100%) / -2);
+			}
 		}
 
 		/*

@@ -115,6 +115,8 @@
 
 	--size-inset: var(--size-3);
 	--size-tap-target: var(--size-8);
+	/* La hauteur visible d'un petit bouton. Sa cible tactile garde --size-tap-target. */
+	--size-control-small: var(--size-7);
 	/* La largeur maximale d'une page : au-delà, les cartes en grille s'étirent et se lisent mal. */
 	--size-container: 60rem;
 	--radius-base: var(--radius-2);

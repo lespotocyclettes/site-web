@@ -195,7 +195,14 @@ Une case de formulaire qu'on choisit parmi d'autres : en cocher une décoche les
 même groupe. Le choix « vente ou don » de la sortie de stock en est un.
 
 **Cible tactile** :
-La surface tapable d'un bouton. Minimum 48 px de haut chez nous. C'est un plancher.
+La surface tapable d'un bouton. Minimum 48 px de haut chez nous. C'est un plancher. Un
+petit bouton peut se dessiner plus bas : une zone invisible prolonge alors sa cible
+jusqu'à 48 px.
+
+**Pseudo-élément** :
+Un morceau de rendu que le CSS ajoute à un élément sans toucher au HTML : `::before`
+avant son contenu, `::after` après. Le navigateur le dessine, mais il n'est pas une balise
+de la page.
 
 **WCAG** :
 Le référentiel d'accessibilité du web. On vise le niveau AA, et un script le mesure.
