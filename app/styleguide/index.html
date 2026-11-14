@@ -287,21 +287,29 @@
 			puis le statut. Une ligne sans aucun champ rempli disparaît.</p>
 
 		<h3>Sur la fiche</h3>
-		<article class="content-card">
-			<div class="media" style="--_ratio: 4 / 3"><img alt="" src="https://www.lespotocyclettes.com/wp-content/uploads/2023/11/descriptionvelo-ancien-768x955.jpg"></div>
-			<h1 class="title"><span class="bike-reference">231104.02</span></h1>
-			<span>gazelle · champion mondial</span>
-			<span>ville · adulte</span>
-			<span class="meta">à traiter</span>
-			<dl class="detail-list">
-				<dt class="term">Entré le</dt>
-				<dd class="value">04/11/2023</dd>
-				<dt class="term" data-variant="empty">Forme du cadre</dt>
-				<dd class="value" data-variant="empty">—</dd>
-			</dl>
-		</article>
-		<p>La même tête, la référence en <code>h1</code> : c'est le titre de l'écran. La photo
-			s'arrête à 70 % de la hauteur de la fenêtre ; sur un écran large, elle est recadrée.</p>
+		<div class="layout-stack">
+			<article class="content-card">
+				<div class="media" style="--_ratio: 4 / 3"><img alt="" src="https://www.lespotocyclettes.com/wp-content/uploads/2023/11/descriptionvelo-ancien-768x955.jpg"></div>
+				<h1 class="title"><span class="bike-reference">231104.02</span></h1>
+				<span>gazelle · champion mondial</span>
+				<span>ville · adulte</span>
+				<span class="meta">à traiter</span>
+			</article>
+			<article class="content-card">
+				<span class="meta">Détails</span>
+				<dl class="detail-list">
+					<dt class="term">Entré le</dt>
+					<dd class="value">04/11/2023</dd>
+					<dt class="term" data-variant="empty">Forme du cadre</dt>
+					<dd class="value" data-variant="empty">—</dd>
+				</dl>
+			</article>
+		</div>
+		<p>Deux cartes, séparées par l'espace du <code>layout-stack</code>. La première est la
+			carte de recherche en grand, la référence en <code>h1</code> : c'est le titre de
+			l'écran. La photo s'arrête à 70 % de la hauteur de la fenêtre ; sur un écran large,
+			elle est recadrée. La seconde, légendée en petit (<code>.meta</code>), porte les autres
+			champs.</p>
 
 		<h3>Sans ratio</h3>
 		<div class="layout-grid" style="--min: 9rem">

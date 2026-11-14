@@ -58,9 +58,9 @@ function BackButton() {
 }
 
 /*
- * La même tête que la carte de recherche (BikeIdentity), puis les autres champs. La photo
- * n'a pas de texte alternatif : la référence et la marque, juste dessous, disent déjà de
- * quel vélo il s'agit.
+ * Deux cartes, séparées par l'espace du Stack : la première est la carte de recherche en
+ * grand (BikeIdentity), la seconde porte les autres champs. La photo n'a pas de texte
+ * alternatif : la référence et la marque, juste dessous, disent déjà de quel vélo il s'agit.
  */
 function BikeDetails({ bikeQuery }: { bikeQuery: QueryOptionsOf<Bike> }) {
 	const { data: bike } = useSuspenseQuery(bikeQuery);
@@ -73,6 +73,9 @@ function BikeDetails({ bikeQuery }: { bikeQuery: QueryOptionsOf<Bike> }) {
 					{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
 				</ContentCard.Media>
 				<BikeIdentity bike={bike} titleAs="h1" />
+			</ContentCard.Root>
+			<ContentCard.Root>
+				<ContentCard.Meta>Détails</ContentCard.Meta>
 				<dl className="detail-list">
 					{/*
 					 * Un champ non renseigné reste visible, avec un tiret : on voit ce qui reste
