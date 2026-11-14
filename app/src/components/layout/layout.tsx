@@ -31,6 +31,10 @@ function toLayoutProps(
 	};
 }
 
+export function Center(props: LayoutProps) {
+	return <div {...toLayoutProps("layout-center", {}, props)} />;
+}
+
 export function Stack({ gap, ...props }: LayoutProps & { gap?: Space }) {
 	return <div {...toLayoutProps("layout-stack", { "--gap": gap }, props)} />;
 }

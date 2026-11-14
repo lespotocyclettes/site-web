@@ -8,9 +8,8 @@
 	<link rel="stylesheet" href="../src/styles/index.css">
 	<style>
 		/* Propre à cette page : la mise en page du styleguide n'est pas la fondation. */
-		/* 60rem : au-delà, les cartes en grille s'étirent et la page se lit mal. */
 		body {
-			max-inline-size: 60rem;
+			max-inline-size: var(--size-container);
 			margin-inline: auto;
 			padding: var(--size-3);
 		}
@@ -122,9 +121,17 @@
 
 	<section>
 		<h2>Mise en page</h2>
-		<p>Trois briques qui rangent des éléments les uns par rapport aux autres, sans rien dessiner. Elles se règlent avec
-			<code>--gap</code> (l'espace entre les éléments), <code>--min</code> et <code>--align</code>.
+		<p>Quatre briques qui rangent des éléments les uns par rapport aux autres, sans rien dessiner. Elles se règlent avec
+			<code>--gap</code> (l'espace entre les éléments), <code>--min</code>, <code>--align</code> et <code>--max</code>.
 		</p>
+
+		<h3><code>.layout-center</code></h3>
+		<div class="layout-center" style="--max: 20rem">
+			<div class="content-card">Centré, 20rem au plus</div>
+		</div>
+		<p>Le cadre de chaque écran de l'app : centré, jamais plus large que
+			<code>--size-container</code> (60rem), avec une marge de chaque côté. Ici,
+			<code>--max</code> le réduit pour qu'on le voie.</p>
 
 		<h3><code>.layout-stack</code></h3>
 		<div class="layout-stack" style="--gap: var(--size-2)">

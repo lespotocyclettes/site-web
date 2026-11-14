@@ -1,9 +1,22 @@
 /*
- * Trois briques de mise en page, réglables par propriété personnalisée (--gap, --min,
- * --align). Elles disent comment ranger des éléments, pas à quelle taille. Aucune ne
- * dépend de la largeur de l'écran : c'est le contenu qui décide quand ça passe à la ligne.
+ * Quatre briques de mise en page, réglables par propriété personnalisée (--gap, --min,
+ * --align, --max). Elles disent comment ranger des éléments, pas à quelle taille. Aucune
+ * ne dépend de la largeur de l'écran : c'est le contenu qui décide quand ça passe à la
+ * ligne.
  */
 @layer layout {
+	/*
+	 * Centre son contenu sous une largeur maximale, avec une marge de chaque côté pour qu'il
+	 * ne touche jamais le bord d'un téléphone. content-box : la largeur maximale compte le
+	 * contenu seul, les marges s'y ajoutent.
+	 */
+	.layout-center {
+		box-sizing: content-box;
+		max-inline-size: var(--max, var(--size-container));
+		margin-inline: auto;
+		padding-inline: var(--size-3);
+	}
+
 	.layout-stack {
 		display: flex;
 		flex-direction: column;
