@@ -11,11 +11,11 @@ const BIKE: Bike = {
 	status: "prêt à la vente",
 };
 
-test("un champ non renseigné reste sur la fiche, avec un tiret", () => {
+test("un champ non renseigné reste sur la fiche, sans valeur", () => {
 	const rows = getBikeDetails(BIKE);
 
-	expect(getValue(rows, "Forme du cadre")).toBe("—");
-	expect(getValue(rows, "Couleurs")).toBe("—");
+	expect(getValue(rows, "Forme du cadre")).toBeNull();
+	expect(getValue(rows, "Couleurs")).toBeNull();
 	expect(getValue(rows, "Donateur")).toBe("Marc");
 });
 
@@ -41,6 +41,6 @@ function exited(exit: Exit): Bike {
 function getValue(
 	rows: readonly DetailRow[],
 	label: string,
-): string | undefined {
+): string | null | undefined {
 	return rows.find((row) => row.label === label)?.value;
 }

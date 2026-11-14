@@ -74,11 +74,21 @@ function BikeDetails({ bikeQuery }: { bikeQuery: QueryOptionsOf<Bike> }) {
 				</ContentCard.Media>
 				<BikeIdentity bike={bike} titleAs="h1" />
 				<dl className="detail-list">
+					{/*
+					 * Un champ non renseigné reste visible, avec un tiret : on voit ce qui reste
+					 * à compléter. Il est atténué, pour que l'œil trouve vite les champs remplis.
+					 */}
 					{getBikeDetails(bike).map(({ label, value }) => {
+						const variant = value === null ? "empty" : undefined;
+
 						return (
 							<Fragment key={label}>
-								<dt className="term">{label}</dt>
-								<dd className="value">{value}</dd>
+								<dt className="term" data-variant={variant}>
+									{label}
+								</dt>
+								<dd className="value" data-variant={variant}>
+									{value ?? "—"}
+								</dd>
 							</Fragment>
 						);
 					})}

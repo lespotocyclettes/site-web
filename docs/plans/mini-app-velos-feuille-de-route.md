@@ -63,11 +63,11 @@ Restent pour plus tard :
 
 Le recto à l'écran : la première photo, plafonnée à 70 % de la hauteur de la fenêtre, puis
 la même tête que la carte de recherche (`BikeIdentity` : la référence en h1, marque ·
-modèle, type · public, statut), puis les autres champs, un champ vide affiché avec un
-tiret (`.detail-list`). Les actions suivent `getNextStatuses`. Un tap ne change rien : il
-ouvre une fenêtre modale (`ModalDialog`), qui demande confirmation ou porte le formulaire de
-sortie (vente ou don en chips radio, acheteur requis, prix requis pour une vente). Un vélo
-sorti montre sa sortie. Un bouton retour ramène à l'écran précédent.
+modèle, type · public, statut), puis les autres champs, un champ vide affiché, atténué,
+avec un tiret (`.detail-list`). Les actions suivent `getNextStatuses`. Un tap ne change
+rien : il ouvre une fenêtre modale (`ModalDialog`), qui demande confirmation ou porte le
+formulaire de sortie (vente ou don en chips radio, acheteur requis, prix requis pour une
+vente). Un vélo sorti montre sa sortie. Un bouton retour ramène à l'écran précédent.
 
 Restent pour plus tard :
 - les **photos suivantes**, qui arrivent avec l'enregistrement ;

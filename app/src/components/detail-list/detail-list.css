@@ -22,5 +22,16 @@
 		> .value {
 			margin: 0;
 		}
+
+		/*
+		 * Un champ non renseigné, posé sur son libellé et sur sa valeur : les deux passent en
+		 * gris, et le libellé perd sa graisse. Les champs remplis ressortent au premier coup
+		 * d'œil.
+		 */
+		> .term[data-variant="empty"],
+		> .value[data-variant="empty"] {
+			font-weight: 400;
+			color: var(--color-text-muted);
+		}
 	}
 }

@@ -2,10 +2,8 @@ import type { Bike, Exit } from "../bike/bike";
 import { formatFrenchDate, type IsoDate } from "../bike/iso-date";
 import { getReferenceParts } from "../bike/reference";
 
-export type DetailRow = { label: string; value: string };
-
-/** Un champ vide reste visible : on voit d'un coup d'œil ce qui reste à compléter. */
-const NOT_FILLED = "—";
+/** Une valeur null est un champ non renseigné : la fiche l'affiche quand même, atténué. */
+export type DetailRow = { label: string; value: string | null };
 
 /**
  * Le recto de la fiche, ligne par ligne, sauf ce que BikeIdentity affiche déjà en tête
@@ -15,12 +13,12 @@ export function getBikeDetails(bike: Bike): readonly DetailRow[] {
 	const { entryDate } = getReferenceParts(bike.reference);
 	const rows: readonly DetailRow[] = [
 		{ label: "Entré le", value: formatFrenchDate(entryDate) },
-		{ label: "Forme du cadre", value: bike.frameShape ?? NOT_FILLED },
-		{ label: "Changement de vitesses", value: bike.gearShift ?? NOT_FILLED },
-		{ label: "Triage", value: bike.triage ?? NOT_FILLED },
+		{ label: "Forme du cadre", value: bike.frameShape },
+		{ label: "Changement de vitesses", value: bike.gearShift },
+		{ label: "Triage", value: bike.triage },
 		{ label: "Couleurs", value: formatList(bike.colors) },
 		{ label: "Caractéristiques", value: formatList(bike.features) },
-		{ label: "Donateur", value: bike.donor ?? NOT_FILLED },
+		{ label: "Donateur", value: bike.donor },
 	];
 	if (bike.status !== "sorti") return rows;
 
@@ -38,8 +36,8 @@ function getExitDetails(exit: Exit, exitDate: IsoDate): readonly DetailRow[] {
 	return [...rows, { label: "Prix", value: formatEuros(exit.price) }];
 }
 
-function formatList(values: readonly string[]): string {
-	if (values.length === 0) return NOT_FILLED;
+function formatList(values: readonly string[]): string | null {
+	if (values.length === 0) return null;
 
 	return values.join(", ");
 }
