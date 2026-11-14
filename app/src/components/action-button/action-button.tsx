@@ -15,6 +15,11 @@ type ActionButtonProps = Omit<
 	variant?: Variant;
 	size?: Size;
 	/**
+	 * Un émoji devant le libellé. Il montre qu'on peut taper, là où un libellé seul ressemble
+	 * à une étiquette. Les lecteurs d'écran ne le lisent pas : le libellé suffit.
+	 */
+	icon?: string;
+	/**
 	 * Si le clic renvoie une promesse, le bouton reste désactivé et affiche une roue jusqu'à
 	 * ce qu'elle se termine : un second clic est impossible, l'action ne part pas deux fois.
 	 */
@@ -30,9 +35,11 @@ type ActionButtonProps = Omit<
 export function ActionButton({
 	variant,
 	size,
+	icon,
 	type = "button",
 	disabled,
 	onClick,
+	children,
 	...props
 }: ActionButtonProps) {
 	const [isPending, setIsPending] = useState(false);
@@ -75,6 +82,9 @@ export function ActionButton({
 			 * exemple avec l'erreur de sa mutation). Il remonte au navigateur, qui le signale.
 			 */
 			onClick={(event) => void runAction(event)}
-		/>
+		>
+			{icon !== undefined && <span aria-hidden="true">{icon}</span>}
+			{children}
+		</button>
 	);
 }

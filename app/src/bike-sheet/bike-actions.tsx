@@ -15,6 +15,12 @@ const ACTION_LABELS = {
 	démonté: "Démonté",
 } as const satisfies Record<NextStatus, string>;
 
+const ACTION_ICONS = {
+	"prêt à la vente": "🏷️",
+	sorti: "📤",
+	démonté: "🔧",
+} as const satisfies Record<NextStatus, string>;
+
 /*
  * Les actions qui font avancer le vélo dans son parcours. Un tap ne change rien : il ouvre
  * une fenêtre modale, qui demande confirmation ou, pour la sortie, son formulaire. Un vélo
@@ -49,6 +55,7 @@ export function BikeActions({ bike }: { bike: Bike }) {
 							key={status}
 							variant={status === "démonté" ? "danger" : "secondary"}
 							size="small"
+							icon={ACTION_ICONS[status]}
 							aria-haspopup="dialog"
 							onClick={() => open(status)}
 						>

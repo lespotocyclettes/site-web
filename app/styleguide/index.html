@@ -191,6 +191,20 @@
 		<p>« Petit » se dessine à 32 px de haut (<code>--size-control-small</code>), mais sa cible
 			tactile garde 48 px : une zone invisible déborde de 8 px en haut et en bas. Elle ne
 			prend aucune place dans la mise en page.</p>
+
+		<h3>Avec icône</h3>
+		<div class="layout-cluster">
+			<button type="button" class="action-button" data-variant="secondary"><span aria-hidden="true">🏷️</span>Prêt à la vente</button>
+			<button type="button" class="action-button" data-variant="danger"><span aria-hidden="true">🔧</span>Démonté</button>
+		</div>
+		<div class="layout-cluster">
+			<button type="button" class="action-button" data-size="small" data-variant="secondary"><span aria-hidden="true">🏷️</span>Prêt à la vente</button>
+			<button type="button" class="action-button" data-size="small" data-variant="secondary"><span aria-hidden="true">📤</span>Sortie de stock</button>
+			<button type="button" class="action-button" data-size="small" data-variant="danger"><span aria-hidden="true">🔧</span>Démonté</button>
+		</div>
+		<p><code>ActionButton icon="🏷️"</code> : un émoji devant le libellé, pour qu'on voie qu'on
+			peut taper. Il est caché aux lecteurs d'écran (<code>aria-hidden</code>) : le libellé
+			suffit.</p>
 	</section>
 
 	<section>
