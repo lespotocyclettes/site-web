@@ -6,7 +6,7 @@ import { type DetailRow, getBikeDetails } from "./bike-details";
 const BIKE: Bike = {
 	...EMPTY_BIKE_DESCRIPTION,
 	reference: formatReference({ entryDate: "2018-11-21", dayCounter: 3 }),
-	brand: "mistral",
+	donor: "Marc",
 	photos: [],
 	status: "prêt à la vente",
 };
@@ -14,9 +14,9 @@ const BIKE: Bike = {
 test("un champ non renseigné reste sur la fiche, avec un tiret", () => {
 	const rows = getBikeDetails(BIKE);
 
-	expect(getValue(rows, "Modèle")).toBe("—");
+	expect(getValue(rows, "Forme du cadre")).toBe("—");
 	expect(getValue(rows, "Couleurs")).toBe("—");
-	expect(getValue(rows, "Marque")).toBe("mistral");
+	expect(getValue(rows, "Donateur")).toBe("Marc");
 });
 
 test("la date d'entrée se lit dans la référence", () => {

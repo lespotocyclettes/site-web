@@ -5,9 +5,11 @@ import type { QueryOptionsOf } from "../api/define-query";
 import type { Bike } from "../bike/bike";
 import type { Reference } from "../bike/reference";
 import { ActionButton } from "../components/action-button/action-button";
+import { BikeIdentity } from "../components/bike-identity/bike-identity";
 import { ContentCard } from "../components/content-card/content-card";
 import { Cluster, Stack } from "../components/layout/layout";
-import { ScreenLayout } from "../screen/screen-layout";
+import { Boundary } from "../screen/boundary";
+import { PageTitle } from "../screen/screen-layout";
 import { BikeActions } from "./bike-actions";
 import { getBikeDetails } from "./bike-details";
 
@@ -15,14 +17,19 @@ import { getBikeDetails } from "./bike-details";
 export function BikeSheet({ params: reference }: { params: Reference }) {
 	const api = useApi();
 
+	/*
+	 * Pas de ScreenLayout : le h1 est la référence, dans la carte, comme sur la carte de
+	 * recherche. Il arrive donc avec le vélo, après le chargement.
+	 */
 	return (
 		<Stack gap="var(--size-2)">
+			<PageTitle title={reference} />
 			<BackButton />
-			<ScreenLayout title={`Vélo ${reference}`}>
+			<Boundary>
 				<BikeDetails
 					bikeQuery={api.bikes.get.queryOptions({ input: reference })}
 				/>
-			</ScreenLayout>
+			</Boundary>
 		</Stack>
 	);
 }
@@ -51,8 +58,9 @@ function BackButton() {
 }
 
 /*
- * La photo n'a pas de texte alternatif : le titre de l'écran et les champs, juste dessous,
- * disent déjà de quel vélo il s'agit.
+ * La même tête que la carte de recherche (BikeIdentity), puis les autres champs. La photo
+ * n'a pas de texte alternatif : la référence et la marque, juste dessous, disent déjà de
+ * quel vélo il s'agit.
  */
 function BikeDetails({ bikeQuery }: { bikeQuery: QueryOptionsOf<Bike> }) {
 	const { data: bike } = useSuspenseQuery(bikeQuery);
@@ -64,6 +72,7 @@ function BikeDetails({ bikeQuery }: { bikeQuery: QueryOptionsOf<Bike> }) {
 				<ContentCard.Media ratio="4 / 3">
 					{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
 				</ContentCard.Media>
+				<BikeIdentity bike={bike} titleAs="h1" />
 				<dl className="detail-list">
 					{getBikeDetails(bike).map(({ label, value }) => {
 						return (

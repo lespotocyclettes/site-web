@@ -7,19 +7,17 @@ export type DetailRow = { label: string; value: string };
 /** Un champ vide reste visible : on voit d'un coup d'œil ce qui reste à compléter. */
 const NOT_FILLED = "—";
 
-/** Le recto de la fiche, ligne par ligne. Un vélo sorti y ajoute sa sortie. */
+/**
+ * Le recto de la fiche, ligne par ligne, sauf ce que BikeIdentity affiche déjà en tête
+ * (statut, type, public, marque, modèle). Un vélo sorti y ajoute sa sortie.
+ */
 export function getBikeDetails(bike: Bike): readonly DetailRow[] {
 	const { entryDate } = getReferenceParts(bike.reference);
 	const rows: readonly DetailRow[] = [
-		{ label: "Statut", value: bike.status },
 		{ label: "Entré le", value: formatFrenchDate(entryDate) },
-		{ label: "Type", value: bike.kind ?? NOT_FILLED },
-		{ label: "Public", value: bike.audience ?? NOT_FILLED },
 		{ label: "Forme du cadre", value: bike.frameShape ?? NOT_FILLED },
 		{ label: "Changement de vitesses", value: bike.gearShift ?? NOT_FILLED },
 		{ label: "Triage", value: bike.triage ?? NOT_FILLED },
-		{ label: "Marque", value: bike.brand ?? NOT_FILLED },
-		{ label: "Modèle", value: bike.model ?? NOT_FILLED },
 		{ label: "Couleurs", value: formatList(bike.colors) },
 		{ label: "Caractéristiques", value: formatList(bike.features) },
 		{ label: "Donateur", value: bike.donor ?? NOT_FILLED },

@@ -7,8 +7,8 @@ const APP_TITLE = "Vélos — Les Poto'Cyclettes";
 
 /**
  * Le titre reste hors de la boundary : il s'affiche pendant le chargement comme en cas
- * d'erreur. Il nomme aussi l'onglet du navigateur : React range la balise <title> dans le
- * <head>, où qu'on l'écrive.
+ * d'erreur. Un écran qui place son h1 ailleurs, comme la fiche vélo, compose PageTitle et
+ * Boundary lui-même.
  */
 export function ScreenLayout({
 	title,
@@ -17,13 +17,19 @@ export function ScreenLayout({
 	title: string;
 	children: ReactNode;
 }) {
-	const pageTitle = `${title} · ${APP_TITLE}`;
-
 	return (
 		<Stack gap="var(--size-4)">
-			<title>{pageTitle}</title>
+			<PageTitle title={title} />
 			<h1>{title}</h1>
 			<Boundary>{children}</Boundary>
 		</Stack>
 	);
+}
+
+/**
+ * Le nom de l'onglet du navigateur, suivi du nom de l'app. React range la balise <title>
+ * dans le <head>, où qu'on l'écrive.
+ */
+export function PageTitle({ title }: { title: string }) {
+	return <title>{`${title} · ${APP_TITLE}`}</title>;
 }
