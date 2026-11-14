@@ -1,5 +1,6 @@
 import type { Bike } from "../../bike/bike";
 import { bikeSheetRoute } from "../../routes/velo";
+import { BikeIdentity } from "../bike-identity/bike-identity";
 import { ContentCard } from "../content-card/content-card";
 
 /*
@@ -9,20 +10,13 @@ import { ContentCard } from "../content-card/content-card";
  */
 export function BikeCard({ bike }: { bike: Bike }) {
 	const [photo] = bike.photos;
-	const description = [bike.brand, bike.model]
-		.filter((part) => part !== null)
-		.join(" · ");
 
 	return (
 		<ContentCard.Root href={bikeSheetRoute.href(bike.reference)}>
 			<ContentCard.Media ratio="4 / 3">
 				{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
 			</ContentCard.Media>
-			<ContentCard.Title>
-				<span className="bike-reference">{bike.reference}</span>
-			</ContentCard.Title>
-			{description !== "" && <span>{description}</span>}
-			<ContentCard.Meta>{bike.status}</ContentCard.Meta>
+			<BikeIdentity bike={bike} />
 		</ContentCard.Root>
 	);
 }
