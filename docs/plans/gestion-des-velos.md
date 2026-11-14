@@ -42,9 +42,9 @@
 >
 > **Amendement du 14/11/2026** (fiche vélo).
 >
-> - **Confirmation** : chaque action se déplie sur place, sous la rangée de boutons. « Prêt
->   à la vente » et « démonté » demandent une confirmation ; « sortie de stock » déplie son
->   formulaire au même endroit. Pas de fenêtre modale.
+> - **Confirmation** : chaque action ouvre une fenêtre modale. « Prêt à la vente » et
+>   « démonté » y demandent une confirmation ; « sortie de stock » y ouvre son formulaire.
+>   Une confirmation dépliée sur place a été essayée, puis écartée au rendu.
 > - **Sortie de stock** : miroir légal de la fiche don, elle bloque. L'acheteur est requis,
 >   et le prix pour une vente.
 

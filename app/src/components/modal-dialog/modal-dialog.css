@@ -19,6 +19,21 @@
 			box-shadow: var(--shadow-overlay);
 		}
 
+		/*
+		 * Seulement ouverte : un display posé sans condition afficherait aussi la fenêtre
+		 * fermée, que le navigateur cache par display: none.
+		 */
+		&[open] {
+			display: flex;
+			flex-direction: column;
+			gap: var(--size-3);
+		}
+
+		/* L'espacement vient du gap : les marges d'un paragraphe s'y ajouteraient. */
+		> p {
+			margin-block: 0;
+		}
+
 		&::backdrop {
 			background: var(--color-backdrop);
 		}

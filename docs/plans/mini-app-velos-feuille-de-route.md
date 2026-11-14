@@ -62,8 +62,9 @@ Restent pour plus tard :
 
 Le recto à l'écran : la première photo, puis les champs, un champ vide affiché avec un
 tiret (`.detail-list`). Les actions suivent `getNextStatuses`. Un tap ne change rien : il
-déplie sur place la confirmation, ou le formulaire de sortie (vente ou don en chips radio,
-acheteur requis, prix requis pour une vente). Un vélo sorti montre sa sortie.
+ouvre une fenêtre modale (`ModalDialog`), qui demande confirmation ou porte le formulaire de
+sortie (vente ou don en chips radio, acheteur requis, prix requis pour une vente). Un vélo
+sorti montre sa sortie. Un bouton retour ramène à l'écran précédent.
 
 Restent pour plus tard :
 - les **photos suivantes**, qui arrivent avec l'enregistrement ;
