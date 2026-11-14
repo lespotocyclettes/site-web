@@ -58,15 +58,28 @@ function Media({ ratio, children }: { ratio?: Ratio; children: ReactNode }) {
 /**
  * Le titre garde le même style quelle que soit sa balise. Une carte qui fait toute la page,
  * comme la fiche vélo, en fait le titre de l'écran : `as="h1"`.
+ *
+ * Avec `actions`, les boutons s'alignent à droite du titre. Jamais dans une carte-lien (avec
+ * href) : un bouton ne se place pas dans un lien.
  */
 function Title({
 	as: Tag = "span",
+	actions,
 	children,
 }: {
 	as?: "span" | "h1";
+	actions?: ReactNode;
 	children: ReactNode;
 }) {
-	return <Tag className="title">{children}</Tag>;
+	const title = <Tag className="title">{children}</Tag>;
+	if (actions === undefined) return title;
+
+	return (
+		<div className="heading">
+			{title}
+			{actions}
+		</div>
+	);
 }
 
 /** Un détail en petit, comme le statut d'un vélo. */

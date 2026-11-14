@@ -368,6 +368,31 @@
 		<p>Le titre garde son style quelle que soit sa balise : un <code>h3</code> ici, un
 			<code>span</code> dans la grille de recherche, le <code>h1</code> de l'écran sur la
 			fiche vélo (<code>ContentCard.Title as="h1"</code>).</p>
+
+		<h3>Titre avec actions</h3>
+		<div class="layout-grid" style="--min: 14rem">
+			<article class="content-card">
+				<div class="heading">
+					<h3 class="title">Court</h3>
+					<div class="layout-cluster">
+						<button type="button" class="action-button" data-variant="secondary" data-size="small">Modifier</button>
+					</div>
+				</div>
+				<p>Le bouton tient sur la ligne du titre.</p>
+			</article>
+			<article class="content-card">
+				<div class="heading">
+					<h3 class="title">Un titre plus long</h3>
+					<div class="layout-cluster">
+						<button type="button" class="action-button" data-variant="secondary" data-size="small">Prêt à la vente</button>
+						<button type="button" class="action-button" data-variant="danger" data-size="small">Démonté</button>
+					</div>
+				</div>
+				<p>Faute de place, les boutons passent sous le titre.</p>
+			</article>
+		</div>
+		<p><code>ContentCard.Title actions={…}</code> : le titre et ses boutons dans un
+			<code>.heading</code>. Jamais dans une carte-lien.</p>
 	</section>
 
 	<section>

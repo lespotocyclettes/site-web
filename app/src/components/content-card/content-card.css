@@ -75,9 +75,22 @@
 			object-fit: cover;
 		}
 
-		> .title {
+		> .title,
+		> .heading > .title {
 			font: var(--text-title-3);
 			color: var(--color-text-heading);
+		}
+
+		/*
+		 * Un titre suivi de ses boutons d'action, sur la même ligne. Quand la place manque, les
+		 * boutons passent sous le titre (flex-wrap), sans écraser le titre.
+		 */
+		> .heading {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			gap: var(--size-2) var(--size-3);
 		}
 
 		> .meta {
