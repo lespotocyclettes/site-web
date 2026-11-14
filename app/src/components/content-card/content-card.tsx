@@ -55,8 +55,18 @@ function Media({ ratio, children }: { ratio?: Ratio; children: ReactNode }) {
 	);
 }
 
-function Title({ children }: { children: ReactNode }) {
-	return <span className="title">{children}</span>;
+/**
+ * Le titre garde le même style quelle que soit sa balise. Une carte qui fait toute la page,
+ * comme la fiche vélo, en fait le titre de l'écran : `as="h1"`.
+ */
+function Title({
+	as: Tag = "span",
+	children,
+}: {
+	as?: "span" | "h1";
+	children: ReactNode;
+}) {
+	return <Tag className="title">{children}</Tag>;
 }
 
 /** Un détail en petit, comme le statut d'un vélo. */
