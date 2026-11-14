@@ -11,6 +11,14 @@
 			--_border: var(--color-border-strong);
 			--_padding-inline: var(--size-inset);
 			--_font-size: 1rem;
+			/*
+			 * L'ombre « cartoon » : pleine, sans flou, sous le bouton. Elle dit qu'il dépasse de la
+			 * page, donc qu'on peut l'enfoncer. --_lift est sa hauteur : 4 px au repos, 5 px au
+			 * survol, 0 à l'appui. Le bouton se décale d'autant, et le bas de l'ombre ne bouge pas.
+			 */
+			--_shadow-color: var(--color-border-strong);
+			--_lift: 0.25rem;
+			--_cartoon-shadow: 0 var(--_lift) 0 var(--_shadow-color);
 
 			display: inline-flex;
 			align-items: center;
@@ -24,15 +32,34 @@
 			background: var(--_bg);
 			border: var(--border-size-1) solid var(--_border);
 			border-radius: var(--radius-button);
+			box-shadow: var(--_cartoon-shadow);
+			translate: 0 calc(0.25rem - var(--_lift));
 			cursor: pointer;
-			transition: background-color 120ms var(--ease-2);
+			transition:
+				background-color 120ms var(--ease-2),
+				box-shadow 120ms var(--ease-2),
+				translate 120ms var(--ease-2);
 			-webkit-tap-highlight-color: transparent;
+
+			/* Sans mouvement : l'ombre change d'un coup, le bouton ne glisse pas. */
+			@media (prefers-reduced-motion: reduce) {
+				transition: background-color 120ms var(--ease-2);
+			}
+		}
+
+		/*
+		 * base.css dessine l'anneau de focus avec box-shadow : ici, l'ombre du bouton
+		 * l'effacerait. Les deux sont donc posées ensemble.
+		 */
+		&:focus-visible {
+			box-shadow: var(--shadow-focus-ring), var(--_cartoon-shadow);
 		}
 
 		&[data-variant="primary"] {
 			--_bg: var(--color-accent);
 			--_fg: var(--color-text-on-accent);
 			--_border: transparent;
+			--_shadow-color: color-mix(in oklab, var(--_bg), black 35%);
 		}
 
 		&[data-variant="secondary"] {
@@ -44,6 +71,7 @@
 			--_bg: var(--color-danger);
 			--_fg: var(--color-text-on-danger);
 			--_border: transparent;
+			--_shadow-color: color-mix(in oklab, var(--_bg), black 35%);
 		}
 
 		/*
@@ -74,7 +102,15 @@
 		 * atteignable au clavier ; un <button disabled> écrit à la main reste habillé pareil.
 		 */
 		&:hover:not(:disabled, [aria-disabled="true"]) {
+			--_lift: 0.3125rem;
+
 			background: color-mix(in oklab, var(--_bg), var(--color-text-heading) 8%);
+		}
+
+		/* L'appui enfonce le bouton : c'est le seul retour au doigt, un téléphone n'a pas de survol. */
+		&:active:not(:disabled, [aria-disabled="true"]) {
+			/* 0rem et non 0 : un 0 sans unité casserait le calc() du décalage. */
+			--_lift: 0rem;
 		}
 
 		&:is(:disabled, [aria-disabled="true"]) {
