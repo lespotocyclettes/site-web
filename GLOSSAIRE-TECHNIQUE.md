@@ -226,6 +226,9 @@ défaut. Nos styles de texte `--text-*` s'écrivent pour elle (fiche
 L'unité de taille qui vaut la taille de texte choisie dans le navigateur : 16 px par
 défaut. Une taille en rem grandit avec le réglage de la personne, une taille en px non.
 
+**vh** :
+Un centième de la hauteur de la fenêtre du navigateur : 70vh, c'est 70 % de cette hauteur.
+
 **Chasse fixe** :
 Une police où chaque caractère a la même largeur, comme sur une machine à écrire. Nos
 références de vélo s'y écrivent, pour s'aligner.

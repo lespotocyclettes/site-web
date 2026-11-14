@@ -39,12 +39,17 @@
 		 *   si elle rogne ce qui dépasse (overflow: clip) ;
 		 * - dans un flex, un enfant ne descend jamais sous la hauteur de son contenu, sauf avec
 		 *   min-block-size: 0. Le cadre suit alors son ratio, et la photo y est recadrée.
+		 *
+		 * Sur un écran large, une carte pleine largeur donnerait une photo plus haute que
+		 * l'écran : elle s'arrête à 70 % de la hauteur de la fenêtre (70vh), et le reste est
+		 * recadré. Une carte de la grille n'atteint jamais cette hauteur.
 		 */
 		> .media {
 			--_ratio: auto;
 
 			aspect-ratio: var(--_ratio);
 			min-block-size: 0;
+			max-block-size: 70vh;
 			margin-inline: calc(-1 * var(--_padding));
 			overflow: clip;
 			font: var(--text-caption);
