@@ -48,6 +48,7 @@ export function BikeActions({ bike }: { bike: Bike }) {
 						<ActionButton
 							key={status}
 							variant={status === "démonté" ? "danger" : "secondary"}
+							size="small"
 							aria-haspopup="dialog"
 							onClick={() => open(status)}
 						>

@@ -72,7 +72,11 @@ function BikeDetails({ bikeQuery }: { bikeQuery: QueryOptionsOf<Bike> }) {
 				<ContentCard.Media ratio="4 / 3">
 					{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
 				</ContentCard.Media>
-				<BikeIdentity bike={bike} titleAs="h1" />
+				<BikeIdentity
+					bike={bike}
+					titleAs="h1"
+					actions={<BikeActions bike={bike} />}
+				/>
 			</ContentCard.Root>
 			<ContentCard.Root>
 				<ContentCard.Meta>Détails</ContentCard.Meta>
@@ -97,7 +101,6 @@ function BikeDetails({ bikeQuery }: { bikeQuery: QueryOptionsOf<Bike> }) {
 					})}
 				</dl>
 			</ContentCard.Root>
-			<BikeActions bike={bike} />
 		</Stack>
 	);
 }

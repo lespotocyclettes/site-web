@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Bike } from "../../bike/bike";
 import { ContentCard } from "../content-card/content-card";
 
@@ -7,21 +8,23 @@ import { ContentCard } from "../content-card/content-card";
  * dont aucun champ n'est rempli n'est pas affichée.
  *
  * Se place dans une ContentCard.Root, sous la photo. Sur la fiche, la référence est le titre
- * de l'écran : titleAs="h1".
+ * de l'écran (titleAs="h1"), et les actions s'alignent à sa droite.
  */
 export function BikeIdentity({
 	bike,
 	titleAs,
+	actions,
 }: {
 	bike: Bike;
 	titleAs?: "span" | "h1";
+	actions?: ReactNode;
 }) {
 	const brandAndModel = joinFilled([bike.brand, bike.model]);
 	const kindAndAudience = joinFilled([bike.kind, bike.audience]);
 
 	return (
 		<>
-			<ContentCard.Title as={titleAs}>
+			<ContentCard.Title as={titleAs} actions={actions}>
 				<span className="bike-reference">{bike.reference}</span>
 			</ContentCard.Title>
 			{brandAndModel !== "" && <span>{brandAndModel}</span>}
