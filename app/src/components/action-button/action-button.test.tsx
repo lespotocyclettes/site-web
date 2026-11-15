@@ -8,8 +8,8 @@ test("une action en cours ne peut pas repartir, et le bouton revient à sa fin",
 		resolve = resolvePromise;
 	});
 	const action = vi.fn(() => promise);
-	render(<ActionButton onClick={action}>Prêt à la vente</ActionButton>);
-	const button = screen.getByRole("button", { name: "Prêt à la vente" });
+	render(<ActionButton onClick={action}>Mettre en vente</ActionButton>);
+	const button = screen.getByRole("button", { name: "Mettre en vente" });
 
 	fireEvent.click(button);
 	fireEvent.click(button);

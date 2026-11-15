@@ -104,6 +104,8 @@ sorti, démonté  → fin du parcours
 ```
 
 Un vélo peut donc sortir en l'état, ou partir au démontage sans avoir été réparé.
+Chaque transition a son verbe, que portent les boutons de la fiche : **mettre en vente**,
+**sortir du stock**, **démonter**.
 _Éviter_ : « état », qui désigne l'état mécanique du vélo. « En stock » pour la première
 valeur : un vélo prêt à la vente est en stock lui aussi.
 _Dans le code_ : `status`, qui vaut `à traiter`, `prêt à la vente`, `sorti` ou `démonté`.
@@ -116,6 +118,7 @@ _Dans le code_ : `isInStock`, et `IN_STOCK_SEARCH`, la recherche où arrive le b
 
 **Prêt à la vente** :
 Le vélo est réparé et peut partir. C'est ce statut qui alimente la vitrine web.
+Y faire passer un vélo, c'est le **mettre en vente**.
 
 **Sortie de stock** :
 Le départ d'un vélo, par vente ou par don. Elle enregistre l'acheteur, le prix et le type

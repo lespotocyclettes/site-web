@@ -9,10 +9,11 @@ import { Cluster } from "../components/layout/layout";
 import { ModalDialog } from "../components/modal-dialog/modal-dialog";
 import { ToggleGroup } from "../components/toggle-group/toggle-group";
 
+/* Un verbe à l'infinitif, ce qu'on fait au vélo : un nom de statut ferait croire à une chip. */
 const ACTION_LABELS = {
-	"prêt à la vente": "Prêt à la vente",
-	sorti: "Sortie de stock",
-	démonté: "Démonté",
+	"prêt à la vente": "Mettre en vente",
+	sorti: "Sortir du stock",
+	démonté: "Démonter",
 } as const satisfies Record<NextStatus, string>;
 
 const ACTION_ICONS = {

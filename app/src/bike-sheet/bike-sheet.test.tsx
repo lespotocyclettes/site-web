@@ -19,20 +19,20 @@ const BIKE: Bike = {
 test("un tap seul ne change pas le statut : il faut confirmer", async () => {
 	const store = renderSheet();
 
-	fireEvent.click(await screen.findByRole("button", { name: "Démonté" }));
+	fireEvent.click(await screen.findByRole("button", { name: "Démonter" }));
 	expect((await store.get(BIKE.reference)).status).toBe("prêt à la vente");
 
 	fireEvent.click(screen.getByRole("button", { name: "Confirmer" }));
 
 	expect(await screen.findByText("démonté")).toBeTruthy();
-	expect(screen.queryByRole("button", { name: "Sortie de stock" })).toBeNull();
+	expect(screen.queryByRole("button", { name: "Sortir du stock" })).toBeNull();
 });
 
 test("une vente enregistre l'acheteur et le prix", async () => {
 	const store = renderSheet();
 
 	fireEvent.click(
-		await screen.findByRole("button", { name: "Sortie de stock" }),
+		await screen.findByRole("button", { name: "Sortir du stock" }),
 	);
 	fireEvent.click(screen.getByRole("radio", { name: "vente" }));
 	fireEvent.change(screen.getByLabelText("Acheteur"), {
