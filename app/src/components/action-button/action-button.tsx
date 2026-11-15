@@ -31,6 +31,9 @@ type ActionButtonProps = Omit<
  * Le bouton de la mini-app, habillé par action-button.css. Il est de type "button" par
  * défaut : un <button> sans type, placé dans un formulaire, l'envoie au moindre clic. Pour
  * envoyer un formulaire, on l'écrit exprès : type="submit".
+ *
+ * Son libellé est un verbe à l'infinitif (« Démonter », « Enregistrer ») : un bouton agit.
+ * Un nom ou un adjectif (« Démonté ») le ferait passer pour une chip, qui porte une valeur.
  */
 export function ActionButton({
 	variant,
