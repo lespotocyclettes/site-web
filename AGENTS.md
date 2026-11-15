@@ -25,6 +25,10 @@ première apparition.
   un `if` garde toujours ses accolades et chaque fonction a son docblock (`@param`,
   `@return`), comme le veulent les
   [standards de code WordPress](https://developer.wordpress.org/coding-standards/).
+- **mettre en page** : compose les briques de
+  [layout.css](./app/src/components/layout/layout.css) (`Center`, `Stack`, `Cluster`,
+  `Grid`), tirées d'[Every Layout](https://every-layout.dev). Une disposition manque :
+  prends d'abord la brique du livre qui la couvre.
 - **ajouter une dépendance, un outil de développement ou une étape de build** : lis la règle 4 de
   [CONCEPTION.md](./CONCEPTION.md). Ces choix se co-signent : propose, l'humain tranche.
 - **changer une convention qui te paraît étrange** : lis [docs/adr/](./docs/adr/). Elle est

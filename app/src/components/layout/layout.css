@@ -3,6 +3,9 @@
  * --align, --max). Elles disent comment ranger des éléments, pas à quelle taille. Aucune
  * ne dépend de la largeur de l'écran : c'est le contenu qui décide quand ça passe à la
  * ligne.
+ *
+ * Elles viennent d'Every Layout (https://every-layout.dev), qui décrit aussi les briques
+ * qu'on n'a pas encore : une disposition qui manque s'y cherche d'abord.
  */
 @layer layout {
 	/*

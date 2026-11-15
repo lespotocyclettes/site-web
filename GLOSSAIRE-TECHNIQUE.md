@@ -60,9 +60,10 @@ sans toucher à la règle. Il y en a deux sortes.
   `--color-field-border`. Elle est faite pour être réglée de l'extérieur.
 
 **Brique de mise en page** :
-Une des trois classes `layout-stack` (empiler), `layout-cluster` (aligner en ligne, avec
-retour à la ligne) et `layout-grid` (grille). Elles rangent des éléments les uns par
-rapport aux autres, sans rien dessiner.
+Une des quatre classes `layout-center` (centrer sous une largeur maximale), `layout-stack`
+(empiler), `layout-cluster` (aligner en ligne, avec retour à la ligne) et `layout-grid`
+(grille). Elles rangent des éléments les uns par rapport aux autres, sans rien dessiner.
+Elles viennent du livre [Every Layout](https://every-layout.dev), qui en décrit d'autres.
 _Éviter_ : « primitive », « outil de mise en page ».
 
 **Manifeste** :
