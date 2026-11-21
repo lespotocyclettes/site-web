@@ -16,6 +16,15 @@ const ACTION_LABELS = {
 	démonté: "Démonter",
 } as const satisfies Record<NextStatus, string>;
 
+/* Chaque question écrite en entier : construite par morceaux, elle ne se chercherait plus. */
+const CONFIRM_QUESTIONS = {
+	"prêt à la vente": "Mettre ce vélo en vente ?",
+	démonté: "Démonter ce vélo ?",
+} as const satisfies Record<Exclude<NextStatus, "sorti">, string>;
+
+/* Le statut ne revient jamais en arrière : le bénévole doit le savoir avant de confirmer. */
+const IRREVERSIBLE_NOTICE = "C'est définitif.";
+
 const ACTION_ICONS = {
 	"prêt à la vente": "🏷️",
 	sorti: "📤",
@@ -99,12 +108,14 @@ export function BikeActions({ bike }: { bike: Bike }) {
 									close();
 								}}
 							>
-								Confirmer
+								{ACTION_LABELS[openedAction]}
 							</ActionButton>
 						</>
 					}
 				>
-					<p>Passer ce vélo « {openedAction} » ?</p>
+					<p>
+						{CONFIRM_QUESTIONS[openedAction]} {IRREVERSIBLE_NOTICE}
+					</p>
 					{error}
 				</ModalDialog>
 			)}
@@ -136,7 +147,7 @@ function ExitDialog({
 
 	return (
 		<ModalDialog
-			title="Sortie de stock"
+			title={ACTION_LABELS.sorti}
 			onClose={onClose}
 			actions={
 				<>
@@ -149,11 +160,12 @@ function ExitDialog({
 						variant="primary"
 						disabled={isPending}
 					>
-						Confirmer la sortie
+						{ACTION_LABELS.sorti}
 					</ActionButton>
 				</>
 			}
 		>
+			<p>{IRREVERSIBLE_NOTICE}</p>
 			<form id={formId} className="layout-stack" onSubmit={submit}>
 				<ToggleGroup
 					type="radio"

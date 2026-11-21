@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { createApi } from "../api/api";
 import { ApiProvider } from "../api/api-context";
@@ -22,7 +22,8 @@ test("un tap seul ne change pas le statut : il faut confirmer", async () => {
 	fireEvent.click(await screen.findByRole("button", { name: "Démonter" }));
 	expect((await store.get(BIKE.reference)).status).toBe("prêt à la vente");
 
-	fireEvent.click(screen.getByRole("button", { name: "Confirmer" }));
+	const dialog = screen.getByRole("dialog");
+	fireEvent.click(within(dialog).getByRole("button", { name: "Démonter" }));
 
 	expect(await screen.findByText("démonté")).toBeTruthy();
 	expect(screen.queryByRole("button", { name: "Sortir du stock" })).toBeNull();
@@ -41,7 +42,10 @@ test("une vente enregistre l'acheteur et le prix", async () => {
 	fireEvent.change(screen.getByLabelText("Prix, en euros"), {
 		target: { value: "120" },
 	});
-	fireEvent.click(screen.getByRole("button", { name: "Confirmer la sortie" }));
+	const dialog = screen.getByRole("dialog");
+	fireEvent.click(
+		within(dialog).getByRole("button", { name: "Sortir du stock" }),
+	);
 
 	expect(await screen.findByText("Léa")).toBeTruthy();
 	const bike = await store.get(BIKE.reference);
