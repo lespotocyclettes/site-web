@@ -29,6 +29,8 @@
 			font: var(--text-label);
 			font-size: var(--_font-size);
 			color: var(--_fg);
+			/* Un lien habillé en bouton : son libellé n'est pas souligné. */
+			text-decoration: none;
 			background: var(--_bg);
 			border: var(--border-size-1) solid var(--_border);
 			border-radius: var(--radius-surface);
