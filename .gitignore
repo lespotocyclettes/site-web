@@ -2,7 +2,9 @@ node_modules
 app/dist
 
 .*
-!/.claude
+!/.claude/skills
+
 !/.vscode
 !/.github
+
 !.gitignore
