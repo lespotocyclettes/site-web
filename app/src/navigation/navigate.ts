@@ -13,7 +13,8 @@ export function navigate(
 		return;
 	}
 
-	window.history.replaceState(null, "", href);
+	/* L'état de l'entrée (son origine, voir entry-origin.ts) survit au remplacement. */
+	window.history.replaceState(window.history.state, "", href);
 	/* replaceState ne prévient personne : on émet l'événement qu'écoute useScreen. */
 	window.dispatchEvent(new HashChangeEvent("hashchange"));
 }

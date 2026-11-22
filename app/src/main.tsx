@@ -7,6 +7,7 @@ import { App } from "./app";
 import { getTodayIsoDate } from "./bike/iso-date";
 import { createInMemoryBikeStore } from "./bike-store/in-memory-bike-store";
 import { SAMPLE_BIKES } from "./bike-store/sample-bikes";
+import { listenToEntryOrigins } from "./navigation/entry-origin";
 import "./styles/index.css";
 
 const root = document.getElementById("root");
@@ -17,6 +18,8 @@ const store = createInMemoryBikeStore({
 	bikes: SAMPLE_BIKES,
 	getToday: getTodayIsoDate,
 });
+
+listenToEntryOrigins(window);
 
 createRoot(root).render(
 	<StrictMode>
