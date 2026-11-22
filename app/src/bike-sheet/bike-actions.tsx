@@ -99,7 +99,7 @@ export function BikeActions({ bike }: { bike: Bike }) {
 								Annuler
 							</ActionButton>
 							<ActionButton
-								variant="primary"
+								variant="danger"
 								onClick={async () => {
 									await changeStatus.mutateAsync({
 										reference: bike.reference,
