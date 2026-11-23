@@ -8,6 +8,8 @@ import { ActionButton } from "../components/action-button/action-button";
 import { BikeIdentity } from "../components/bike-identity/bike-identity";
 import { ContentCard } from "../components/content-card/content-card";
 import { Cluster, Stack } from "../components/layout/layout";
+import { getBackLinkProps } from "../navigation/back-link";
+import { IN_STOCK_HREF } from "../routes/index";
 import { Boundary } from "../screen/boundary";
 import { PageTitle } from "../screen/screen-layout";
 import { BikeActions } from "./bike-actions";
@@ -35,13 +37,9 @@ export function BikeSheet({ params: reference }: { params: Reference }) {
 }
 
 /*
- * Revient à l'écran précédent, le plus souvent la recherche, avec ses filtres. Ouverte
- * depuis un lien partagé, la fiche n'a pas d'écran précédent dans l'app : le retour quitte
- * alors l'app.
- *
- * Retour intelligent, à faire : un vrai lien vers la recherche, qui se comporte comme
- * history.back() quand l'entrée précédente de l'historique est cette même recherche, aux
- * paramètres de requête près. On garderait les filtres, sans jamais sortir de l'app.
+ * Revient à la recherche d'où l'on vient, ou à la recherche en stock (voir back-link.ts).
+ * L'origine se lit au rendu : la fiche se redessine à chaque changement d'adresse, et
+ * l'origine d'une entrée ne change plus une fois notée.
  */
 function BackButton() {
 	return (
@@ -49,7 +47,7 @@ function BackButton() {
 			<ActionButton
 				variant="secondary"
 				size="small"
-				onClick={() => window.history.back()}
+				{...getBackLinkProps(IN_STOCK_HREF, window.history)}
 			>
 				← Retour
 			</ActionButton>
