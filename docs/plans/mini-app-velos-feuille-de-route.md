@@ -68,8 +68,10 @@ champs, un champ vide affiché, atténué, avec un tiret (`.detail-list`). Les a
 droite de la référence (`ContentCard.Title actions`), suivent `getNextStatuses`. Un tap ne
 change rien : il ouvre une fenêtre modale (`ModalDialog`), qui demande confirmation ou
 porte le formulaire de sortie (vente ou don en chips radio, acheteur requis, prix requis
-pour une vente). Un vélo sorti montre sa sortie. Un bouton retour ramène à l'écran
-précédent.
+pour une vente). Un vélo sorti montre sa sortie. Le lien retour ramène à la recherche
+d'où l'on vient, filtres et défilement compris ; ouverte par un lien partagé, la fiche
+renvoie à la recherche en stock (`navigation/back-link.ts`). Pour le savoir, chaque entrée
+de l'historique note son origine (`navigation/entry-origin.ts`).
 
 Restent pour plus tard :
 - les **photos suivantes**, qui arrivent avec l'enregistrement ;
@@ -92,6 +94,26 @@ Sans elle, reprendre la photo relance l'inférence et efface la saisie du formul
 pas encore validée se perd si le navigateur ferme l'onglet. La persistance par étape est
 prévue dans unreel.
 
+**Le retour, pendant et après l'enregistrement : un flux borné.** Pendant la saisie, le
+retour remonte d'une étape (via le rembobinage d'unreel, déjà prévu). Une fois
+l'enregistrement validé, ses étapes sortent de l'historique : le retour depuis la
+confirmation saute par-dessus et ramène à l'écran d'avant. Le navigateur ne supprime pas
+d'entrée, mais on peut revenir avant le flux puis écraser :
+
+```
+AVANT LA VALIDATION              APRÈS LA VALIDATION
+
+Recherche                        Recherche
+Étape A ┐                        Confirmation   ← remplace l'étape A ;
+Étape B │ flux borné, profondeur 3                 B et C ne sont plus atteignables
+Étape C ┘ ← on est ici           retour depuis la confirmation → Recherche
+```
+
+À la validation : `history.go(-profondeur)`, puis l'écran de confirmation prend la place.
+Chaque entrée note déjà son origine dans `history.state` ; elle y ajoutera
+`flow: { name, depth }`. Le motif s'appelle *bounded task flow* chez Oracle ADF,
+`popUpTo` dans la navigation Android.
+
 ## 4. Adaptateur relais
 
 Le relais PHP (phase 1 du plan), puis `src/bike-store/relay-bike-store.ts`, qui le remplit et
@@ -112,6 +134,13 @@ Des champs volontairement laissés de côté, à reprendre vite :
 - les **pneus** (diamètre et largeur), plus lourds à saisir.
 
 Chacun entrera au glossaire métier avec le code qui l'utilise.
+
+Une piste, à co-signer (règle 4 de CONCEPTION.md) : passer le routage à
+[TanStack Router](https://tanstack.com/router). Notre routage par `#` (`navigation/`) en
+reprend déjà les idées : une route par fichier, des paramètres décodés et typés,
+l'historique du navigateur. Le flux borné et l'origine d'une entrée y seraient plus simples
+à poser, et son historique en mémoire se teste sans navigateur. À peser contre la question
+4 de la règle : une dépendance qui part dans le produit livré.
 
 ## Avant la relecture par le second dev
 

@@ -347,6 +347,12 @@ La liste des adresses visitées dans l'onglet, que remonte le bouton retour. Un 
 ajoute une entrée ; `history.replaceState` remplace l'entrée courante sans en ajouter, ce
 que fait la frappe dans le champ de recherche.
 
+**État d'une entrée d'historique** (`history.state`) :
+Une petite valeur qu'une entrée de l'historique garde quand on la quitte, et qu'on
+retrouve en y revenant, même après un rechargement. La mini-app y note l'**origine** de
+chaque entrée : l'adresse d'où l'on est arrivé, que le navigateur ne dit pas lui-même.
+C'est elle qui permet au retour de la fiche de remonter jusqu'à la recherche.
+
 **Hook** :
 Une fonction React dont le nom commence par `use` (`useQuery`, `useApi`). Elle ne
 s'appelle que dans un composant, et le composant se redessine quand ce qu'elle renvoie
