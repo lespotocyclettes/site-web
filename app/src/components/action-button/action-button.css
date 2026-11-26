@@ -10,6 +10,7 @@
 			--_fg: var(--color-text-heading);
 			--_border: var(--color-border-strong);
 			--_padding-inline: var(--size-inset);
+			--_block-size: var(--size-tap-target);
 			--_font-size: 1rem;
 			/*
 			 * L'ombre « cartoon » : pleine, sans flou, sous le bouton. Elle dit qu'il dépasse de la
@@ -24,7 +25,7 @@
 			align-items: center;
 			justify-content: center;
 			gap: var(--size-2);
-			min-block-size: var(--size-tap-target);
+			min-block-size: var(--_block-size);
 			padding-inline: var(--_padding-inline);
 			font: var(--text-label);
 			font-size: var(--_font-size);
@@ -86,10 +87,10 @@
 		 */
 		&[data-size="small"] {
 			--_padding-inline: var(--size-2);
+			--_block-size: var(--size-7);
 			--_font-size: 0.75rem;
 
 			position: relative;
-			min-block-size: var(--size-control-small);
 
 			&::before {
 				content: "";
