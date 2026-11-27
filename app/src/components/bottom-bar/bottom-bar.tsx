@@ -1,7 +1,6 @@
 import { isPlainClick } from "../../navigation/plain-click";
 import { registrationRoute } from "../../routes/enregistrement";
 import { IN_STOCK_HREF } from "../../routes/recherche";
-import { ActionButton } from "../action-button/action-button";
 
 /*
  * La barre du bas des écrans racines. Il n'y a qu'une racine, la recherche : son onglet est
@@ -9,8 +8,8 @@ import { ActionButton } from "../action-button/action-button";
  * filtres en cours : il appelle onReselect. Son href ne sert qu'à l'ouvrir dans un nouvel
  * onglet.
  *
- * « Enregistrer » n'est pas un onglet mais une action, dessinée en bouton : elle ouvre
- * l'enregistrement en plein écran, qu'on quitte par son retour.
+ * « Enregistrer » se dessine comme un onglet, mais n'est jamais actif : il ouvre
+ * l'enregistrement, un écran enfant en plein écran, où la barre du bas n'est plus.
  */
 export function BottomBar({ onReselect }: { onReselect: () => void }) {
 	return (
@@ -31,9 +30,12 @@ export function BottomBar({ onReselect }: { onReselect: () => void }) {
 				</span>
 				Recherche
 			</a>
-			<ActionButton variant="primary" icon="➕" href={registrationRoute.href()}>
+			<a className="tab" href={registrationRoute.href()}>
+				<span className="icon" aria-hidden="true">
+					➕
+				</span>
 				Enregistrer
-			</ActionButton>
+			</a>
 		</nav>
 	);
 }

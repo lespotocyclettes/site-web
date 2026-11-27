@@ -573,16 +573,17 @@
 		<div class="layout-stack">
 			<nav class="bottom-bar" aria-label="Exemple : onglet actif">
 				<a class="tab" href="#styleguide" aria-current="page"><span class="icon" aria-hidden="true">🔍</span>Recherche</a>
-				<a class="action-button" href="#styleguide" data-variant="primary"><span aria-hidden="true">➕</span>Enregistrer</a>
+				<a class="tab" href="#styleguide"><span class="icon" aria-hidden="true">➕</span>Enregistrer</a>
 			</nav>
 			<nav class="bottom-bar" aria-label="Exemple : onglet inactif">
 				<a class="tab" href="#styleguide"><span class="icon" aria-hidden="true">🔍</span>Recherche</a>
-				<a class="action-button" href="#styleguide" data-variant="primary"><span aria-hidden="true">➕</span>Enregistrer</a>
+				<a class="tab" href="#styleguide"><span class="icon" aria-hidden="true">➕</span>Enregistrer</a>
 			</nav>
 		</div>
-		<p>La barre des écrans racines. Un onglet mène à un écran, l'onglet actif porte
-			<code>aria-current="page"</code> : il passe en couleur de lien et en gras. Une action,
-			comme « Enregistrer », reste un bouton.</p>
+		<p>La barre des écrans racines, faite d'onglets. L'onglet de l'écran ouvert porte
+			<code>aria-current="page"</code> : il passe en couleur de lien et en gras.
+			« Enregistrer » n'est jamais actif : il ouvre un écran enfant, où la barre du bas
+			n'est plus.</p>
 	</section>
 
 	<section>
@@ -606,7 +607,7 @@
 						<div class="layout-center">
 							<nav class="bottom-bar" aria-label="Exemple : écran racine">
 								<a class="tab" href="#styleguide" aria-current="page"><span class="icon" aria-hidden="true">🔍</span>Recherche</a>
-								<a class="action-button" href="#styleguide" data-variant="primary"><span aria-hidden="true">➕</span>Enregistrer</a>
+								<a class="tab" href="#styleguide"><span class="icon" aria-hidden="true">➕</span>Enregistrer</a>
 							</nav>
 						</div>
 					</div>
