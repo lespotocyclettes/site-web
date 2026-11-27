@@ -9,8 +9,7 @@ import { ContentCard } from "../components/content-card/content-card";
 import { Stack } from "../components/layout/layout";
 import { getBackLinkProps } from "../navigation/back-link";
 import { IN_STOCK_HREF } from "../routes/recherche";
-import { Boundary } from "../screen/boundary";
-import { ChildScreen, PageTitle } from "../screen/screen-layout";
+import { ChildScreen } from "../screen/screen-layout";
 import { BikeActions } from "./bike-actions";
 import { getBikeDetails } from "./bike-details";
 
@@ -19,8 +18,8 @@ export function BikeSheet({ params: reference }: { params: Reference }) {
 	const api = useApi();
 
 	/*
-	 * Pas de titre dans la barre : le h1 est la référence, dans la carte, comme sur la carte
-	 * de recherche. Il arrive donc avec le vélo, après le chargement.
+	 * La référence vient de l'adresse : la barre l'affiche avant même que le vélo arrive, et
+	 * la garde en vue quand on fait défiler jusqu'aux détails.
 	 *
 	 * Le retour mène à la recherche d'où l'on vient, ou à la recherche en stock (voir
 	 * back-link.ts). L'origine se lit au rendu : la fiche se redessine à chaque changement
@@ -28,15 +27,13 @@ export function BikeSheet({ params: reference }: { params: Reference }) {
 	 */
 	return (
 		<ChildScreen
-			title={null}
+			title={reference}
+			heading={<span className="bike-reference">{reference}</span>}
 			back={getBackLinkProps(IN_STOCK_HREF, window.history)}
 		>
-			<PageTitle title={reference} />
-			<Boundary>
-				<BikeDetails
-					bikeQuery={api.bikes.get.queryOptions({ input: reference })}
-				/>
-			</Boundary>
+			<BikeDetails
+				bikeQuery={api.bikes.get.queryOptions({ input: reference })}
+			/>
 		</ChildScreen>
 	);
 }
@@ -56,11 +53,7 @@ function BikeDetails({ bikeQuery }: { bikeQuery: QueryOptionsOf<Bike> }) {
 				<ContentCard.Media ratio="4 / 3">
 					{photo ? <img src={photo.url} alt="" /> : "Pas de photo"}
 				</ContentCard.Media>
-				<BikeIdentity
-					bike={bike}
-					titleAs="h1"
-					actions={<BikeActions bike={bike} />}
-				/>
+				<BikeIdentity bike={bike} actions={<BikeActions bike={bike} />} />
 			</ContentCard.Root>
 			<ContentCard.Root>
 				<ContentCard.Meta>Détails</ContentCard.Meta>

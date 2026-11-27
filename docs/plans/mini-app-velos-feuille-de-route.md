@@ -62,8 +62,9 @@ Restent pour plus tard :
 ## Fait : 2. Fiche + actions
 
 Le recto à l'écran : la première photo, plafonnée à 70 % de la hauteur de la fenêtre, puis
-la même tête que la carte de recherche (`BikeIdentity` : la référence en h1, marque ·
-modèle, type · public, statut). Une seconde carte, légendée « Détails », porte les autres
+la même tête que la carte de recherche (`BikeIdentity` : la référence, marque · modèle,
+type · public, statut). Le h1 est la référence, dans la barre du haut : elle s'affiche
+avant le chargement du vélo et reste en vue quand on fait défiler. Une seconde carte, légendée « Détails », porte les autres
 champs, un champ vide affiché, atténué, avec un tiret (`.detail-list`). Les actions, à
 droite de la référence (`ContentCard.Title actions`), suivent `getNextStatuses`. Un tap ne
 change rien : il ouvre une fenêtre modale (`ModalDialog`), qui demande confirmation ou

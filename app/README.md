@@ -92,9 +92,8 @@ prépare les requêtes ; le composant qui affiche les données les reçoit et le
 </ChildScreen>
 ```
 
-Un écran enfant qui place son h1 ailleurs passe `title={null}`, et pose lui-même
-`PageTitle` et `Boundary` : c'est le cas de la fiche, dont le h1 est la référence, dans la
-carte. C'est la page entière qui défile, et les barres restent collées au bord : au retour,
+Quand la barre doit montrer autre chose que le texte du titre, `ChildScreen` prend aussi un
+`heading` : la fiche y met sa référence en chasse fixe (`.bike-reference`). C'est la page entière qui défile, et les barres restent collées au bord : au retour,
 le navigateur remet ainsi la page à la position où on l'avait laissée.
 
 Un bouton s'écrit `<ActionButton variant="primary">` (`src/components/action-button/`),

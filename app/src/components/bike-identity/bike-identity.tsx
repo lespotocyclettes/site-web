@@ -7,16 +7,14 @@ import { ContentCard } from "../content-card/content-card";
  * la référence, puis marque · modèle, puis type · public, et le statut en petit. Une ligne
  * dont aucun champ n'est rempli n'est pas affichée.
  *
- * Se place dans une ContentCard.Root, sous la photo. Sur la fiche, la référence est le titre
- * de l'écran (titleAs="h1"), et les actions s'alignent à sa droite.
+ * Se place dans une ContentCard.Root, sous la photo. Sur la fiche, les actions s'alignent à
+ * droite de la référence.
  */
 export function BikeIdentity({
 	bike,
-	titleAs,
 	actions,
 }: {
 	bike: Bike;
-	titleAs?: "span" | "h1";
 	actions?: ReactNode;
 }) {
 	const brandAndModel = joinFilled([bike.brand, bike.model]);
@@ -24,7 +22,7 @@ export function BikeIdentity({
 
 	return (
 		<>
-			<ContentCard.Title as={titleAs} actions={actions}>
+			<ContentCard.Title actions={actions}>
 				<span className="bike-reference">{bike.reference}</span>
 			</ContentCard.Title>
 			{brandAndModel !== "" && <span>{brandAndModel}</span>}

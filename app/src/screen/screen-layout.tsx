@@ -45,30 +45,30 @@ export function RootScreen({
 	);
 }
 
-/*
- * Avec `title: null`, l'écran place son h1 ailleurs : il compose PageTitle et Boundary
- * lui-même, comme la fiche vélo.
- */
 export function ChildScreen({
 	title,
+	heading = title,
 	back,
 	children,
 }: {
-	title: string | null;
+	/** Le titre de l'écran, en texte : il nomme aussi l'onglet du navigateur. */
+	title: string;
+	/** Ce que montre la barre, s'il diffère du texte : la fiche y met sa référence en chasse fixe. */
+	heading?: ReactNode;
 	back: BackLinkProps;
 	children: ReactNode;
 }) {
 	return (
 		<div className="screen-layout">
-			{title !== null && <PageTitle title={title} />}
+			<PageTitle title={title} />
 			<header className="header">
 				<Center>
-					<TopBar back={back} title={title} />
+					<TopBar back={back} title={heading} />
 				</Center>
 			</header>
 			<main className="content">
 				<Center>
-					{title === null ? children : <Boundary>{children}</Boundary>}
+					<Boundary>{children}</Boundary>
 				</Center>
 			</main>
 		</div>
