@@ -1,15 +1,25 @@
 @layer components {
+	/*
+	 * Trois colonnes : le retour, le titre, et une colonne vide. Les deux colonnes de côté
+	 * partagent la place qui reste à parts égales : le titre tombe au milieu de la barre,
+	 * quelle que soit la largeur du retour. Un titre trop long pour ça mange la colonne vide
+	 * avant de passer à la ligne.
+	 */
 	.top-bar {
 		& {
-			display: flex;
+			display: grid;
+			grid-template-columns: 1fr auto 1fr;
+			justify-items: start;
 			align-items: center;
-			gap: var(--size-3);
+			gap: var(--size-2);
 			min-block-size: var(--size-tap-target);
 		}
 
-		/* Le titre d'une barre, pas d'une page : un palier sous le h1 d'un écran racine. */
+		/* Le titre d'une barre, pas d'une page : sobre, pour tenir entre le retour et le bord. */
 		> .title {
-			font: var(--text-title-2);
+			justify-self: center;
+			font: var(--text-title-3);
+			text-align: center;
 		}
 	}
 }
