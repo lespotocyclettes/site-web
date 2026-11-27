@@ -50,7 +50,7 @@ La base actuelle ne correspond pas au modèle du glossaire. Il faut l'adapter :
 Le champ texte (référence, marque, modèle), les chips de statut et de public
 (`ToggleGroup`, des cases à cocher), la grille de vignettes photo (référence, marque ·
 modèle, type · public, statut). La recherche vit dans
-l'adresse. « En stock » n'est pas une chip : c'est la recherche où mène le lien du menu,
+l'adresse. « En stock » n'est pas une chip : c'est la recherche où mène l'onglet Recherche,
 à traiter et prêt à la vente cochés.
 
 Restent pour plus tard :
@@ -76,6 +76,35 @@ de l'historique note son origine (`navigation/entry-origin.ts`).
 Restent pour plus tard :
 - les **photos suivantes**, qui arrivent avec l'enregistrement ;
 - le **verso** (suivi atelier, état mécanique), qui vit sur la fiche plastifiée.
+
+## Fait : la mise en page mobile
+
+Une barre par écran, jamais deux. Un écran racine, qu'on ouvre depuis la barre du bas, n'a
+que cette barre : aujourd'hui, la recherche. Un écran enfant n'a que la barre du haut, avec
+le retour : la fiche et l'enregistrement. La barre du bas porte l'onglet Recherche et le
+bouton « Enregistrer ». L'enregistrement n'est pas un onglet mais une tâche, ouverte en
+plein écran, qu'on quitte par son retour. Retoucher l'onglet Recherche, quand on y est
+déjà, met le focus dans le champ, sans toucher aux filtres.
+
+C'est la page entière qui défile, et les barres restent collées au bord : le retour de la
+fiche retrouve ainsi la position de la recherche (`src/screen/screen-layout.tsx`).
+
+Pas encore vérifié sur un vrai téléphone : la barre d'accueil de l'iPhone, le clavier qui
+recouvre la barre du bas, le clavier qui s'ouvre quand on retouche l'onglet Recherche.
+
+```
+RACINE · Recherche         ENFANT · Fiche vélo
+┏━━━━━━━━━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━━━━━━━━━━┓
+┃ □ Chercher un vélo…  ┃   ┃ ← Retour             ┃
+┃ ▪ à traiter  ▪ prêt  ┃   ┣━━━━━━━━━━━━━━━━━━━━━━┫
+┃ ┌──────┐  ┌──────┐   ┃   ┃ ░░░░░░ photo ░░░░░░░ ┃
+┃ │ vélo │  │ vélo │   ┃   ┃ 261027.01   [Action] ┃
+┃ └──────┘  └──────┘   ┃   ┃ Peugeot · ville      ┃
+┣━━━━━━━━━━━━━━━━━━━━━━┫   ┃                      ┃
+┃    🔍         ➕     ┃   ┃ DÉTAILS              ┃
+┃Recherche  Enregistrer┃   ┃ Couleur   rouge      ┃
+┗━━━━━━━━━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━━━━━━━━━━┛
+```
 
 ## 3. Enregistrement — ⚠ attend unreel
 
@@ -134,6 +163,14 @@ Des champs volontairement laissés de côté, à reprendre vite :
 - les **pneus** (diamètre et largeur), plus lourds à saisir.
 
 Chacun entrera au glossaire métier avec le code qui l'utilise.
+
+Deux suites possibles de la mise en page mobile, à reprendre après un essai à l'atelier :
+
+- **masquer les barres quand on fait défiler la page vers le bas**, et les rendre quand on
+  remonte. Le gain est mince, 3 à 4rem, et une barre qui bouge déplace le bouton sous le
+  pouce ;
+- **un bouton « ajouter » sur la recherche**, si le bouton « Enregistrer » de la barre du
+  bas ne se trouve pas assez bien.
 
 Une piste, à co-signer (règle 4 de CONCEPTION.md) : passer le routage à
 [TanStack Router](https://tanstack.com/router). Notre routage par `#` (`navigation/`) en

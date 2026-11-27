@@ -74,16 +74,28 @@ le bouton retour, un rechargement ou un lien partagé retrouvent la même liste.
 formulaire réécrit l'adresse à chaque changement : une chip ajoute une entrée
 d'historique, la frappe remplace la courante.
 
-Chaque écran suit la même forme. Il pose `ScreenLayout` (`src/screen/`), qui affiche le
-titre (et nomme l'onglet du navigateur) puis, autour du contenu, un skeleton pendant le chargement et un message avec
-« Réessayer » en cas d'erreur. L'écran prépare les requêtes ; le composant qui affiche les
-données les reçoit et les lit avec `useSuspenseQuery` :
+Une valeur calculée au chargement d'un fichier de route, comme `IN_STOCK_HREF`, vit donc
+dans ce fichier, pas dans `src/routes/index.ts`. Les écrans s'en servent, et `index.ts`
+importe les écrans : rangée là, elle croiserait une route encore vide.
+
+Chaque écran a une barre, une seule (`src/screen/screen-layout.tsx`). Un écran racine, qu'on
+ouvre depuis la barre du bas, pose `RootScreen` : son titre, son contenu, puis la barre du
+bas. Un écran enfant pose `ChildScreen` : la barre du haut avec le retour et le titre, puis
+le contenu. Les deux nomment l'onglet du navigateur et mettent autour du contenu un
+skeleton pendant le chargement, et un message avec « Réessayer » en cas d'erreur. L'écran
+prépare les requêtes ; le composant qui affiche les données les reçoit et les lit avec
+`useSuspenseQuery` :
 
 ```tsx
-<ScreenLayout title={`Vélo ${reference}`}>
-	<BikeDetails bikeQuery={api.bikes.get.queryOptions({ input: reference })} />
-</ScreenLayout>
+<ChildScreen title="Enregistrer un vélo" back={getBackLinkProps(IN_STOCK_HREF, window.history)}>
+	<RegistrationSequencer />
+</ChildScreen>
 ```
+
+Un écran enfant qui place son h1 ailleurs passe `title={null}`, et pose lui-même
+`PageTitle` et `Boundary` : c'est le cas de la fiche, dont le h1 est la référence, dans la
+carte. C'est la page entière qui défile, et les barres restent collées au bord : au retour,
+le navigateur remet ainsi la page à la position où on l'avait laissée.
 
 Un bouton s'écrit `<ActionButton variant="primary">` (`src/components/action-button/`),
 jamais `<button className="action-button">` à la main : le composant n'oublie ni le

@@ -191,6 +191,27 @@ coup d'œil.
 **Mobile-first** :
 Écrire d'abord pour le petit écran, puis élargir. Jamais l'inverse.
 
+**Écran racine, écran enfant** :
+Un écran racine s'ouvre depuis la barre du bas, comme la recherche. Il n'a que cette barre.
+Un écran enfant s'ouvre depuis un autre écran, comme la fiche vélo. Il n'a que la barre du
+haut, avec le retour. Une barre par écran, jamais deux.
+
+**Sticky** (`position: sticky`) :
+Un élément qui défile avec la page jusqu'au bord de l'écran, puis y reste collé. Nos barres
+du haut et du bas en sont. Contrairement à un élément fixe (`position: fixed`), il garde sa
+place dans la page : rien ne passe dessous sans qu'on le veuille.
+
+**Zone sûre** (`env(safe-area-inset-bottom)`) :
+La bande que le téléphone garde pour lui au bord de l'écran, comme la barre d'accueil d'un
+iPhone sans bouton. `env(safe-area-inset-bottom)` en donne la hauteur, 0 ailleurs. Le
+navigateur ne la donne que si la page la réclame, avec `viewport-fit=cover` dans
+`index.html`.
+
+**`aria-current`** :
+Un attribut qui dit aux lecteurs d'écran quel élément d'une liste est celui où l'on est :
+`aria-current="page"` sur l'onglet de l'écran ouvert. Notre CSS s'en sert aussi pour
+dessiner l'onglet actif, plutôt que d'inventer un attribut `data-*`.
+
 **Media query** :
 Un bloc de CSS qui ne s'applique que si une condition est remplie, le plus souvent une
 largeur de fenêtre : `@media (width >= 40rem) { … }`. Nos titres y prennent leur grand
@@ -241,6 +262,11 @@ défaut. Une taille en rem grandit avec le réglage de la personne, une taille e
 
 **vh** :
 Un centième de la hauteur de la fenêtre du navigateur : 70vh, c'est 70 % de cette hauteur.
+
+**svh** :
+Comme vh, mais mesuré quand la barre d'adresse du navigateur est affichée. Sur un
+téléphone, cette barre se replie quand on fait défiler : 100vh dépasse alors de l'écran
+visible, 100svh jamais.
 
 **Chasse fixe** :
 Une police où chaque caractère a la même largeur, comme sur une machine à écrire. Nos
