@@ -30,9 +30,21 @@
 			color: var(--color-link);
 		}
 
+		/*
+		 * L'emoji tient dans une pilule, vide sur un onglet inactif. Elle garde la même taille
+		 * dans les deux cas : rien ne bouge quand l'onglet change d'état.
+		 */
 		> .tab > .icon {
+			padding-block: var(--size-1);
+			padding-inline: var(--size-4);
 			font-size: var(--font-size-4);
 			line-height: 1;
+			border-radius: var(--radius-pill);
+		}
+
+		/* L'onglet actif se voit d'abord à sa pilule, teintée du vert de la charte. */
+		> .tab[aria-current="page"] > .icon {
+			background: color-mix(in oklab, var(--color-accent), transparent 70%);
 		}
 	}
 }
