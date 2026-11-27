@@ -1,4 +1,3 @@
-import { IN_STOCK_SEARCH } from "../bike/search";
 import type { ScreenRoute } from "../navigation/define-route";
 import { registrationRoute } from "./enregistrement";
 import { searchRoute } from "./recherche";
@@ -13,6 +12,3 @@ export const ROUTES: readonly ScreenRoute[] = [
 	bikeSheetRoute,
 	registrationRoute,
 ];
-
-/** Là où arrive le bénévole : le lien du menu, une adresse vide ou mal tapée. */
-export const IN_STOCK_HREF = searchRoute.href(IN_STOCK_SEARCH);

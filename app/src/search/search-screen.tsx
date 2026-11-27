@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useDeferredValue } from "react";
+import { useDeferredValue, useRef } from "react";
 import { useApi } from "../api/api-context";
 import type { QueryOptionsOf } from "../api/define-query";
 import { AUDIENCES, type Bike } from "../bike/bike";
@@ -11,7 +11,7 @@ import { ToggleGroup } from "../components/toggle-group/toggle-group";
 import { navigate } from "../navigation/navigate";
 import { searchRoute } from "../routes/recherche";
 import { Boundary } from "../screen/boundary";
-import { ScreenLayout } from "../screen/screen-layout";
+import { RootScreen } from "../screen/screen-layout";
 import { readSearch, SEARCH_PARAM } from "./search-params";
 
 /*
@@ -25,6 +25,7 @@ export function SearchScreen({ params: search }: { params: BikeSearch }) {
 	 * plutôt que de repasser par le skeleton à chaque lettre tapée.
 	 */
 	const shownSearch = useDeferredValue(search);
+	const searchTextRef = useRef<HTMLInputElement>(null);
 
 	function updateSearch(
 		form: HTMLFormElement | null,
@@ -38,7 +39,10 @@ export function SearchScreen({ params: search }: { params: BikeSearch }) {
 	}
 
 	return (
-		<ScreenLayout title="Recherche">
+		<RootScreen
+			title="Recherche"
+			onReselect={() => searchTextRef.current?.focus()}
+		>
 			<Stack gap="var(--size-4)">
 				{/* Sans ça, Entrée enverrait le formulaire et écrirait `?q=` hors du `#`. */}
 				<form onSubmit={(event) => event.preventDefault()}>
@@ -48,6 +52,7 @@ export function SearchScreen({ params: search }: { params: BikeSearch }) {
 								Référence, marque ou modèle
 							</label>
 							<input
+								ref={searchTextRef}
 								id="search-text"
 								type="search"
 								name={SEARCH_PARAM.text}
@@ -84,7 +89,7 @@ export function SearchScreen({ params: search }: { params: BikeSearch }) {
 					/>
 				</Boundary>
 			</Stack>
-		</ScreenLayout>
+		</RootScreen>
 	);
 }
 

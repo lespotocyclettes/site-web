@@ -585,6 +585,56 @@
 			comme « Enregistrer », reste un bouton.</p>
 	</section>
 
+	<section>
+		<h2>Cadre d'écran <code>.screen-layout</code></h2>
+		<p>Faites défiler chaque boîte : la barre reste collée au bord. Dans l'app, c'est la page
+			entière qui défile, et le cadre fait au moins la hauteur de l'écran ; ici, une boîte de
+			hauteur fixe en tient lieu.</p>
+		<div class="layout-grid" style="--min: 16rem">
+			<div style="block-size: 20rem; overflow: auto; border: var(--border-size-1) solid var(--color-border)">
+				<div class="screen-layout" style="min-block-size: 100%">
+					<main class="content">
+						<div class="layout-center">
+							<h3>Écran racine</h3>
+							<p>Le contenu, puis la barre du bas.</p>
+							<p>Un paragraphe pour faire défiler.</p>
+							<p>Un autre.</p>
+							<p>Et un dernier.</p>
+						</div>
+					</main>
+					<div class="footer">
+						<div class="layout-center">
+							<nav class="bottom-bar" aria-label="Exemple : écran racine">
+								<a class="tab" href="#styleguide" aria-current="page"><span class="icon" aria-hidden="true">🔍</span>Recherche</a>
+								<a class="action-button" href="#styleguide" data-variant="primary"><span aria-hidden="true">➕</span>Enregistrer</a>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="block-size: 20rem; overflow: auto; border: var(--border-size-1) solid var(--color-border)">
+				<div class="screen-layout" style="min-block-size: 100%">
+					<header class="header">
+						<div class="layout-center">
+							<div class="top-bar">
+								<a class="action-button" href="#styleguide" data-size="small" data-variant="secondary">← Retour</a>
+							</div>
+						</div>
+					</header>
+					<main class="content">
+						<div class="layout-center">
+							<h3>Écran enfant</h3>
+							<p>La barre du haut, puis le contenu.</p>
+							<p>Un paragraphe pour faire défiler.</p>
+							<p>Un autre.</p>
+							<p>Et un dernier.</p>
+						</div>
+					</main>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<script>
 		/* Vérifiée par scripts/check-tokens.mjs : elle doit lister tous les --color-* de semantic.css. */
 		const COLOR_TOKENS = [

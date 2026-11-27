@@ -1,0 +1,54 @@
+/*
+ * Le cadre d'un écran : sa barre, collée en haut ou en bas, et son contenu. C'est la page
+ * entière qui défile, pas le contenu seul : au retour, le navigateur remet la page à la
+ * position où on l'avait laissée (navigation/back-link.ts). Une zone qui défilerait seule
+ * entre deux barres fixes perdrait cette position, sans message d'erreur.
+ *
+ * Every Layout a une brique proche, Cover, mais elle centre son contenu en hauteur. Ici, le
+ * contenu commence en haut et pousse la barre du bas jusqu'en bas de l'écran.
+ */
+@layer components {
+	.screen-layout {
+		& {
+			display: flex;
+			flex-direction: column;
+			/* svh : la hauteur de l'écran quand la barre du navigateur est affichée. */
+			min-block-size: 100svh;
+		}
+
+		/* sticky : la barre défile avec la page jusqu'au bord de l'écran, puis y reste collée. */
+		> .header,
+		> .footer {
+			position: sticky;
+			/* Par-dessus le contenu qui passe dessous en défilant. */
+			z-index: 1;
+			background: var(--color-surface-page);
+		}
+
+		> .header {
+			inset-block-start: 0;
+			padding-block: var(--size-2);
+			border-block-end: var(--border-size-1) solid var(--color-border);
+		}
+
+		/*
+		 * Le contenu prend la place qui reste : sur une page courte, il pousse la barre du bas
+		 * jusqu'en bas de l'écran. La marge du bas est large : sur un écran sans barre du bas,
+		 * le dernier bouton ne colle pas au bord du téléphone, où le pouce l'atteint mal.
+		 */
+		> .content {
+			flex-grow: 1;
+			padding-block: var(--size-4) var(--size-8);
+		}
+
+		/*
+		 * env(safe-area-inset-bottom) : la hauteur que garde la barre d'accueil d'un iPhone sans
+		 * bouton. Elle vaut 0 ailleurs. index.html la réclame avec viewport-fit=cover.
+		 */
+		> .footer {
+			inset-block-end: 0;
+			padding-block-end: env(safe-area-inset-bottom);
+			border-block-start: var(--border-size-1) solid var(--color-border);
+		}
+	}
+}

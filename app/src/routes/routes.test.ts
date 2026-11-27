@@ -3,8 +3,8 @@ import { formatReference } from "../bike/reference";
 import { IN_STOCK_SEARCH } from "../bike/search";
 import { matchScreen } from "../navigation/define-route";
 import { registrationRoute } from "./enregistrement";
-import { IN_STOCK_HREF, ROUTES } from "./index";
-import { searchRoute } from "./recherche";
+import { ROUTES } from "./index";
+import { IN_STOCK_HREF, searchRoute } from "./recherche";
 import { bikeSheetRoute } from "./velo";
 
 /* Les paramètres que l'écran reçoit quand on ouvre cette adresse. */

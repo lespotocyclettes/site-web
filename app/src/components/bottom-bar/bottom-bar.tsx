@@ -1,6 +1,6 @@
 import { isPlainClick } from "../../navigation/plain-click";
 import { registrationRoute } from "../../routes/enregistrement";
-import { IN_STOCK_HREF } from "../../routes/index";
+import { IN_STOCK_HREF } from "../../routes/recherche";
 import { ActionButton } from "../action-button/action-button";
 
 /*
