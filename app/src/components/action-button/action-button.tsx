@@ -5,7 +5,7 @@ import {
 	useState,
 } from "react";
 
-type Variant = "primary" | "secondary" | "danger";
+type Variant = "primary" | "secondary" | "ghost" | "danger";
 
 type Size = "small";
 

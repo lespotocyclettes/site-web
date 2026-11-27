@@ -70,6 +70,20 @@
 			--_fg: var(--color-link);
 		}
 
+		/*
+		 * Sans contour : ni bordure ni ombre, le libellé en couleur de lien. Il n'a pas d'ombre
+		 * à enfoncer, donc il ne bouge pas : c'est la teinte du fond qui répond au survol et à
+		 * l'appui (règle plus bas).
+		 */
+		&[data-variant="ghost"] {
+			--_bg: transparent;
+			--_fg: var(--color-link);
+			--_border: transparent;
+			--_shadow-color: transparent;
+
+			translate: none;
+		}
+
 		&[data-variant="danger"] {
 			--_bg: var(--color-danger);
 			--_fg: var(--color-text-on-danger);
@@ -114,6 +128,11 @@
 		&:active:not(:disabled, [aria-disabled="true"]) {
 			/* 0rem et non 0 : un 0 sans unité casserait le calc() du décalage. */
 			--_lift: 0rem;
+		}
+
+		/* Le seul retour au doigt d'un bouton sans ombre : son fond fonce à l'appui. */
+		&[data-variant="ghost"]:active:not(:disabled, [aria-disabled="true"]) {
+			background: color-mix(in oklab, var(--_bg), var(--color-text-heading) 16%);
 		}
 
 		&:is(:disabled, [aria-disabled="true"]) {

@@ -162,11 +162,15 @@
 			<button type="button" class="action-button">Par défaut</button>
 			<button type="button" class="action-button" data-variant="primary">Enregistrer</button>
 			<button type="button" class="action-button" data-variant="secondary">Annuler</button>
+			<button type="button" class="action-button" data-variant="ghost">Passer</button>
 			<button type="button" class="action-button" data-variant="danger">Supprimer</button>
 		</div>
 		<p>Une ombre pleine, sans flou, sous chaque bouton : il dépasse de la page, on peut
 			l'enfoncer. Survolez-le, il monte ; appuyez, il s'enfonce. Une chip n'a pas d'ombre :
 			c'est ce qui les distingue.</p>
+		<p>Une exception : « ghost », le bouton sans contour, n'a ni bordure ni ombre. Il sert
+			quand le bouton doit s'effacer, comme le retour de la barre du haut. Sa flèche et sa
+			place disent qu'on peut le taper ; il répond au doigt par une teinte de fond.</p>
 
 		<h3>États</h3>
 		<div class="layout-cluster">
@@ -188,6 +192,7 @@
 			<button type="button" class="action-button" data-size="small">Par défaut</button>
 			<button type="button" class="action-button" data-size="small" data-variant="primary">Enregistrer</button>
 			<button type="button" class="action-button" data-size="small" data-variant="secondary">Annuler</button>
+			<button type="button" class="action-button" data-size="small" data-variant="ghost">Passer</button>
 			<button type="button" class="action-button" data-size="small" data-variant="danger">Supprimer</button>
 			<button type="button" class="action-button" data-size="small" data-variant="primary" aria-disabled="true" aria-busy="true">En cours</button>
 		</div>
@@ -200,12 +205,14 @@
 			<a class="action-button" href="#styleguide">Par défaut</a>
 			<a class="action-button" href="#styleguide" data-variant="primary">Enregistrer</a>
 			<a class="action-button" href="#styleguide" data-variant="secondary">← Retour</a>
+			<a class="action-button" href="#styleguide" data-variant="ghost">← Retour</a>
 			<a class="action-button" href="#styleguide" data-variant="danger">Supprimer</a>
 		</div>
 		<div class="layout-cluster">
 			<a class="action-button" href="#styleguide" data-size="small">Par défaut</a>
 			<a class="action-button" href="#styleguide" data-size="small" data-variant="primary">Enregistrer</a>
 			<a class="action-button" href="#styleguide" data-size="small" data-variant="secondary">← Retour</a>
+			<a class="action-button" href="#styleguide" data-size="small" data-variant="ghost">← Retour</a>
 			<a class="action-button" href="#styleguide" data-size="small" data-variant="danger">Supprimer</a>
 		</div>
 		<p>Avec un <code>href</code>, <code>ActionButton</code> rend un lien <code>&lt;a&gt;</code>
@@ -557,11 +564,11 @@
 		<h2>Barre du haut <code>.top-bar</code></h2>
 		<div class="layout-stack">
 			<div class="top-bar">
-				<a class="action-button" href="#styleguide" data-size="small" data-variant="secondary">← Retour</a>
+				<a class="action-button" href="#styleguide" data-size="small" data-variant="ghost">← Retour</a>
 				<h1 class="title">Enregistrer un vélo</h1>
 			</div>
 			<div class="top-bar">
-				<a class="action-button" href="#styleguide" data-size="small" data-variant="secondary">← Retour</a>
+				<a class="action-button" href="#styleguide" data-size="small" data-variant="ghost">← Retour</a>
 			</div>
 		</div>
 		<p>La barre d'un écran enfant : le retour, puis le titre de l'écran. Sans titre, l'écran
@@ -618,7 +625,7 @@
 					<header class="header">
 						<div class="layout-center">
 							<div class="top-bar">
-								<a class="action-button" href="#styleguide" data-size="small" data-variant="secondary">← Retour</a>
+								<a class="action-button" href="#styleguide" data-size="small" data-variant="ghost">← Retour</a>
 							</div>
 						</div>
 					</header>

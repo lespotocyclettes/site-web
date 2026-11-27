@@ -15,7 +15,7 @@ export function TopBar({
 }) {
 	return (
 		<div className="top-bar">
-			<ActionButton variant="secondary" size="small" {...back}>
+			<ActionButton variant="ghost" size="small" {...back}>
 				← Retour
 			</ActionButton>
 			{title !== null && <h1 className="title">{title}</h1>}
