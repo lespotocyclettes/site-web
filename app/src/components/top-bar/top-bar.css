@@ -1,0 +1,15 @@
+@layer components {
+	.top-bar {
+		& {
+			display: flex;
+			align-items: center;
+			gap: var(--size-3);
+			min-block-size: var(--size-tap-target);
+		}
+
+		/* Le titre d'une barre, pas d'une page : un palier sous le h1 d'un écran racine. */
+		> .title {
+			font: var(--text-title-2);
+		}
+	}
+}

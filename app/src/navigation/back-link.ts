@@ -1,5 +1,6 @@
 import type { MouseEvent } from "react";
 import { getPreviousHash } from "./entry-origin";
+import { isPlainClick } from "./plain-click";
 
 /** Ce que fait un retour : remonter l'historique, ou ouvrir une adresse comme un lien. */
 export type BackLink =
@@ -40,21 +41,15 @@ export function getBackLinkProps(
 	return {
 		href: backLink.href,
 		onClick(event: MouseEvent<HTMLAnchorElement>) {
-			/* Ctrl ou Cmd + clic ouvre un nouvel onglet : le navigateur s'en charge. */
-			const isPlainClick =
-				event.button === 0 &&
-				!event.ctrlKey &&
-				!event.metaKey &&
-				!event.shiftKey &&
-				!event.altKey;
-
-			if (backLink.kind === "history-back" && isPlainClick) {
+			if (backLink.kind === "history-back" && isPlainClick(event)) {
 				event.preventDefault();
 				history.back();
 			}
 		},
 	};
 }
+
+export type BackLinkProps = ReturnType<typeof getBackLinkProps>;
 
 /** `#recherche?q=peugeot` → `#recherche` : l'écran, sans ses paramètres. */
 function getScreenPath(hash: string): string {

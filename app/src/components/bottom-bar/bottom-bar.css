@@ -1,0 +1,38 @@
+@layer components {
+	.bottom-bar {
+		& {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-around;
+			gap: var(--size-3);
+			padding-block: var(--size-2);
+		}
+
+		/* L'emoji au-dessus du libellé, comme les onglets d'une appli de téléphone. */
+		> .tab {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			min-block-size: var(--size-tap-target);
+			min-inline-size: var(--size-tap-target);
+			padding-inline: var(--size-2);
+			font: var(--text-caption);
+			color: var(--color-text-muted);
+			text-decoration: none;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		/* La couleur seule ne suffit pas à tout le monde : l'onglet actif passe aussi en gras. */
+		> .tab[aria-current="page"] {
+			font-weight: 600;
+			color: var(--color-link);
+		}
+
+		> .tab > .icon {
+			font-size: var(--font-size-4);
+			line-height: 1;
+		}
+	}
+}

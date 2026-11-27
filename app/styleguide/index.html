@@ -553,6 +553,38 @@
 		</dialog>
 	</section>
 
+	<section>
+		<h2>Barre du haut <code>.top-bar</code></h2>
+		<div class="layout-stack">
+			<div class="top-bar">
+				<a class="action-button" href="#styleguide" data-size="small" data-variant="secondary">← Retour</a>
+				<h1 class="title">Enregistrer un vélo</h1>
+			</div>
+			<div class="top-bar">
+				<a class="action-button" href="#styleguide" data-size="small" data-variant="secondary">← Retour</a>
+			</div>
+		</div>
+		<p>La barre d'un écran enfant : le retour, puis le titre de l'écran. Sans titre, l'écran
+			place son h1 ailleurs, comme la fiche vélo dont le h1 est la référence.</p>
+	</section>
+
+	<section>
+		<h2>Barre du bas <code>.bottom-bar</code></h2>
+		<div class="layout-stack">
+			<nav class="bottom-bar" aria-label="Exemple : onglet actif">
+				<a class="tab" href="#styleguide" aria-current="page"><span class="icon" aria-hidden="true">🔍</span>Recherche</a>
+				<a class="action-button" href="#styleguide" data-variant="primary"><span aria-hidden="true">➕</span>Enregistrer</a>
+			</nav>
+			<nav class="bottom-bar" aria-label="Exemple : onglet inactif">
+				<a class="tab" href="#styleguide"><span class="icon" aria-hidden="true">🔍</span>Recherche</a>
+				<a class="action-button" href="#styleguide" data-variant="primary"><span aria-hidden="true">➕</span>Enregistrer</a>
+			</nav>
+		</div>
+		<p>La barre des écrans racines. Un onglet mène à un écran, l'onglet actif porte
+			<code>aria-current="page"</code> : il passe en couleur de lien et en gras. Une action,
+			comme « Enregistrer », reste un bouton.</p>
+	</section>
+
 	<script>
 		/* Vérifiée par scripts/check-tokens.mjs : elle doit lister tous les --color-* de semantic.css. */
 		const COLOR_TOKENS = [
