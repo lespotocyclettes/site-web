@@ -31,3 +31,6 @@ node_modules/
 
 # Sauvegardes du site (WPvivid) : lourdes, et rien à faire dans le dépôt
 backups/
+
+# Les userscripts compilés depuis ../userscripts : le déploiement les refabrique
+userscripts/
