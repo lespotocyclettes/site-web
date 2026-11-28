@@ -16,6 +16,10 @@ jobs:
       - name: Construction des fichiers statiques de WP-Plugin
         run: cd ./wp-plugin && npm run build
       - run: rm -rf ./wp-plugin/node_modules
+      # Les userscripts s'installent à part (voir userscripts/README.md) et se compilent
+      # dans wp-plugin/userscripts/, qui part sur le site avec le plugin.
+      - name: Construction des userscripts
+        run: cd ./userscripts && npm ci && npm run build
 
       # L'action reçoit les mots de passe FTP : elle est figée sur un commit précis (v3.1.0).
       # Avec « @latest », chaque nouvelle version publiée par son auteur les recevrait
