@@ -19,7 +19,11 @@ export const bundles = [
 		name: "demo",
 		description:
 			"Démonstration : trois retouches pour rire sur le site de l'association.",
-		matches: ["https://lespotocyclettes.com/*"],
+		// Le site redirige vers www, mais un lien ancien peut encore pointer sans.
+		matches: [
+			"https://www.lespotocyclettes.com/*",
+			"https://lespotocyclettes.com/*",
+		],
 	},
 	{
 		name: "paheko",

@@ -9,7 +9,7 @@ export type Mode = "production" | "development";
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const PUBLISHED_FOLDER = "../wp-plugin/userscripts";
 const PUBLISHED_URL =
-	"https://lespotocyclettes.com/wp-content/plugins/lespotocyclettes/userscripts";
+	"https://www.lespotocyclettes.com/wp-content/plugins/lespotocyclettes/userscripts";
 const DEV_SERVER_PORT = Number(new URL(DEV_SERVER_ORIGIN).port);
 
 /**
