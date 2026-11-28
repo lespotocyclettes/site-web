@@ -8,6 +8,9 @@ Le dépôt du site de l'association et de ses outils numériques.
   les styles globaux du thème, et la double authentification.
 - [app](./app/) : la mini-app de gestion des vélos. Pour l'instant elle contient sa
   fondation CSS et son styleguide, pas encore de métier.
+- [userscripts](./userscripts/) : de petits programmes que le navigateur ajoute à une page,
+  pour adapter Paheko sans toucher à son code. Avec trois exemples sur le site de
+  l'association.
 - [docs/plans](./docs/plans/) : les plans de projet. Pour l'instant celui de la mini-app
   vélos, amendé au fil des décisions.
 - [docs/adr](./docs/adr/) : les fiches de décision. Une par choix difficile à défaire, avec

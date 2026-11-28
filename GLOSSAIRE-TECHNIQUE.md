@@ -435,6 +435,44 @@ Un programme qui copie un dossier vers un autre en ne recopiant que ce qui a cha
 Pour *Windows Subsystem for Linux*, un Linux qui tourne à l'intérieur de Windows. Les
 outils du plugin, rsync compris, s'y lancent.
 
+## Les userscripts
+
+Le dossier `userscripts/` en parle tout le temps. Son mode d'emploi est dans
+[userscripts/README.md](./userscripts/README.md).
+
+**Userscript** :
+Un petit programme JavaScript que le navigateur ajoute à une page web qu'on ne contrôle pas.
+Il peut préremplir un champ, masquer un bloc, ajouter un bouton. Il agit seulement dans le
+navigateur où il est installé, jamais sur le serveur du site.
+
+**Gestionnaire de userscripts** :
+L'extension du navigateur qui installe les userscripts, les lance sur les bonnes pages et les
+met à jour. Sur PC : Violentmonkey ou Tampermonkey. Sur iPad : l'app Userscripts, qui
+s'ajoute à Safari.
+
+**Bundle** :
+Un fichier `.user.js` compilé pour un site, prêt à installer. On en a un par site : `demo`
+pour le site de l'association, `paheko` pour Paheko. Le mot vient de l'anglais *bundle*,
+« paquet » : l'outil de build rassemble plusieurs fichiers source en un seul.
+
+**IIFE** :
+*Immediately Invoked Function Expression*, une fonction qui s'exécute aussitôt écrite. C'est
+la forme d'un bundle : un fichier unique qui démarre tout seul, sans rien importer. Un
+gestionnaire de userscripts n'accepte que cette forme.
+
+**En-tête de userscript** :
+Le bloc de commentaires `// ==UserScript==` en tête d'un bundle. Le gestionnaire y lit le
+nom du script, les adresses où l'activer (`@match`), sa version (`@version`) et l'adresse où
+chercher les mises à jour (`@updateURL`).
+
+**MutationObserver** :
+L'outil du navigateur qui prévient quand la page change : un élément ajouté, un autre
+retiré. `watchSelector` s'en sert pour repérer un élément qui arrive après le chargement.
+
+**Préprod** :
+Une copie de Paheko faite pour les essais, à l'adresse `potocyclettes-preprod.paheko.cloud`.
+On y teste sans risque, puis on refait pour de vrai sur `potocyclettes.paheko.cloud`.
+
 ## Côté serveur
 
 **mu-plugin** :
