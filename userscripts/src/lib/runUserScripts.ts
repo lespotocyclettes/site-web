@@ -16,7 +16,7 @@ export type UserScript = Readonly<{
 }>;
 
 /** Ne fait rien : il donne seulement son type au script, pour que l'éditeur aide à l'écrire. */
-export function defineUserScript<U extends UserScript>(userScript: U): U {
+export function defineUserScript(userScript: UserScript): UserScript {
 	return userScript;
 }
 
