@@ -1,4 +1,5 @@
-import { DEV_SCRIPT_ID, DEV_SERVER_ORIGIN } from "./devServer.ts";
+const DEV_SERVER_ORIGIN = "http://localhost:4173";
+const DEV_SCRIPT_ID = "poto-dev-script";
 
 /*
  * Sur le poste du développeur, deux copies d'un bundle peuvent cohabiter : celle installée

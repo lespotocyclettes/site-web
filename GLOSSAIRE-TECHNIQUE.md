@@ -451,9 +451,9 @@ met à jour. Sur PC : Violentmonkey ou Tampermonkey. Sur iPad : l'app Userscript
 s'ajoute à Safari.
 
 **Bundle** :
-Un fichier `.user.js` compilé pour un site, prêt à installer. On en a un par site : `demo`
-pour le site de l'association, `paheko` pour Paheko. Le mot vient de l'anglais *bundle*,
-« paquet » : l'outil de build rassemble plusieurs fichiers source en un seul.
+Le fichier `.user.js` compilé, prêt à installer : `potocyclettes.user.js`. Le mot vient de
+l'anglais *bundle*, « paquet » : l'outil de build rassemble plusieurs fichiers source en un
+seul.
 
 **IIFE** :
 *Immediately Invoked Function Expression*, une fonction qui s'exécute aussitôt écrite. C'est

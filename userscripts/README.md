@@ -5,13 +5,12 @@ champ, masquer un bloc, ajouter un bouton. Il agit seulement dans le navigateur 
 installé, sans toucher au serveur du site. C'est notre façon d'adapter Paheko, dont on ne
 peut pas modifier le code.
 
-Les scripts sont regroupés en **bundles**, un par site. Un bundle est un fichier `.user.js`
-prêt à installer :
+Tous les scripts sont rassemblés dans un **bundle**, `potocyclettes.user.js`, le fichier
+que les postes installent. Il tourne sur `potocyclettes.paheko.cloud` et sur sa préprod,
+`potocyclettes-preprod.paheko.cloud`.
 
-| Bundle   | Site                                                              | Contenu                       |
-| -------- | ----------------------------------------------------------------- | ----------------------------- |
-| `paheko` | `potocyclettes.paheko.cloud` et `potocyclettes-preprod.paheko.cloud` | les retouches de Paheko       |
-| `demo`   | `www.lespotocyclettes.com`                                          | trois exemples, pour apprendre |
+Le dossier `src/demo/` contient trois exemples, pour apprendre, sur le site de
+l'association. Ils ne tournent qu'en développement : les bénévoles ne les reçoivent pas.
 
 Les mots techniques sont expliqués dans le [glossaire technique](../GLOSSAIRE-TECHNIQUE.md),
 partie « Les userscripts ».
@@ -27,8 +26,7 @@ partie « Les userscripts ».
      Safari › Extensions.
 2. **Ouvrir l'adresse du bundle** dans ce navigateur. Le gestionnaire propose de
    l'installer :
-   - Paheko : <https://www.lespotocyclettes.com/wp-content/plugins/lespotocyclettes/userscripts/paheko.user.js>
-   - Démo : <https://www.lespotocyclettes.com/wp-content/plugins/lespotocyclettes/userscripts/demo.user.js>
+   <https://www.lespotocyclettes.com/wp-content/plugins/lespotocyclettes/userscripts/potocyclettes.user.js>
 
 Ensuite, le gestionnaire vérifie lui-même s'il existe une version plus récente, en général
 une fois par jour. On peut forcer la vérification depuis son menu.
@@ -45,13 +43,16 @@ dépôt : il n'a besoin d'aucune autre partie du projet.
 ```sh
 cd userscripts
 npm install
-npm run dev -- demo    # ou paheko
+npm run dev
 ```
 
-`npm run dev` recompile le bundle à chaque modification et le sert depuis votre machine.
-La première fois, ouvrez l'adresse qu'il affiche (`http://localhost:4173/demo.dev.user.js`)
-pour installer le **chargeur de développement**. Sur ce navigateur, désactivez la copie
-installée depuis le site. Désormais, chaque enregistrement recharge la page.
+`npm run dev` recompile le bundle à chaque modification et le sert depuis votre machine,
+démo comprise. La première fois, ouvrez l'adresse qu'il affiche,
+`http://localhost:4173/dev-loader.user.js`, pour installer le **chargeur de
+développement**. Sur ce navigateur, désactivez la copie installée depuis le site.
+Désormais, chaque enregistrement recharge la page.
+
+Pour voir la démo : <https://www.lespotocyclettes.com/nous-rejoindre/>.
 
 Chrome peut demander l'autorisation d'accéder au réseau local : c'est votre machine,
 acceptez.
@@ -61,8 +62,7 @@ Avant de pousser : `npm run verify` vérifie les types et lance les tests.
 
 ## Écrire un script
 
-Un script est un fichier dans le dossier de son bundle. Le plus simple tient en quelques
-lignes :
+Un script est un fichier dans `src/paheko/`. Le plus simple tient en quelques lignes :
 
 ```ts
 // src/paheko/bonjour.ts
@@ -81,7 +81,7 @@ export default defineUserScript({
 });
 ```
 
-Puis on l'ajoute à la liste du bundle, dans `src/paheko/index.ts`.
+Puis on l'ajoute à la liste des scripts, dans `src/index.ts`.
 
 La bibliothèque commune, dans `src/lib/`, fournit les briques. Chaque exemple de
 `src/demo/` en montre une :
@@ -93,6 +93,9 @@ La bibliothèque commune, dans `src/lib/`, fournit les briques. Chaque exemple d
 | `createButton`      | un bouton qui affiche son chargement et ses erreurs  | `tarifs-en-chambres-a-air.ts` |
 | `match`             | choisir les pages, ou même la saison                 | `caritas-hiberne.ts`          |
 | `waitQuerySelector` | attendre un élément avant d'agir                     | `caritas-hiberne.ts`          |
+
+`src/demo/demo.test.ts` montre comment tester un script : `npm test` le lance avec les
+autres tests.
 
 `match` reçoit un objet [`URL`](https://developer.mozilla.org/fr/docs/Web/API/URL) :
 `url.hostname`, `url.pathname`, `url.searchParams.get("id")`… `URLPattern`, l'outil du
@@ -115,15 +118,15 @@ Safari sur iPad reste à vérifier avant de l'employer.
   muet. Vérifier ses scripts après chaque mise à jour de Paheko.
 
 
-## Ajouter un bundle
+## Viser un autre site
 
-1. Ajouter une entrée dans `bundles.ts` : son nom, sa description, ses adresses.
-2. Créer `src/<nom>/index.ts`, sur le modèle de `src/paheko/index.ts`.
+Ajouter son adresse à `MATCHES`, dans `vite.config.ts`. Le chargeur de développement suit
+tout seul : Vite le fabrique à partir de la même liste.
 
 
 ## Publier
 
-Un push sur `main` déclenche le déploiement du site. Il compile chaque bundle vers
+Un push sur `main` déclenche le déploiement du site. Il compile le bundle vers
 `wp-plugin/userscripts/` et l'envoie avec le plugin. La version (`@version`) prend la date
 et l'heure de compilation, par exemple `2026.1128.1432` : elle augmente à chaque
 déploiement, et c'est ce qui déclenche la mise à jour des postes.

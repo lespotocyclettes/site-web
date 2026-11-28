@@ -1,5 +1,6 @@
 import { defineUserScript } from "../lib/runUserScripts.ts";
 import { waitQuerySelector } from "../lib/watchSelector.ts";
+import { isAssociationSite } from "./isAssociationSite.ts";
 
 /*
  * Les briques montrées : `match`, qui peut tester autre chose que l'adresse (ici, la
@@ -15,7 +16,7 @@ function isWinter(date: Date) {
 
 export default defineUserScript({
 	name: "caritas-hiberne",
-	match: () => isWinter(new Date()),
+	match: (url) => isAssociationSite(url) && isWinter(new Date()),
 	styles: `
 		.poto-hibernation {
 			display: inline-block;

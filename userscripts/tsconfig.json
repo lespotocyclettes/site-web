@@ -9,7 +9,7 @@
 		"noEmit": true,
 		"skipLibCheck": true,
 		"verbatimModuleSyntax": true,
-		"types": ["node"]
+		"types": ["node", "vite/client"]
 	},
-	"include": ["src", "scripts", "bundles.ts", "vitest.config.ts"]
+	"include": ["src", "vite.config.ts", "vitest.config.ts"]
 }

@@ -1,4 +1,5 @@
 import { defineUserScript } from "../lib/runUserScripts.ts";
+import { isAssociationSite } from "./isAssociationSite.ts";
 
 // La brique montrée : `styles`. Du CSS seul, pas une ligne de JavaScript.
 const WRENCH_CURSOR = `url("data:image/svg+xml,${encodeURIComponent(
@@ -7,7 +8,7 @@ const WRENCH_CURSOR = `url("data:image/svg+xml,${encodeURIComponent(
 
 export default defineUserScript({
 	name: "mode-cambouis",
-	match: () => true,
+	match: isAssociationSite,
 	styles: `
 		/* Trois taches de graisse : l'atelier a déjà servi. */
 		body {
