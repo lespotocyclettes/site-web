@@ -6,6 +6,10 @@
  *
  * Every Layout a une brique proche, Cover, mais elle centre son contenu en hauteur. Ici, le
  * contenu commence en haut et pousse la barre du bas jusqu'en bas de l'écran.
+ *
+ * env(safe-area-inset-*) : la bande que le téléphone garde pour lui à chaque bord, comme
+ * l'encoche ou la barre d'accueil d'un iPhone. Elle vaut 0 ailleurs. index.html la réclame
+ * avec viewport-fit=cover. Chaque zone du cadre la laisse libre à ses bords.
  */
 @layer components {
 	.screen-layout {
@@ -14,6 +18,13 @@
 			flex-direction: column;
 			/* svh : la hauteur de l'écran quand la barre du navigateur est affichée. */
 			min-block-size: 100svh;
+		}
+
+		/* Téléphone couché, l'encoche passe sur un côté. Le fond des barres va jusqu'au bord. */
+		> .header,
+		> .content,
+		> .footer {
+			padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
 		}
 
 		/* sticky : la barre défile avec la page jusqu'au bord de l'écran, puis y reste collée. */
@@ -25,9 +36,11 @@
 			background: var(--color-surface-page);
 		}
 
+		/* Sa hauteur fixe, plus l'encoche du haut, qu'elle garde au-dessus de son contenu. */
 		> .header {
 			inset-block-start: 0;
-			padding-block: var(--size-2);
+			block-size: calc(var(--top-bar-size) + env(safe-area-inset-top));
+			padding-block: calc(var(--size-2) + env(safe-area-inset-top)) var(--size-2);
 			border-block-end: var(--border-size-1) solid var(--color-border);
 		}
 
@@ -41,14 +54,28 @@
 			padding-block: var(--size-4) var(--size-8);
 		}
 
-		/*
-		 * env(safe-area-inset-bottom) : la hauteur que garde la barre d'accueil d'un iPhone sans
-		 * bouton. Elle vaut 0 ailleurs. index.html la réclame avec viewport-fit=cover.
-		 */
+		/* Sa hauteur fixe, plus la barre d'accueil, qu'elle garde sous son contenu. */
 		> .footer {
 			inset-block-end: 0;
+			block-size: calc(var(--bottom-bar-size) + env(safe-area-inset-bottom));
 			padding-block-end: env(safe-area-inset-bottom);
 			border-block-start: var(--border-size-1) solid var(--color-border);
 		}
 	}
+}
+
+/*
+ * Une page qui a une barre ajoute sa hauteur à la zone sûre de ce bord. La règle vise la
+ * page entière (:has, « qui contient ») : html en a besoin pour faire défiler la page sans
+ * cacher un champ sous la barre (styles/base.css).
+ *
+ * Hors couche, comme les tokens qu'elle surcharge : une règle rangée dans une couche perd
+ * toujours contre une déclaration hors couche (styles/index.css).
+ */
+.potos-app:has(.screen-layout > .header) {
+	--safe-area-inset-top: calc(env(safe-area-inset-top) + var(--top-bar-size));
+}
+
+.potos-app:has(.screen-layout > .footer) {
+	--safe-area-inset-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-bar-size));
 }

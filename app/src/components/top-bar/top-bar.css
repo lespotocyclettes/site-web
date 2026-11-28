@@ -2,24 +2,35 @@
 	/*
 	 * Trois colonnes : le retour, le titre, et une colonne vide. Les deux colonnes de côté
 	 * partagent la place qui reste à parts égales : le titre tombe au milieu de la barre,
-	 * quelle que soit la largeur du retour. Un titre trop long pour ça mange la colonne vide
-	 * avant de passer à la ligne.
+	 * quelle que soit la largeur du retour. Un titre trop long pour ça mange la colonne vide,
+	 * puis se coupe par « … ».
+	 *
+	 * minmax(0, auto) : la colonne du titre peut rétrécir sous la largeur de son texte, que
+	 * le titre ne déborde pas de la barre.
 	 */
 	.top-bar {
 		& {
 			display: grid;
-			grid-template-columns: 1fr auto 1fr;
+			grid-template-columns: 1fr minmax(0, auto) 1fr;
 			justify-items: start;
 			align-items: center;
 			gap: var(--size-2);
 			min-block-size: var(--size-tap-target);
 		}
 
-		/* Le titre d'une barre, pas d'une page : sobre, pour tenir entre le retour et le bord. */
+		/*
+		 * Le titre d'une barre, pas d'une page : sobre, pour tenir entre le retour et le bord.
+		 * Une seule ligne : la barre a une hauteur fixe (--top-bar-size), un titre sur deux
+		 * lignes en déborderait. text-overflow coupe le texte qui dépasse et le finit par « … ».
+		 */
 		> .title {
 			justify-self: center;
+			max-inline-size: 100%;
+			overflow: hidden;
 			font: var(--text-title-3);
 			text-align: center;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 	}
 }

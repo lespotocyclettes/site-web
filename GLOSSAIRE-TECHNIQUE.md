@@ -201,11 +201,19 @@ Un élément qui défile avec la page jusqu'au bord de l'écran, puis y reste co
 du haut et du bas en sont. Contrairement à un élément fixe (`position: fixed`), il garde sa
 place dans la page : rien ne passe dessous sans qu'on le veuille.
 
-**Zone sûre** (`env(safe-area-inset-bottom)`) :
-La bande que le téléphone garde pour lui au bord de l'écran, comme la barre d'accueil d'un
-iPhone sans bouton. `env(safe-area-inset-bottom)` en donne la hauteur, 0 ailleurs. Le
-navigateur ne la donne que si la page la réclame, avec `viewport-fit=cover` dans
-`index.html`.
+**Zone sûre** (`env(safe-area-inset-*)`, `--safe-area-inset-*`) :
+Ce qui couvre un bord de l'écran, et que le contenu doit laisser libre. Le téléphone en
+garde une part pour lui : l'encoche, la barre d'accueil d'un iPhone sans bouton.
+`env(safe-area-inset-top)`, `-right`, `-bottom` et `-left` en donnent la taille, 0 ailleurs.
+Le navigateur ne la donne que si la page la réclame, avec `viewport-fit=cover` dans
+`index.html`. Nos variables `--safe-area-inset-*` partent de cette valeur, et une page qui a
+une barre y ajoute sa hauteur. Les barres lisent `env()` ; ce qui se colle sous une barre lit
+nos variables.
+
+**`scroll-padding`** :
+La marge que garde la page quand elle défile jusqu'à un élément, par exemple un champ qui
+prend le focus. Elle vaut notre zone sûre en haut et en bas : le champ ne finit pas caché
+sous une barre.
 
 **`aria-current`** :
 Un attribut qui dit aux lecteurs d'écran quel élément d'une liste est celui où l'on est :

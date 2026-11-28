@@ -1,8 +1,11 @@
 @layer components {
+	/*
+	 * Une seule rangée d'onglets, jamais deux : la barre a une hauteur fixe
+	 * (--bottom-bar-size). Sur un téléphone de 360 px, cinq onglets y tiennent.
+	 */
 	.bottom-bar {
 		& {
 			display: flex;
-			flex-wrap: wrap;
 			align-items: center;
 			justify-content: space-around;
 			gap: var(--size-3);

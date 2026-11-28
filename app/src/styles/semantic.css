@@ -115,6 +115,29 @@
 
 	--size-inset: var(--size-3);
 	--size-tap-target: var(--size-8);
+
+	/*
+	 * La zone sûre, bord par bord : ce qui couvre le bord de l'écran, et que le contenu doit
+	 * laisser libre. Par défaut, c'est ce que garde le téléphone (encoche, barre d'accueil),
+	 * que donne env(). Une page qui a une barre y ajoute sa hauteur (screen/screen-layout.css).
+	 * C'est le sens qu'iOS donne à sa « safe area », barres de navigation comprises.
+	 *
+	 * Ce qui se colle sous une barre, ou y fait défiler la page, lit ces variables. Les barres,
+	 * elles, lisent env() : elles ne vont pas se pousser elles-mêmes.
+	 */
+	--safe-area-inset-top: env(safe-area-inset-top);
+	--safe-area-inset-right: env(safe-area-inset-right);
+	--safe-area-inset-bottom: env(safe-area-inset-bottom);
+	--safe-area-inset-left: env(safe-area-inset-left);
+
+	/*
+	 * La hauteur fixe de chaque barre, encoche non comprise : la cible tactile, une marge
+	 * dessus et dessous, et le trait qui la sépare du contenu. Fixe, pour que la zone sûre
+	 * puisse l'ajouter : le CSS ne sait pas lire la hauteur d'un autre élément. En rem, elle
+	 * grandit avec le texte quand on l'agrandit dans les réglages du téléphone.
+	 */
+	--top-bar-size: calc(var(--size-tap-target) + 2 * var(--size-2) + var(--border-size-1));
+	--bottom-bar-size: calc(var(--size-tap-target) + 2 * var(--size-2) + var(--border-size-1));
 	/* La largeur maximale d'une page : au-delà, les cartes en grille s'étirent et se lisent mal. */
 	--size-container: 60rem;
 	/*

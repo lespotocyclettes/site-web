@@ -5,7 +5,13 @@
  */
 @layer base {
 	@scope (.potos-app) {
+		/*
+		 * scroll-padding : quand la page défile jusqu'à un élément (un champ qui prend le
+		 * focus, une ancre), elle s'arrête avant cette marge. Le champ ne finit pas caché sous
+		 * une barre.
+		 */
 		:scope {
+			scroll-padding-block: var(--safe-area-inset-top) var(--safe-area-inset-bottom);
 			background: var(--color-surface-page);
 			font: var(--text-body);
 			color: var(--color-text-body);
